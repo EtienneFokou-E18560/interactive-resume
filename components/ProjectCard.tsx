@@ -1,7 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ExternalLink, Github } from "lucide-react";
+import { ExternalLink } from "lucide-react";
+import { FaGithub } from "react-icons/fa";
 import Link from "next/link";
 import type { Project } from "@/data/projects";
 
@@ -14,7 +15,7 @@ export default function ProjectCard({ project }: { project: Project }) {
       whileHover={{ y: -4 }}
       className="group flex flex-col overflow-hidden rounded-xl border border-zinc-200 bg-white dark:border-zinc-800 dark:bg-zinc-900"
     >
-      <div className="flex h-40 items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-zinc-800 dark:to-zinc-900">
+      <div className="flex h-40 items-center justify-center bg-linear-to-br from-blue-50 to-indigo-100 dark:from-zinc-800 dark:to-zinc-900">
         <span className="text-4xl font-bold text-blue-200 dark:text-zinc-700">
           {project.title.charAt(0)}
         </span>
@@ -47,7 +48,7 @@ export default function ProjectCard({ project }: { project: Project }) {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1 text-sm text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-50"
             >
-              <Github className="h-4 w-4" />
+              <FaGithub className="h-4 w-4" />
               Code
             </Link>
           )}

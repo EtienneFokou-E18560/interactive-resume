@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Github, Linkedin, Mail } from "lucide-react";
+import { Mail } from "lucide-react";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { profile } from "@/data/profile";
 
 export default function Footer() {
@@ -19,7 +20,7 @@ export default function Footer() {
             className="text-zinc-500 transition-colors hover:text-zinc-900 dark:hover:text-zinc-50"
             aria-label="GitHub"
           >
-            <Github className="h-5 w-5" />
+            <FaGithub className="h-5 w-5" />
           </Link>
           <Link
             href={profile.linkedin}
@@ -28,7 +29,7 @@ export default function Footer() {
             className="text-zinc-500 transition-colors hover:text-zinc-900 dark:hover:text-zinc-50"
             aria-label="LinkedIn"
           >
-            <Linkedin className="h-5 w-5" />
+            <FaLinkedin className="h-5 w-5" />
           </Link>
           <Link
             href={`mailto:${profile.email}`}

@@ -11,7 +11,7 @@ export default function Hero() {
 
   return (
     <section className="relative overflow-hidden px-4 py-24 sm:px-6 sm:py-32">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-100/40 via-transparent to-transparent dark:from-blue-950/30" />
+      <div className="pointer-events-none absolute inset-0 bg-radial-[at_50%_0%] from-blue-100/40 via-transparent to-transparent dark:from-blue-950/30" />
 
       <div className="relative mx-auto max-w-6xl">
         <motion.p
