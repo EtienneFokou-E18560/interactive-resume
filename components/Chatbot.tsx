@@ -5,9 +5,9 @@ import { MessageCircle, X, Send } from "lucide-react";
 import { profile } from "@/data/profile";
 
 const faq: Record<string, string> = {
-  experience: `I have experience at Microsoft, Aflac, and Urgent2k as a ${profile.title}.`,
+  experience: `I have experience at Microsoft, Aflac, and Gartner as a ${profile.title}.`,
   skills: "My core skills include Azure, AWS, Terraform, Docker, Kubernetes, Python, and TypeScript.",
-  contact: `You can reach me at ${profile.email} or via LinkedIn.`,
+  contact: `You can reach me at ${profile.email} or via ${profile.linkedin}.`,
   default:
     "I can answer questions about my experience, skills, and contact info. Try asking about those topics!",
 };
