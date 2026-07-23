@@ -3,28 +3,31 @@
 import { useState } from "react";
 import { MessageCircle, X, Send } from "lucide-react";
 import { profile } from "@/data/profile";
+import { useLanguage } from "@/hooks/useLanguage";
 
-const faq: Record<string, string> = {
-  experience: `I have experience at Microsoft, Aflac, and Gartner as a ${profile.title}.`,
-  skills: "My core skills include Azure, AWS, Terraform, Docker, Kubernetes, Python, and TypeScript.",
-  contact: `You can reach me at ${profile.email} or via ${profile.linkedin}.`,
-  default:
-    "I can answer questions about my experience, skills, and contact info. Try asking about those topics!",
-};
-
-function getResponse(message: string): string {
+function getResponse(
+  message: string,
+  t: ReturnType<typeof useLanguage>["t"]
+): string {
   const lower = message.toLowerCase();
-  if (lower.includes("experience") || lower.includes("work")) return faq.experience;
-  if (lower.includes("skill") || lower.includes("tech")) return faq.skills;
-  if (lower.includes("contact") || lower.includes("email")) return faq.contact;
-  return faq.default;
+  if (lower.includes("experience") || lower.includes("work")) {
+    return t.chatbot.experience(profile.title);
+  }
+  if (lower.includes("skill") || lower.includes("tech")) {
+    return t.chatbot.skills;
+  }
+  if (lower.includes("contact") || lower.includes("email")) {
+    return t.chatbot.contact(profile.email, profile.linkedin);
+  }
+  return t.chatbot.default;
 }
 
 export default function Chatbot() {
+  const { t } = useLanguage();
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<
     { role: "user" | "assistant"; text: string }[]
-  >([{ role: "assistant", text: "Hi! Ask me about Etienne's experience, skills, or contact info." }]);
+  >([{ role: "assistant", text: t.chatbot.greeting }]);
   const [input, setInput] = useState("");
 
   function sendMessage() {
@@ -33,7 +36,7 @@ export default function Chatbot() {
     setMessages((prev) => [
       ...prev,
       { role: "user", text: userMsg },
-      { role: "assistant", text: getResponse(userMsg) },
+      { role: "assistant", text: getResponse(userMsg, t) },
     ]);
     setInput("");
   }
@@ -43,17 +46,17 @@ export default function Chatbot() {
       <button
         type="button"
         onClick={() => setOpen(!open)}
-        className="fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-blue-600 text-white shadow-lg transition-transform hover:scale-105"
+        className="fixed bottom-4 right-4 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-blue-600 text-white shadow-lg transition-transform hover:scale-105 sm:bottom-6 sm:right-6"
         aria-label="Open resume assistant"
       >
         {open ? <X className="h-6 w-6" /> : <MessageCircle className="h-6 w-6" />}
       </button>
 
       {open && (
-        <div className="fixed bottom-24 right-6 z-50 flex h-96 w-80 flex-col overflow-hidden rounded-xl border border-zinc-200 bg-white shadow-2xl dark:border-zinc-800 dark:bg-zinc-900">
+        <div className="fixed bottom-20 right-4 z-50 flex h-[min(24rem,calc(100vh-6rem))] w-[min(20rem,calc(100vw-2rem))] flex-col overflow-hidden rounded-xl border border-zinc-200 bg-white shadow-2xl sm:bottom-24 sm:right-6 sm:w-80 dark:border-zinc-800 dark:bg-zinc-900">
           <div className="border-b border-zinc-200 px-4 py-3 dark:border-zinc-800">
             <p className="font-medium text-zinc-900 dark:text-zinc-50">
-              Resume Assistant
+              {t.chatbot.title}
             </p>
           </div>
 
@@ -63,8 +66,8 @@ export default function Chatbot() {
                 key={i}
                 className={`rounded-lg px-3 py-2 text-sm ${
                   msg.role === "user"
-                    ? "ml-8 bg-blue-600 text-white"
-                    : "mr-8 bg-zinc-100 text-zinc-800 dark:bg-zinc-800 dark:text-zinc-200"
+                    ? "ml-6 bg-blue-600 text-white sm:ml-8"
+                    : "mr-6 bg-zinc-100 text-zinc-800 sm:mr-8 dark:bg-zinc-800 dark:text-zinc-200"
                 }`}
               >
                 {msg.text}
@@ -77,13 +80,13 @@ export default function Chatbot() {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && sendMessage()}
-              placeholder="Ask a question..."
-              className="flex-1 rounded-lg border border-zinc-300 px-3 py-2 text-sm outline-none dark:border-zinc-700 dark:bg-zinc-950"
+              placeholder={t.chatbot.placeholder}
+              className="min-w-0 flex-1 rounded-lg border border-zinc-300 px-3 py-2 text-sm outline-none focus:border-blue-500 dark:border-zinc-700 dark:bg-zinc-950"
             />
             <button
               type="button"
               onClick={sendMessage}
-              className="rounded-lg bg-blue-600 p-2 text-white"
+              className="shrink-0 rounded-lg bg-blue-600 p-2 text-white"
               aria-label="Send message"
             >
               <Send className="h-4 w-4" />

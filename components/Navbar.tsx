@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Moon, Sun, Globe } from "lucide-react";
-import { useSyncExternalStore } from "react";
+import { Moon, Sun, Globe, Menu, X } from "lucide-react";
+import { useSyncExternalStore, useState, useEffect } from "react";
 import { useTheme } from "next-themes";
 import { useLanguage } from "@/hooks/useLanguage";
 import { cn } from "@/lib/utils";
@@ -22,17 +22,30 @@ export default function Navbar() {
   const pathname = usePathname();
   const { theme, setTheme } = useTheme();
   const { t, locale, setLocale } = useLanguage();
+  const [mobileOpen, setMobileOpen] = useState(false);
   const mounted = useSyncExternalStore(
     () => () => {},
     () => true,
     () => false
   );
 
+  useEffect(() => {
+    document.body.style.overflow = mobileOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileOpen]);
+
+  function closeMobileMenu() {
+    setMobileOpen(false);
+  }
+
   return (
     <header className="sticky top-0 z-50 border-b border-zinc-200/80 bg-white/80 backdrop-blur-md dark:border-zinc-800 dark:bg-zinc-950/80">
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 sm:px-6">
         <Link
           href="/"
+          onClick={closeMobileMenu}
           className="text-lg font-semibold tracking-tight text-zinc-900 dark:text-zinc-50"
         >
           {profile.name.split(" ")[0]}
@@ -81,8 +94,41 @@ export default function Navbar() {
               )}
             </button>
           )}
+
+          <button
+            type="button"
+            onClick={() => setMobileOpen(!mobileOpen)}
+            className="rounded-lg p-2 text-zinc-600 transition-colors hover:bg-zinc-100 md:hidden dark:text-zinc-400 dark:hover:bg-zinc-800"
+            aria-label={mobileOpen ? t.nav.close : t.nav.menu}
+            aria-expanded={mobileOpen}
+          >
+            {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
         </div>
       </nav>
+
+      {mobileOpen && (
+        <div className="border-t border-zinc-200 bg-white px-4 py-4 md:hidden dark:border-zinc-800 dark:bg-zinc-950">
+          <ul className="space-y-1">
+            {navItems.map(({ href, key }) => (
+              <li key={href}>
+                <Link
+                  href={href}
+                  onClick={closeMobileMenu}
+                  className={cn(
+                    "block rounded-lg px-3 py-3 text-base font-medium transition-colors",
+                    pathname === href
+                      ? "bg-zinc-100 text-zinc-900 dark:bg-zinc-800 dark:text-zinc-50"
+                      : "text-zinc-600 hover:bg-zinc-50 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-900 dark:hover:text-zinc-50"
+                  )}
+                >
+                  {t.nav[key]}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </header>
   );
 }

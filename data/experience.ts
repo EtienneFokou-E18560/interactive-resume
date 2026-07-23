@@ -4,6 +4,7 @@ export interface Experience {
   start: string;
   end: string;
   location?: string;
+  url?: string;
   description: string[];
   technologies?: string[];
 }
@@ -14,7 +15,8 @@ export const experience: Experience[] = [
     role: "Software Engineer",
     start: "2022",
     end: "Present",
-    location: "Atlanta, GA",
+    location: "Redmond, WA",
+    url: "https://www.microsoft.com",
     description: [
       "Built cloud automation tools for enterprise infrastructure",
       "Developed observability dashboards and monitoring solutions",
@@ -29,6 +31,7 @@ export const experience: Experience[] = [
     start: "2020",
     end: "2022",
     location: "Columbus, GA",
+    url: "https://www.aflac.com",
     description: [
       "Developed internal tools for insurance operations",
       "Implemented CI/CD pipelines for faster deployments",

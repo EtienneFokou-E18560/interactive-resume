@@ -18,17 +18,22 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://github.com/EtienneFokou-E18560/interactive-resume";
+
 export const metadata: Metadata = {
   title: {
     default: `${profile.name} | ${profile.title}`,
     template: `%s | ${profile.name}`,
   },
   description: profile.summary,
+  metadataBase: new URL(siteUrl),
   openGraph: {
     title: `${profile.name} | ${profile.title}`,
     description: profile.summary,
     type: "website",
-    url: process.env.NEXT_PUBLIC_SITE_URL,
+    url: siteUrl,
+    siteName: `${profile.name} Portfolio`,
   },
   robots: { index: true, follow: true },
 };

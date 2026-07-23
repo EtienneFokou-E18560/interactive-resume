@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { Mail } from "lucide-react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { Mail } from "lucide-react";
 import { profile } from "@/data/profile";
 
 export default function Footer() {
@@ -9,7 +9,7 @@ export default function Footer() {
   return (
     <footer className="mt-auto border-t border-zinc-200 dark:border-zinc-800">
       <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-4 py-8 sm:flex-row sm:px-6">
-        <p className="text-sm text-zinc-500 dark:text-zinc-400">
+        <p className="text-center text-sm text-zinc-500 dark:text-zinc-400 sm:text-left">
           © {year} {profile.name}. All rights reserved.
         </p>
         <div className="flex items-center gap-4">
