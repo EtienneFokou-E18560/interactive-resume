@@ -30,6 +30,7 @@ function buildCommands(): Record<string, string | string[]> {
     projects: projects.flatMap((p) => [
       `${p.title}`,
       `  ${p.description}`,
+      ...p.highlights.slice(0, 2).map((h) => `  - ${h}`),
       `  Tech: ${p.technologies.join(", ")}`,
       "",
     ]),

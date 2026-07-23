@@ -47,6 +47,18 @@ export default function ProjectCard({ project }: { project: Project }) {
           {project.description}
         </p>
 
+        <ul className="mt-3 space-y-1.5">
+          {project.highlights.slice(0, 2).map((highlight) => (
+            <li
+              key={highlight}
+              className="flex items-start gap-2 text-xs text-zinc-600 dark:text-zinc-400"
+            >
+              <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-blue-500" />
+              {highlight}
+            </li>
+          ))}
+        </ul>
+
         <div className="mt-4 flex flex-wrap gap-2">
           {project.technologies.map((tech) => (
             <span
