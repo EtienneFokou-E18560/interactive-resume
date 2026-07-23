@@ -24,11 +24,14 @@ export const translations = {
       architecture: "Architecture",
       certifications: "Certifications",
       terminal: "Terminal Mode",
+      techStack: "Tech Stack",
       viewAll: "View all",
     },
     about: {
       title: "About Me",
       highlights: "Career Highlights",
+      education: "Education",
+      bio: "Background",
     },
     experience: {
       title: "Experience",
@@ -70,7 +73,8 @@ export const translations = {
     },
     chatbot: {
       title: "Resume Assistant",
-      greeting: "Hi! Ask me about Etienne's experience, skills, or contact info.",
+      greeting: (name: string) =>
+        `Hi! Ask me about ${name}'s experience, skills, or contact info.`,
       placeholder: "Ask a question...",
       experience: (title: string) =>
         `I have experience at Microsoft, Aflac, and Urgent2k as a ${title}.`,
@@ -85,6 +89,12 @@ export const translations = {
       title: "Page not found",
       description: "The page you are looking for does not exist or has been moved.",
       backHome: "Back to home",
+    },
+    cta: {
+      title: "Let's build something great together",
+      description:
+        "Open to cloud engineering, DevOps, and backend opportunities. Reach out for collaborations, consulting, or full-time roles.",
+      contact: "Start a Conversation",
     },
     common: {
       allRightsReserved: "All rights reserved.",
@@ -113,11 +123,14 @@ export const translations = {
       architecture: "Architecture",
       certifications: "Certifications",
       terminal: "Mode Terminal",
+      techStack: "Stack Technique",
       viewAll: "Voir tout",
     },
     about: {
       title: "À propos de moi",
       highlights: "Points forts",
+      education: "Formation",
+      bio: "Parcours",
     },
     experience: {
       title: "Expérience",
@@ -159,8 +172,8 @@ export const translations = {
     },
     chatbot: {
       title: "Assistant CV",
-      greeting:
-        "Bonjour ! Posez-moi des questions sur l'expérience, les compétences ou le contact d'Étienne.",
+      greeting: (name: string) =>
+        `Bonjour ! Posez-moi des questions sur l'expérience, les compétences ou le contact de ${name}.`,
       placeholder: "Posez une question...",
       experience: (title: string) =>
         `J'ai de l'expérience chez Microsoft, Aflac et Urgent2k en tant que ${title}.`,
@@ -175,6 +188,12 @@ export const translations = {
       title: "Page introuvable",
       description: "La page que vous recherchez n'existe pas ou a été déplacée.",
       backHome: "Retour à l'accueil",
+    },
+    cta: {
+      title: "Construisons quelque chose d'exceptionnel",
+      description:
+        "Ouvert aux opportunités en ingénierie cloud, DevOps et backend. Contactez-moi pour des collaborations ou des postes.",
+      contact: "Démarrer une conversation",
     },
     common: {
       allRightsReserved: "Tous droits réservés.",

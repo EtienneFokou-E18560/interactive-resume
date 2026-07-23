@@ -28,6 +28,9 @@ export const metadata: Metadata = {
   },
   description: profile.summary,
   metadataBase: new URL(siteUrl),
+  authors: [{ name: profile.name, url: profile.github }],
+  creator: profile.name,
+  applicationName: profile.name,
   openGraph: {
     title: `${profile.name} | ${profile.title}`,
     description: profile.summary,

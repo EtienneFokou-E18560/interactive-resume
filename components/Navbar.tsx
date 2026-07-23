@@ -48,7 +48,7 @@ export default function Navbar() {
           onClick={closeMobileMenu}
           className="text-lg font-semibold tracking-tight text-zinc-900 dark:text-zinc-50"
         >
-          {profile.name.split(" ")[0]}
+          {profile.name}
         </Link>
 
         <ul className="hidden items-center gap-1 md:flex">

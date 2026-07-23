@@ -3,6 +3,7 @@
 import ArchitectureDiagram from "@/components/ArchitectureDiagram";
 import PageLayout from "@/components/PageLayout";
 import SkillChart from "@/components/SkillChart";
+import TechStack from "@/components/TechStack";
 import { certifications } from "@/data/certifications";
 import { useLanguage } from "@/hooks/useLanguage";
 
@@ -12,6 +13,11 @@ export default function SkillsPageContent() {
   return (
     <PageLayout title={t.skills.title} description={t.skills.description}>
       <SkillChart />
+
+      <section className="mt-16">
+        <h2 className="mb-6 text-xl font-semibold">{t.home.techStack}</h2>
+        <TechStack />
+      </section>
 
       <section className="mt-16">
         <h2 className="mb-8 text-xl font-semibold">{t.skills.certifications}</h2>
@@ -25,16 +31,6 @@ export default function SkillsPageContent() {
               <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
                 {cert.issuer} · {cert.year}
               </p>
-              {cert.credentialUrl && (
-                <a
-                  href={cert.credentialUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-3 inline-block text-sm text-blue-600 hover:underline dark:text-blue-400"
-                >
-                  {t.skills.viewCredential} →
-                </a>
-              )}
             </div>
           ))}
         </div>

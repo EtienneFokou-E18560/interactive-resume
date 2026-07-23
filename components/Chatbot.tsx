@@ -27,7 +27,7 @@ export default function Chatbot() {
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<
     { role: "user" | "assistant"; text: string }[]
-  >([{ role: "assistant", text: t.chatbot.greeting }]);
+  >([{ role: "assistant", text: t.chatbot.greeting(profile.name) }]);
   const [input, setInput] = useState("");
 
   function sendMessage() {
