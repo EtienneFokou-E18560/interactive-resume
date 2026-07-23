@@ -6,7 +6,7 @@ const layers = [
   { label: "Browser", color: "bg-blue-500" },
   { label: "React / Next.js", color: "bg-cyan-500" },
   { label: "API Routes", color: "bg-emerald-500" },
-  { label: "Azure / AWS / OCI", color: "bg-violet-500" },
+  { label: "Azure / AWS / GCP", color: "bg-violet-500" },
   { label: "Terraform", color: "bg-amber-500" },
   { label: "PostgreSQL", color: "bg-rose-500" },
 ];

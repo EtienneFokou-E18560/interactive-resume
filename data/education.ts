@@ -9,19 +9,11 @@ export interface Education {
 
 export const education: Education[] = [
   {
-    school: "Georgia Institute of Technology",
-    degree: "Master of Science",
-    field: "Computer Science",
-    start: "2016",
-    end: "2018",
-    location: "Atlanta, GA",
-  },
-  {
-    school: "University of Georgia",
+    school: "Kennesaw State University",
     degree: "Bachelor of Science",
     field: "Computer Science",
     start: "2012",
     end: "2016",
-    location: "Athens, GA",
+    location: "Kennesaw, GA",
   },
 ];

@@ -77,9 +77,9 @@ export const translations = {
         `Hi! Ask me about ${name}'s experience, skills, or contact info.`,
       placeholder: "Ask a question...",
       experience: (title: string) =>
-        `I have experience at Microsoft, Aflac, and Urgent2k as a ${title}.`,
+        `I have experience at Gartner, Microsoft, and Aflac as a ${title}.`,
       skills:
-        "My core skills include Azure, AWS, Terraform, Docker, Kubernetes, Python, and TypeScript.",
+        "My core skills include Python, Go, AWS, Azure, GCP, Terraform, Docker, Kubernetes, Prometheus, and Grafana.",
       contact: (email: string, linkedin: string) =>
         `You can reach me at ${email} or via ${linkedin}.`,
       default:
@@ -176,9 +176,9 @@ export const translations = {
         `Bonjour ! Posez-moi des questions sur l'expérience, les compétences ou le contact de ${name}.`,
       placeholder: "Posez une question...",
       experience: (title: string) =>
-        `J'ai de l'expérience chez Microsoft, Aflac et Urgent2k en tant que ${title}.`,
+        `J'ai de l'expérience chez Gartner, Microsoft et Aflac en tant que ${title}.`,
       skills:
-        "Mes compétences principales incluent Azure, AWS, Terraform, Docker, Kubernetes, Python et TypeScript.",
+        "Mes compétences principales incluent Python, Go, AWS, Azure, GCP, Terraform, Docker, Kubernetes, Prometheus et Grafana.",
       contact: (email: string, linkedin: string) =>
         `Vous pouvez me joindre à ${email} ou via ${linkedin}.`,
       default:

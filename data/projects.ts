@@ -10,37 +10,46 @@ export interface Project {
 export const projects: Project[] = [
   {
     title: "Mapan",
-    description: "Bus reservation platform with real-time seat availability and mobile booking.",
-    technologies: ["React Native", "Node.js", "MongoDB"],
+    description:
+      "Bus ticket reservation and travel booking platform with real-time availability, booking confirmations, and payment processing across multiple transport providers.",
+    technologies: [
+      "Python",
+      "REST APIs",
+      "PostgreSQL",
+      "SQL",
+      "Automated Testing",
+    ],
     github: "https://github.com/EtienneFokou-E18560/mapan",
     image: "/images/mapan.svg",
   },
   {
-    title: "Payment SaaS",
-    description: "Multi-tenant payment processing platform with subscription billing.",
-    technologies: ["Next.js", "Stripe", "PostgreSQL", "Docker"],
-    github: "https://github.com/EtienneFokou-E18560/payment-saas",
-    image: "/images/payment-saas.svg",
+    title: "Cloud Infrastructure Automation",
+    description:
+      "Automated cloud infrastructure provisioning and CI/CD pipeline optimization using IaC and GitOps workflows across multiple engineering teams.",
+    technologies: [
+      "Terraform",
+      "Ansible",
+      "AWS ECS",
+      "Docker",
+      "Jenkins",
+      "GitHub Actions",
+      "Python",
+      "Bash",
+    ],
+    image: "/images/cloud-infra.svg",
   },
   {
-    title: "Kubernetes Dashboard",
-    description: "Custom cluster monitoring dashboard with pod metrics and log aggregation.",
-    technologies: ["React", "Kubernetes", "Prometheus", "Grafana"],
-    github: "https://github.com/EtienneFokou-E18560/k8s-dashboard",
-    image: "/images/k8s-dashboard.svg",
-  },
-  {
-    title: "AI Monitoring Platform",
-    description: "Anomaly detection for application logs using ML-based alerting.",
-    technologies: ["Python", "FastAPI", "Azure", "TensorFlow"],
-    github: "https://github.com/EtienneFokou-E18560/ai-monitoring",
-    image: "/images/ai-monitoring.svg",
-  },
-  {
-    title: "Log Parser Dashboard",
-    description: "Interactive log analysis tool with search, filtering, and visualization.",
-    technologies: ["React", "Elasticsearch", "Node.js", "Docker"],
-    github: "https://github.com/EtienneFokou-E18560/log-parser",
-    image: "/images/log-parser.svg",
+    title: "Distributed System Monitoring",
+    description:
+      "Centralized observability platform with log aggregation pipelines across distributed microservices, reducing MTTD and MTTR for production services.",
+    technologies: [
+      "Prometheus",
+      "Grafana",
+      "Datadog",
+      "ELK Stack",
+      "AWS CloudWatch",
+      "PagerDuty",
+    ],
+    image: "/images/observability.svg",
   },
 ];
