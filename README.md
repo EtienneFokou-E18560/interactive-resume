@@ -270,6 +270,10 @@ Edit `lib/i18n.ts` to add or modify English and French strings for navigation, h
 
 This project can be deployed to any platform that supports Next.js.
 
+**AWS (Terraform + GitHub Actions):** infrastructure and CI/CD live in a separate repository — [interactive-resume-infra](https://github.com/EtienneFokou-E18560/interactive-resume-infra).
+
+The app uses `output: "standalone"` in `next.config.ts` so the infra repo can build a production Docker image.
+
 ### Vercel (recommended)
 
 1. Push the repository to GitHub
@@ -279,23 +283,18 @@ This project can be deployed to any platform that supports Next.js.
 
 ### Docker
 
-```dockerfile
-FROM node:20-alpine AS builder
-WORKDIR /app
-COPY package*.json ./
-RUN npm ci
-COPY . .
-RUN npm run build
+Production Docker builds are defined in [interactive-resume-infra](https://github.com/EtienneFokou-E18560/interactive-resume-infra). To test locally, clone both repos and build from the infra directory:
 
-FROM node:20-alpine AS runner
-WORKDIR /app
-ENV NODE_ENV=production
-COPY --from=builder /app/.next ./.next
-COPY --from=builder /app/public ./public
-COPY --from=builder /app/package.json ./
-RUN npm ci --omit=dev
-EXPOSE 3000
-CMD ["npm", "start"]
+```bash
+git clone https://github.com/EtienneFokou-E18560/interactive-resume.git
+git clone https://github.com/EtienneFokou-E18560/interactive-resume-infra.git
+
+cd interactive-resume-infra
+docker build \
+  --build-arg NEXT_PUBLIC_SITE_URL=http://localhost:3000 \
+  -t interactive-resume:local \
+  ../interactive-resume
+docker run --rm -p 3000:3000 interactive-resume:local
 ```
 
 ### Other platforms
