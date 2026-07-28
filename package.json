@@ -7,7 +7,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "vercel": "vercel",
+    "deploy": "vercel --prod"
+  },
+  "engines": {
+    "node": "24.x"
   },
   "dependencies": {
     "framer-motion": "^12.42.2",

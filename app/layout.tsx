@@ -6,6 +6,7 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import { LanguageProvider } from "@/hooks/useLanguage";
 import Chatbot from "@/components/Chatbot";
 import { profile } from "@/data/profile";
+import { getSiteUrl } from "@/lib/site";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -18,8 +19,7 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://github.com/EtienneFokou-E18560/interactive-resume";
+const siteUrl = getSiteUrl();
 
 export const metadata: Metadata = {
   title: {

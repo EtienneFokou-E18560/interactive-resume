@@ -276,10 +276,36 @@ The app uses `output: "standalone"` in `next.config.ts` so the infra repo can bu
 
 ### Vercel (recommended)
 
-1. Push the repository to GitHub
-2. Import the project at [vercel.com/new](https://vercel.com/new)
-3. Set `NEXT_PUBLIC_SITE_URL` to your production URL
-4. Deploy — Vercel detects Next.js automatically
+This repo is configured for Vercel (`vercel.json`). Framework: Next.js. Install/build use npm.
+
+**Option A — Dashboard (Git-connected, auto-deploy on push)**
+
+1. Push this repository to GitHub
+2. Import at [vercel.com/new](https://vercel.com/new) → select `interactive-resume`
+3. Framework Preset should be **Next.js** (auto-detected)
+4. Add environment variables (Production + Preview as needed):
+
+   | Name | Required | Notes |
+   |------|----------|--------|
+   | `NEXT_PUBLIC_SITE_URL` | Recommended | Your live URL, e.g. `https://your-project.vercel.app` or custom domain |
+   | `RESEND_API_KEY` | Optional | Enables contact form email delivery |
+   | `CONTACT_EMAIL` | Optional | Inbox for contact messages (defaults to profile email) |
+
+5. Deploy. Later pushes to `main` redeploy Production; PRs get Preview URLs.
+
+**Option B — CLI**
+
+```bash
+npm i -g vercel   # or use npx
+npx vercel login
+npx vercel        # preview deploy + link project
+npx vercel --prod # production
+# or: npm run deploy
+```
+
+After the first deploy, set `NEXT_PUBLIC_SITE_URL` to the production URL (or your custom domain) in the Vercel project settings and redeploy so Open Graph tags use the canonical host.
+
+`output: "standalone"` in `next.config.ts` is for Docker/AWS; Vercel uses its own Next.js build and ignores that for hosting.
 
 ### Docker
 
@@ -301,9 +327,13 @@ docker run --rm -p 3000:3000 interactive-resume:local
 
 - **Netlify** — connect GitHub repo, build command: `npm run build`
 - **Azure Static Web Apps** — connect repository, auto-deploys on push
-- **Cloudflare Pages** — supports Next.js via `@cloudflare/next-on-pages`
+- **Cloudflare Pages** — prefer Cloudflare Workers + `@opennextjs/cloudflare` for full Next.js support
 
 Set `NEXT_PUBLIC_SITE_URL` to your production domain in all environments.
+
+**Live (Vercel):** [interactive-resume-lilac-two.vercel.app](https://interactive-resume-lilac-two.vercel.app) · dashboard: [cieltd/interactive-resume](https://vercel.com/cieltd/interactive-resume)
+
+To enable automatic deploys on git push, connect the GitHub repo in the Vercel dashboard (Git integration requires a [Login Connection](https://vercel.com/docs/accounts/create-an-account#login-methods-and-connections) to GitHub). Until then, deploy with `npm run deploy` or `npx vercel --prod`.
 
 ---
 
