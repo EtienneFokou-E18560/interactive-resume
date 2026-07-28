@@ -7,6 +7,12 @@ import { experience } from "@/data/experience";
 import { projects } from "@/data/projects";
 import { education } from "@/data/education";
 import { techStack } from "@/data/techStack";
+import {
+  clearVisitorName,
+  getVisitorName,
+  setVisitorName,
+  welcomeMessage,
+} from "@/lib/visitor";
 
 function buildCommands(): Record<string, string | string[]> {
   return {
@@ -18,6 +24,7 @@ function buildCommands(): Record<string, string | string[]> {
       "  skills      - Technical skills",
       "  education   - Academic background",
       "  contact     - Contact information",
+      "  name        - Set or show your name (saved in a cookie)",
       "  clear       - Clear terminal",
       "  help        - Show this help",
     ],
@@ -50,16 +57,27 @@ function buildCommands(): Record<string, string | string[]> {
   };
 }
 
+const DEFAULT_LINES = [
+  welcomeMessage(null),
+  "",
+  "Commands: about | experience | projects | skills | education | contact | name",
+];
+
 export default function Terminal() {
   const commands = useMemo(() => buildCommands(), []);
-  const [lines, setLines] = useState<string[]>([
-    `Welcome, ${profile.name.split(" ")[0]}. Type 'help' to get started.`,
-    "",
-    "Commands: about | experience | projects | skills | education | contact",
-  ]);
+  const [lines, setLines] = useState<string[]>(DEFAULT_LINES);
   const [input, setInput] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
   const outputRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const name = getVisitorName();
+    if (!name) return;
+    setLines((prev) => {
+      if (prev[0] !== welcomeMessage(null)) return prev;
+      return [welcomeMessage(name), ...prev.slice(1)];
+    });
+  }, []);
 
   useEffect(() => {
     outputRef.current?.scrollTo({
@@ -68,14 +86,40 @@ export default function Terminal() {
     });
   }, [lines]);
 
+  function handleNameCommand(raw: string): string {
+    const arg = raw.trim().slice(4).trim(); // drop "name"
+    if (!arg) {
+      const current = getVisitorName();
+      return current
+        ? `Your name is set to "${current}". Use "name <value>" to change it, or "name clear" to remove it.`
+        : 'No name saved. Use "name <your name>" to set one (stored in a cookie).';
+    }
+    if (arg.toLowerCase() === "clear") {
+      clearVisitorName();
+      return "Name cleared.";
+    }
+    const saved = setVisitorName(arg);
+    if (!saved) {
+      return "Invalid name. Use letters, numbers, spaces, or simple punctuation (max 40 characters).";
+    }
+    return `Nice to meet you, ${saved}. Welcome message will use your name next time.`;
+  }
+
   function runCommand(cmd: string) {
-    const trimmed = cmd.trim().toLowerCase();
-    if (trimmed === "clear") {
+    const trimmed = cmd.trim();
+    const lower = trimmed.toLowerCase();
+
+    if (lower === "clear") {
       setLines([]);
       return;
     }
 
-    const output = commands[trimmed];
+    if (lower === "name" || lower.startsWith("name ")) {
+      setLines((prev) => [...prev, `$ ${cmd}`, handleNameCommand(trimmed)]);
+      return;
+    }
+
+    const output = commands[lower];
     const response = output
       ? Array.isArray(output)
         ? output.join("\n").trim()

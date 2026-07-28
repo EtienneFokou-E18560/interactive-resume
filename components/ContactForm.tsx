@@ -3,6 +3,7 @@
 import { useState, FormEvent } from "react";
 import { Send, Loader2 } from "lucide-react";
 import { useLanguage } from "@/hooks/useLanguage";
+import { setVisitorName } from "@/lib/visitor";
 
 export default function ContactForm() {
   const { t } = useLanguage();
@@ -25,6 +26,9 @@ export default function ContactForm() {
       });
 
       if (!res.ok) throw new Error("Failed");
+      if (typeof data.name === "string") {
+        setVisitorName(data.name);
+      }
       setStatus("success");
       form.reset();
     } catch {
