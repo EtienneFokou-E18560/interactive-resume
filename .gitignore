@@ -23,6 +23,7 @@
 # misc
 .DS_Store
 *.pem
+.venv-docs/
 
 # debug
 npm-debug.log*
