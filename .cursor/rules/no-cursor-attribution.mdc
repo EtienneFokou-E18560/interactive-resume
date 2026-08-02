@@ -1,0 +1,16 @@
+---
+description: No Cursor co-author or attribution on git commits and PRs
+alwaysApply: true
+---
+
+# Git and PR identity (no Cursor attribution)
+
+When creating commits, amending, rebasing commit messages, or opening/updating pull requests for this repository:
+
+- **Author identity**: Use **Etienne Fokou** `<etienne56@gmail.com>` for commit author and committer (respect repo-local `user.name` / `user.email`).
+- **Never add** any Cursor attribution, including but not limited to:
+  - `Co-authored-by: Cursor <cursoragent@cursor.com>` (or any variant)
+  - "Made with Cursor" or similar footers in commit messages or PR descriptions
+  - Any trailer or metadata that attributes work to Cursor or cursoragent@cursor.com
+
+If a tool or hook would add Cursor attribution, strip it before the commit or PR is finalized. Prefer a plain commit message with no co-author trailers unless the user explicitly requests other co-authors (never Cursor).
