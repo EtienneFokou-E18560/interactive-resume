@@ -331,7 +331,7 @@ docker run --rm -p 3000:3000 interactive-resume:local
 
 Set `NEXT_PUBLIC_SITE_URL` to your production domain in all environments.
 
-**Live (Vercel):** [interactive-resume-lilac-two.vercel.app](https://interactive-resume-lilac-two.vercel.app) · dashboard: [cieltd/interactive-resume](https://vercel.com/cieltd/interactive-resume)
+**Live (Vercel):** [etiennefokouresume.vercel.app](https://etiennefokouresume.vercel.app) · dashboard: [cieltd/etiennefokouresume](https://vercel.com/cieltd/etiennefokouresume)
 
 To enable automatic deploys on git push, connect the GitHub repo in the Vercel dashboard (Git integration requires a [Login Connection](https://vercel.com/docs/accounts/create-an-account#login-methods-and-connections) to GitHub). Until then, deploy with `npm run deploy` or `npx vercel --prod`.
 
