@@ -46,7 +46,7 @@ export default function ExperienceCard({ item }: { item: Experience }) {
           )}
         </div>
         <ChevronDown
-          className={`h-5 w-5 shrink-0 text-zinc-400 transition-transform ${
+          className={`h-5 w-5 shrink-0 text-zinc-400 transition-transform dark:text-zinc-500 ${
             expanded ? "rotate-180" : ""
           }`}
         />

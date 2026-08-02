@@ -138,18 +138,18 @@ export default function Terminal() {
 
   return (
     <div
-      className="w-full max-w-full overflow-hidden rounded-xl border border-zinc-800 bg-zinc-950 shadow-inner"
+      className="w-full max-w-full overflow-hidden rounded-xl border border-zinc-300 bg-zinc-50 shadow-inner dark:border-zinc-800 dark:bg-zinc-950"
       onClick={() => inputRef.current?.focus()}
       role="region"
       aria-label="Terminal mode"
     >
-      <div className="flex items-center gap-2 border-b border-zinc-800 px-3 py-2.5 sm:px-4 sm:py-3">
+      <div className="flex items-center gap-2 border-b border-zinc-300 px-3 py-2.5 sm:px-4 sm:py-3 dark:border-zinc-800">
         <div className="flex shrink-0 gap-1.5">
           <span className="h-2.5 w-2.5 rounded-full bg-red-500/80" />
           <span className="h-2.5 w-2.5 rounded-full bg-yellow-500/80" />
           <span className="h-2.5 w-2.5 rounded-full bg-green-500/80" />
         </div>
-        <div className="flex min-w-0 flex-1 items-center gap-2 text-zinc-500">
+        <div className="flex min-w-0 flex-1 items-center gap-2 text-zinc-500 dark:text-zinc-500">
           <TerminalIcon className="h-3.5 w-3.5 shrink-0 sm:h-4 sm:w-4" />
           <span className="truncate font-mono text-xs sm:text-sm">
             {profile.name.toLowerCase().replace(/\s+/g, "-")} ~ terminal
@@ -159,7 +159,7 @@ export default function Terminal() {
 
       <div
         ref={outputRef}
-        className="max-h-[min(50vh,28rem)] overflow-x-auto overflow-y-auto px-3 py-3 font-mono text-xs leading-relaxed text-green-400 sm:px-4 sm:py-4 sm:text-sm"
+        className="max-h-[min(50vh,28rem)] overflow-x-auto overflow-y-auto px-3 py-3 font-mono text-xs leading-relaxed text-emerald-700 sm:px-4 sm:py-4 sm:text-sm dark:text-green-400"
       >
         <div className="min-w-0 space-y-1 break-words whitespace-pre-wrap">
           {lines.map((line, i) => (
@@ -170,8 +170,8 @@ export default function Terminal() {
         </div>
       </div>
 
-      <div className="flex items-center gap-2 border-t border-zinc-800 px-3 py-2.5 sm:px-4 sm:py-3">
-        <span className="shrink-0 font-mono text-sm text-green-500 sm:text-base">
+      <div className="flex items-center gap-2 border-t border-zinc-300 px-3 py-2.5 sm:px-4 sm:py-3 dark:border-zinc-800">
+        <span className="shrink-0 font-mono text-sm text-emerald-600 sm:text-base dark:text-green-500">
           $
         </span>
         <input
@@ -179,7 +179,7 @@ export default function Terminal() {
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={handleKeyDown}
-          className="min-w-0 flex-1 bg-transparent font-mono text-base text-green-400 outline-none sm:text-sm"
+          className="min-w-0 flex-1 bg-transparent font-mono text-base text-emerald-700 outline-none sm:text-sm dark:text-green-400"
           aria-label="Terminal input"
           autoComplete="off"
           autoCorrect="off"

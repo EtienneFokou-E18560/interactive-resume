@@ -65,7 +65,7 @@ export default function AboutPageContent() {
                 {item.degree} in {item.field}
               </h3>
               <p className="mt-1 text-zinc-600 dark:text-zinc-400">{item.school}</p>
-              <p className="mt-2 text-sm text-zinc-500">
+              <p className="mt-2 text-sm text-zinc-500 dark:text-zinc-400">
                 {item.start} – {item.end}
                 {item.location ? ` · ${item.location}` : ""}
               </p>

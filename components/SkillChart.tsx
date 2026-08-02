@@ -25,7 +25,7 @@ export default function SkillChart() {
                   <span className="text-zinc-700 dark:text-zinc-300">
                     {skill.name}
                   </span>
-                  <span className="text-zinc-500">{skill.level}%</span>
+                  <span className="text-zinc-500 dark:text-zinc-400">{skill.level}%</span>
                 </div>
                 <div className="h-2 overflow-hidden rounded-full bg-zinc-100 dark:bg-zinc-800">
                   <motion.div
