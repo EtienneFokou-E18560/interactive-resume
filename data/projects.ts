@@ -10,25 +10,6 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    title: "Mapan",
-    description:
-      "Bus ticket reservation and travel booking platform with real-time availability, booking confirmations, and payment processing across multiple transport providers.",
-    highlights: [
-      "Built backend API integrations for real-time ticket availability, booking confirmations, and payment processing",
-      "Developed automated testing and monitoring scripts for reservation workflows, reducing booking failures",
-      "Collaborated with cross-functional teams to optimize user experience and onboard new transport partners",
-    ],
-    technologies: [
-      "Python",
-      "REST APIs",
-      "PostgreSQL",
-      "SQL",
-      "Automated Testing",
-    ],
-    github: "https://github.com/EtienneFokou-E18560/mapan",
-    image: "/images/mapan.svg",
-  },
-  {
     title: "Cloud Infrastructure Automation",
     description:
       "Automated cloud infrastructure provisioning and CI/CD pipeline optimization using IaC and GitOps workflows across multiple engineering teams.",

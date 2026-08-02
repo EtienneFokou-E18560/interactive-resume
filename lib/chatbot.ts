@@ -88,7 +88,6 @@ export function getChatbotResponse(message: string, locale: Locale): string {
   if (
     match(msg, [
       "project",
-      "mapan",
       "monitoring",
       "observability",
       "infrastructure",
@@ -96,14 +95,6 @@ export function getChatbotResponse(message: string, locale: Locale): string {
       "projet",
     ])
   ) {
-    if (msg.includes("mapan")) {
-      const p = projects.find((x) => x.title === "Mapan");
-      if (p) {
-        return [p.title, p.description, "", ...p.highlights.map((h) => `• ${h}`)].join(
-          "\n"
-        );
-      }
-    }
     return formatProjects();
   }
 
