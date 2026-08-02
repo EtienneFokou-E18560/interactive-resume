@@ -287,7 +287,7 @@ This repo is configured for Vercel (`vercel.json`). Framework: Next.js. Install/
 
    | Name | Required | Notes |
    |------|----------|--------|
-   | `NEXT_PUBLIC_SITE_URL` | Recommended | Your live URL, e.g. `https://your-project.vercel.app` or custom domain |
+   | `NEXT_PUBLIC_SITE_URL` | Recommended | Your live URL, e.g. `https://etiennefokouresume.vercel.app` or a custom domain |
    | `RESEND_API_KEY` | Optional | Enables contact form email delivery |
    | `CONTACT_EMAIL` | Optional | Inbox for contact messages (defaults to profile email) |
 

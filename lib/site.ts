@@ -15,5 +15,5 @@ export function getSiteUrl(): string {
     return `https://${process.env.VERCEL_URL}`;
   }
 
-  return "https://github.com/EtienneFokou-E18560/interactive-resume";
+  return "https://etiennefokouresume.vercel.app";
 }
