@@ -17,7 +17,7 @@ export default function Section({
 }: SectionProps) {
   return (
     <section
-      className={`px-4 py-16 sm:px-6 ${alt ? "bg-zinc-50 dark:bg-zinc-900/50" : ""} ${className}`}
+      className={`px-4 py-16 sm:px-6 ${alt ? "bg-surface-muted dark:bg-zinc-900/50" : ""} ${className}`}
     >
       <div className="mx-auto max-w-6xl">
         {(title || subtitle) && (

@@ -7,7 +7,7 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="mt-auto border-t border-zinc-200 bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-900/50">
+    <footer className="mt-auto border-t border-zinc-200 bg-surface-muted dark:border-zinc-800 dark:bg-zinc-900/50">
       <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
         <div className="flex flex-col items-center justify-between gap-8 md:flex-row md:items-start">
           <div className="text-center md:text-left">
@@ -17,7 +17,7 @@ export default function Footer() {
             <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
               {profile.title} · {profile.location}
             </p>
-            <p className="mt-3 text-sm text-zinc-500">
+            <p className="mt-3 text-sm text-zinc-500 dark:text-zinc-400">
               © {year} {profile.name}. All rights reserved.
             </p>
           </div>

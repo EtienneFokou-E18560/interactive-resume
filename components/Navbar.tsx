@@ -20,7 +20,7 @@ const navItems = [
 
 export default function Navbar() {
   const pathname = usePathname();
-  const { theme, setTheme } = useTheme();
+  const { setTheme, resolvedTheme } = useTheme();
   const { t, locale, setLocale } = useLanguage();
   const [mobileOpen, setMobileOpen] = useState(false);
   const mounted = useSyncExternalStore(
@@ -83,11 +83,13 @@ export default function Navbar() {
           {mounted && (
             <button
               type="button"
-              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+              onClick={() =>
+                setTheme(resolvedTheme === "dark" ? "light" : "dark")
+              }
               className="rounded-lg p-2 text-zinc-600 transition-colors hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-800"
               aria-label="Toggle theme"
             >
-              {theme === "dark" ? (
+              {resolvedTheme === "dark" ? (
                 <Sun className="h-4 w-4" />
               ) : (
                 <Moon className="h-4 w-4" />
