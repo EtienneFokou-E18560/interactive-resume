@@ -63,7 +63,7 @@ export default function Hero() {
             transition={{ duration: 0.5, delay: 0.35 }}
             className="mt-6 max-w-2xl text-base leading-relaxed text-zinc-600 sm:text-lg dark:text-zinc-400"
           >
-            {profile.summary}
+            {profile.summaryHero}
           </motion.p>
 
           <motion.div
