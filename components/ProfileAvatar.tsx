@@ -11,7 +11,7 @@ export default function ProfileAvatar({ size = 160 }: { size?: number }) {
         src={profile.avatar}
         alt={profile.name}
         fill
-        className="object-cover"
+        className="object-cover object-[center_15%]"
         priority
         sizes={`${size}px`}
       />

@@ -8,7 +8,7 @@ export const profile = {
   phone: "(678) 650-4245",
   github: "https://github.com/EtienneFokou-E18560",
   linkedin: "https://www.linkedin.com/in/efokou/",
-  avatar: "/images/profile.svg",
+  avatar: "/images/profile.jpg",
   summaryHero:
     "I help companies turn complex engineering challenges into reliable, scalable, and highly automated systems. With 10+ years across Microsoft, Gartner, and Aflac, I combine software engineering, cloud infrastructure, SRE, DevOps, and Agentic AI/LLM experience.",
   summary:
