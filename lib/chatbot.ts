@@ -81,8 +81,8 @@ export function getChatbotResponse(message: string, locale: Locale): string {
     ])
   ) {
     return locale === "fr"
-      ? `${profile.name} est ${profile.title} avec 7+ ans d'expérience.\n\n${formatExperience()}`
-      : `${profile.name} is a ${profile.title} with 7+ years of experience.\n\n${formatExperience()}`;
+      ? `${profile.name} est ${profile.title} avec 10+ ans d'expérience.\n\n${formatExperience()}`
+      : `${profile.name} is a ${profile.title} with 10+ years of experience.\n\n${formatExperience()}`;
   }
 
   if (
