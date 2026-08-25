@@ -49,4 +49,26 @@ export const projects: Project[] = [
     ],
     image: "/images/observability.svg",
   },
+  {
+    title: "Agentic AI Platform",
+    description:
+      "Orchestration layer for LLM-powered agents with tool use, retrieval, and guardrails for production workflows across cloud environments.",
+    highlights: [
+      "Designed multi-step agent workflows with tool routing, context management, and human-in-the-loop checkpoints for reliable task completion",
+      "Built RAG pipelines and prompt/evaluation harnesses to ground agent responses in internal docs and reduce hallucinations",
+      "Integrated agent telemetry with existing observability stacks for latency, cost, and failure-rate monitoring",
+    ],
+    technologies: [
+      "Python",
+      "LangChain",
+      "OpenAI API",
+      "RAG",
+      "Vector DB",
+      "FastAPI",
+      "Kubernetes",
+      "Prometheus",
+      "Grafana",
+    ],
+    image: "/images/agentic-ai.svg",
+  },
 ];
