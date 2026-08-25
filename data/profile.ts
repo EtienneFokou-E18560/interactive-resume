@@ -4,7 +4,7 @@ export const profile = {
   subtitle:
     "Cloud Infrastructure & Distributed Systems · Backend & Platform Engineering",
   location: "Bellevue, WA",
-  email: "etienne56@gmail.com",
+  email: "efokou279@gmail.com",
   phone: "(678) 650-4245",
   github: "https://github.com/EtienneFokou-E18560",
   linkedin: "https://www.linkedin.com/in/efokou/",

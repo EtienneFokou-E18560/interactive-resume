@@ -7,7 +7,7 @@ alwaysApply: true
 
 When creating commits, amending, rebasing commit messages, or opening/updating pull requests for this repository:
 
-- **Author identity**: Use **Etienne Fokou** `<etienne56@gmail.com>` for commit author and committer (respect repo-local `user.name` / `user.email`).
+- **Author identity**: Use **Etienne Fokou** `<efokou279@gmail.com>` for commit author and committer (respect repo-local `user.name` / `user.email`).
 - **Never add** any Cursor attribution, including but not limited to:
   - `Co-authored-by: Cursor <cursoragent@cursor.com>` (or any variant)
   - "Made with Cursor" or similar footers in commit messages or PR descriptions
