@@ -93,7 +93,7 @@ export const translations = {
     cta: {
       title: "Let's build something great together",
       description:
-        "Open to cloud engineering, DevOps, and backend opportunities. Reach out for collaborations, consulting, or full-time roles.",
+        "Open to cloud engineering, DevOps, and backend opportunities. Get in touch about collaborations, consulting, or full-time roles.",
       contact: "Start a Conversation",
     },
     common: {

@@ -14,7 +14,7 @@ export default function CallToAction() {
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.15),transparent_50%)]" />
         <div className="relative">
           <h2 className="text-2xl font-bold sm:text-3xl">{t.cta.title}</h2>
-          <p className="mx-auto mt-4 max-w-2xl text-lg text-blue-100">
+          <p className="mx-auto mt-4 max-w-2xl text-pretty text-lg text-blue-100">
             {t.cta.description}
           </p>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
