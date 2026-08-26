@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Download, Mail, MapPin, Phone } from "lucide-react";
+import { Download, Layers, Mail, MapPin, Phone } from "lucide-react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import ContactForm from "@/components/ContactForm";
 import PageLayout from "@/components/PageLayout";
@@ -51,6 +51,15 @@ export default function ContactPageContent() {
           <div>
             <h2 className="mb-4 text-xl font-semibold">{t.contact.social}</h2>
             <div className="flex flex-wrap gap-3">
+              <Link
+                href={profile.portfolio}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-lg border border-zinc-200 px-4 py-3 text-sm text-zinc-600 transition-colors hover:border-zinc-300 hover:text-zinc-900 dark:border-zinc-800 dark:text-zinc-400 dark:hover:text-zinc-50"
+              >
+                <Layers className="h-5 w-5" />
+                {t.contact.portfolio}
+              </Link>
               <Link
                 href={profile.github}
                 target="_blank"

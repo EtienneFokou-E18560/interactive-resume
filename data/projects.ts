@@ -10,6 +10,28 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    title: "efokou-labs engineering portfolio",
+    description:
+      "Public GitHub org for cloud, SRE, and GitOps work: one kind cluster, Argo CD, Terraform modules, and sample workloads instead of isolated demo accounts.",
+    highlights: [
+      "kind + Argo CD platform with GitOps overlays for Next.js, FastAPI, Postgres, and Redis",
+      "Versioned Terraform modules with create-and-destroy tests; AWS used for demos, then torn down",
+    ],
+    technologies: [
+      "Kubernetes",
+      "Argo CD",
+      "Terraform",
+      "AWS",
+      "GitHub Actions",
+      "Python",
+      "FastAPI",
+      "Next.js",
+    ],
+    github: "https://github.com/efokou-labs",
+    demo: "https://efokou-labs.github.io/system-design-notes/",
+    image: "/images/cloud-infra.svg",
+  },
+  {
     title: "Cloud Infrastructure Automation",
     description:
       "Automated cloud infrastructure provisioning and CI/CD pipeline optimization using IaC and GitOps workflows across multiple engineering teams.",

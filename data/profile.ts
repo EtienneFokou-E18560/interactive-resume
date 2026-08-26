@@ -7,6 +7,7 @@ export const profile = {
   email: "efokou279@gmail.com",
   phone: "(678) 650-4245",
   github: "https://github.com/EtienneFokou-E18560",
+  portfolio: "https://github.com/efokou-labs",
   linkedin: "https://www.linkedin.com/in/efokou/",
   avatar: "/images/profile.jpg",
   summaryHero:
@@ -32,6 +33,6 @@ export const profile = {
     { label: "Years Experience", value: "10+" },
     { label: "Companies", value: "3" },
     { label: "Cloud Platforms", value: "3" },
-    { label: "Projects", value: "3" },
+    { label: "Projects", value: "4" },
   ],
 };

@@ -15,6 +15,7 @@ export const translations = {
     hero: {
       download: "Download Resume",
       contact: "Get in Touch",
+      portfolio: "Portfolio",
     },
     home: {
       about: "About",
@@ -62,6 +63,7 @@ export const translations = {
       getInTouch: "Get in Touch",
       directContact: "Direct Contact",
       social: "Social",
+      portfolio: "Portfolio",
       resume: "Resume",
       downloadPdf: "Download PDF",
       name: "Name",
@@ -114,6 +116,7 @@ export const translations = {
     hero: {
       download: "Télécharger le CV",
       contact: "Me contacter",
+      portfolio: "Portfolio",
     },
     home: {
       about: "À propos",
@@ -161,6 +164,7 @@ export const translations = {
       getInTouch: "Envoyer un message",
       directContact: "Contact direct",
       social: "Réseaux sociaux",
+      portfolio: "Portfolio",
       resume: "CV",
       downloadPdf: "Télécharger le PDF",
       name: "Nom",

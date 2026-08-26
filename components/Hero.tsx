@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Download, ArrowRight, Mail, MapPin } from "lucide-react";
+import { Download, ArrowRight, Mail, MapPin, Layers } from "lucide-react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import ProfileAvatar from "@/components/ProfileAvatar";
 import StatsGrid from "@/components/StatsGrid";
@@ -95,6 +95,15 @@ export default function Hero() {
             transition={{ duration: 0.5, delay: 0.45 }}
             className="mt-6 flex flex-wrap items-center gap-4"
           >
+            <Link
+              href={profile.portfolio}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-sm text-zinc-500 transition-colors hover:text-zinc-900 dark:hover:text-zinc-50"
+            >
+              <Layers className="h-5 w-5" />
+              {t.hero.portfolio}
+            </Link>
             <Link
               href={profile.github}
               target="_blank"

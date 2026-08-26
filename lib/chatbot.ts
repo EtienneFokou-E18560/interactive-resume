@@ -133,6 +133,8 @@ export function getChatbotResponse(message: string, locale: Locale): string {
       "email",
       "phone",
       "linkedin",
+      "github",
+      "portfolio",
       "reach",
       "contacter",
       "téléphone",
@@ -145,6 +147,7 @@ export function getChatbotResponse(message: string, locale: Locale): string {
       `Location: ${profile.location}`,
       `LinkedIn: ${profile.linkedin}`,
       `GitHub: ${profile.github}`,
+      `Portfolio: ${profile.portfolio}`,
     ].join("\n");
   }
 

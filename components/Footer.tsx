@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
-import { Mail } from "lucide-react";
+import { Layers, Mail } from "lucide-react";
 import { profile } from "@/data/profile";
 
 export default function Footer() {
@@ -24,6 +24,15 @@ export default function Footer() {
 
           <div className="flex flex-col items-center gap-4 md:items-end">
             <div className="flex items-center gap-4">
+              <Link
+                href={profile.portfolio}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-zinc-500 transition-colors hover:text-zinc-900 dark:hover:text-zinc-50"
+                aria-label="Portfolio"
+              >
+                <Layers className="h-5 w-5" />
+              </Link>
               <Link
                 href={profile.github}
                 target="_blank"

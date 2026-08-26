@@ -53,6 +53,7 @@ function buildCommands(): Record<string, string | string[]> {
       `Location: ${profile.location}`,
       `LinkedIn: ${profile.linkedin}`,
       `GitHub: ${profile.github}`,
+      `Portfolio: ${profile.portfolio}`,
     ],
   };
 }
