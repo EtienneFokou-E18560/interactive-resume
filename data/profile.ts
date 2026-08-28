@@ -29,19 +29,19 @@ export const profile = {
     "Observability with Prometheus, Grafana, Datadog, and ELK Stack",
     "Agentic AI workflows with LLM orchestration, RAG, and production guardrails",
   ],
-  /** Proof points — replace [METRIC] with approved numbers before launch polish */
+  /** Honest scope proof points until exact metrics are verified */
   stats: [
     {
-      label: "Faster provisioning / deploy lead time",
-      value: "[METRIC]%",
+      label: "Provisioning and deployment lead time",
+      value: "FASTER",
     },
     {
-      label: "Teams or services supported",
-      value: "[METRIC]",
+      label: "Engineering teams and services supported",
+      value: "MULTIPLE",
     },
     {
-      label: "Lower MTTR",
-      value: "[METRIC]%",
+      label: "Mean time to recovery (MTTR)",
+      value: "LOWER",
     },
   ],
 };
