@@ -41,12 +41,12 @@ export default function Navbar() {
   }
 
   return (
-    <header className="sticky top-0 z-50 border-b border-zinc-200/80 bg-white/80 backdrop-blur-md dark:border-zinc-800 dark:bg-zinc-950/80">
-      <nav className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 sm:px-6">
+    <header className="site-header">
+      <nav className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6">
         <Link
           href="/"
           onClick={closeMobileMenu}
-          className="text-lg font-semibold tracking-tight text-zinc-900 dark:text-zinc-50"
+          className="text-lg font-semibold tracking-tight text-foreground"
         >
           {profile.name}
         </Link>
@@ -56,12 +56,8 @@ export default function Navbar() {
             <li key={href}>
               <Link
                 href={href}
-                className={cn(
-                  "rounded-lg px-3 py-2 text-sm font-medium transition-colors",
-                  pathname === href
-                    ? "bg-zinc-100 text-zinc-900 dark:bg-zinc-800 dark:text-zinc-50"
-                    : "text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-50"
-                )}
+                className="nav-link"
+                aria-current={pathname === href ? "page" : undefined}
               >
                 {t.nav[key]}
               </Link>
@@ -69,12 +65,12 @@ export default function Navbar() {
           ))}
         </ul>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1">
           <button
             type="button"
             onClick={() => setLocale(locale === "en" ? "fr" : "en")}
-            className="rounded-lg p-2 text-zinc-600 transition-colors hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-800"
-            aria-label="Toggle language"
+            className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-[var(--radius-sm)] text-[var(--color-text-muted)] transition-colors hover:bg-[var(--color-surface-hover)] hover:text-foreground"
+            aria-label={`Switch language (current: ${locale.toUpperCase()})`}
           >
             <Globe className="h-4 w-4" />
             <span className="sr-only">{locale.toUpperCase()}</span>
@@ -86,7 +82,7 @@ export default function Navbar() {
               onClick={() =>
                 setTheme(resolvedTheme === "dark" ? "light" : "dark")
               }
-              className="rounded-lg p-2 text-zinc-600 transition-colors hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-800"
+              className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-[var(--radius-sm)] text-[var(--color-text-muted)] transition-colors hover:bg-[var(--color-surface-hover)] hover:text-foreground"
               aria-label="Toggle theme"
             >
               {resolvedTheme === "dark" ? (
@@ -100,7 +96,7 @@ export default function Navbar() {
           <button
             type="button"
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="rounded-lg p-2 text-zinc-600 transition-colors hover:bg-zinc-100 md:hidden dark:text-zinc-400 dark:hover:bg-zinc-800"
+            className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-[var(--radius-sm)] text-[var(--color-text-muted)] transition-colors hover:bg-[var(--color-surface-hover)] hover:text-foreground md:hidden"
             aria-label={mobileOpen ? t.nav.close : t.nav.menu}
             aria-expanded={mobileOpen}
           >
@@ -110,19 +106,15 @@ export default function Navbar() {
       </nav>
 
       {mobileOpen && (
-        <div className="border-t border-zinc-200 bg-white px-4 py-4 md:hidden dark:border-zinc-800 dark:bg-zinc-950">
+        <div className="border-t border-[var(--color-border)] bg-[var(--color-bg)] px-4 py-4 md:hidden">
           <ul className="space-y-1">
             {navItems.map(({ href, key }) => (
               <li key={href}>
                 <Link
                   href={href}
                   onClick={closeMobileMenu}
-                  className={cn(
-                    "block rounded-lg px-3 py-3 text-base font-medium transition-colors",
-                    pathname === href
-                      ? "bg-zinc-100 text-zinc-900 dark:bg-zinc-800 dark:text-zinc-50"
-                      : "text-zinc-600 hover:bg-zinc-50 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-900 dark:hover:text-zinc-50"
-                  )}
+                  className={cn("nav-link block py-3")}
+                  aria-current={pathname === href ? "page" : undefined}
                 >
                   {t.nav[key]}
                 </Link>

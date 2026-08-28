@@ -26,11 +26,13 @@ function SectionHeader({
   viewAll: string;
 }) {
   return (
-    <div className="mb-8 flex flex-wrap items-center justify-between gap-3">
-      <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">{title}</h2>
+    <div className="mb-8 flex flex-wrap items-end justify-between gap-3 border-b border-[var(--color-border)] pb-5">
+      <h2 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
+        {title}
+      </h2>
       <Link
         href={href}
-        className="text-sm font-medium text-blue-600 hover:underline dark:text-blue-400"
+        className="text-sm font-medium text-[var(--color-text-muted)] hover:text-accent"
       >
         {viewAll} →
       </Link>

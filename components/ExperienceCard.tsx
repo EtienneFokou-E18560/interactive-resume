@@ -10,24 +10,24 @@ export default function ExperienceCard({ item }: { item: Experience }) {
   const [expanded, setExpanded] = useState(false);
 
   return (
-    <article className="rounded-xl border border-zinc-200 bg-white dark:border-zinc-800 dark:bg-zinc-900">
+    <article className="card overflow-hidden">
       <button
         type="button"
         onClick={() => setExpanded(!expanded)}
-        className="flex w-full items-center justify-between gap-4 p-6 text-left"
+        className="flex w-full items-center justify-between gap-4 p-5 text-left sm:p-6"
         aria-expanded={expanded}
       >
         <div className="min-w-0 flex-1">
-          <h3 className="text-lg font-semibold text-zinc-900 dark:text-zinc-50">
+          <h3 className="text-lg font-semibold tracking-tight text-foreground">
             {item.role}
           </h3>
-          <p className="mt-1 text-zinc-600 dark:text-zinc-400">
+          <p className="mt-1 text-sm text-[var(--color-text-secondary)]">
             {item.url ? (
               <Link
                 href={item.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-blue-600 dark:hover:text-blue-400"
+                className="hover:text-accent"
                 onClick={(e) => e.stopPropagation()}
               >
                 {item.company}
@@ -39,19 +39,19 @@ export default function ExperienceCard({ item }: { item: Experience }) {
             {item.start} – {item.end}
           </p>
           {item.location && (
-            <p className="mt-1 flex items-center gap-1.5 text-sm text-zinc-500 dark:text-zinc-500">
+            <p className="mt-1 flex items-center gap-1.5 text-sm text-[var(--color-text-muted)]">
               <MapPin className="h-3.5 w-3.5 shrink-0" />
               {item.location}
             </p>
           )}
           {item.scope && (
-            <p className="mt-2 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+            <p className="mt-2 text-sm leading-relaxed text-[var(--color-text-secondary)]">
               {item.scope}
             </p>
           )}
         </div>
         <ChevronDown
-          className={`h-5 w-5 shrink-0 text-zinc-400 transition-transform dark:text-zinc-500 ${
+          className={`h-5 w-5 shrink-0 text-[var(--color-text-muted)] transition-transform ${
             expanded ? "rotate-180" : ""
           }`}
         />
@@ -63,14 +63,14 @@ export default function ExperienceCard({ item }: { item: Experience }) {
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: 0.25 }}
             className="overflow-hidden"
           >
-            <div className="border-t border-zinc-100 px-6 pb-6 pt-4 dark:border-zinc-800">
-              <ul className="space-y-2 text-zinc-600 dark:text-zinc-400">
+            <div className="border-t border-[var(--color-border)] px-5 pb-6 pt-4 sm:px-6">
+              <ul className="space-y-2 text-[var(--color-text-secondary)]">
                 {item.description.map((line) => (
-                  <li key={line} className="flex items-start gap-2">
-                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-blue-500" />
+                  <li key={line} className="flex items-start gap-2 text-sm">
+                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
                     <span>{line}</span>
                   </li>
                 ))}
@@ -78,10 +78,7 @@ export default function ExperienceCard({ item }: { item: Experience }) {
               {item.technologies && (
                 <div className="mt-4 flex flex-wrap gap-2">
                   {item.technologies.map((tech) => (
-                    <span
-                      key={tech}
-                      className="rounded-full bg-zinc-100 px-3 py-1 text-xs font-medium text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300"
-                    >
+                    <span key={tech} className="tag">
                       {tech}
                     </span>
                   ))}

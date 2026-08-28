@@ -40,20 +40,20 @@ function ChatbotPanel({ locale, onClose }: { locale: Locale; onClose: () => void
   const suggestions = chatbotSuggestions[locale];
 
   return (
-    <div className="fixed bottom-20 right-4 z-50 flex h-[min(28rem,calc(100vh-6rem))] w-[min(22rem,calc(100vw-2rem))] flex-col overflow-hidden rounded-xl border border-zinc-200 bg-white shadow-2xl sm:bottom-24 sm:right-6 sm:w-96 dark:border-zinc-800 dark:bg-zinc-900">
-      <div className="flex items-center justify-between border-b border-zinc-200 px-4 py-3 dark:border-zinc-800">
+    <div className="card fixed bottom-20 right-4 z-50 flex h-[min(28rem,calc(100vh-6rem))] w-[min(22rem,calc(100vw-2rem))] flex-col overflow-hidden shadow-[var(--shadow-md)] sm:bottom-24 sm:right-6 sm:w-96">
+      <div className="flex items-center justify-between border-b border-[var(--color-border)] px-4 py-3">
         <div>
-          <p className="font-medium text-zinc-900 dark:text-zinc-50">
-            Resume Assistant
-          </p>
-          <p className="text-xs text-zinc-500 dark:text-zinc-400">
-            {locale === "fr" ? "Posez une question" : "Ask a question"}
+          <p className="font-medium text-foreground">Resume Assistant</p>
+          <p className="text-xs text-[var(--color-text-muted)]">
+            {locale === "fr"
+              ? "Réponses basées sur le CV du site"
+              : "Answers grounded in this site’s résumé"}
           </p>
         </div>
         <button
           type="button"
           onClick={onClose}
-          className="rounded-lg p-1 text-zinc-500 hover:bg-zinc-100 dark:hover:bg-zinc-800"
+          className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-[var(--radius-sm)] text-[var(--color-text-muted)] hover:bg-[var(--color-surface-hover)]"
           aria-label="Close chat"
         >
           <X className="h-4 w-4" />
@@ -63,11 +63,11 @@ function ChatbotPanel({ locale, onClose }: { locale: Locale; onClose: () => void
       <div ref={outputRef} className="flex-1 space-y-3 overflow-y-auto p-4">
         {messages.map((msg, i) => (
           <div
-            key={i}
-            className={`rounded-lg px-3 py-2 text-sm break-words whitespace-pre-wrap ${
+            key={`${msg.role}-${i}-${msg.text.slice(0, 24)}`}
+            className={`rounded-[var(--radius-md)] px-3 py-2 text-sm break-words whitespace-pre-wrap ${
               msg.role === "user"
-                ? "ml-4 bg-blue-600 text-white sm:ml-8"
-                : "mr-4 bg-zinc-100 text-zinc-800 sm:mr-8 dark:bg-zinc-800 dark:text-zinc-200"
+                ? "ml-4 bg-[var(--color-text)] text-[var(--color-bg)] sm:ml-8"
+                : "mr-4 bg-[var(--color-bg-subtle)] text-[var(--color-text-secondary)] sm:mr-8"
             }`}
           >
             {msg.text}
@@ -75,14 +75,14 @@ function ChatbotPanel({ locale, onClose }: { locale: Locale; onClose: () => void
         ))}
       </div>
 
-      <div className="border-t border-zinc-200 px-3 py-2 dark:border-zinc-800">
+      <div className="border-t border-[var(--color-border)] px-3 py-2">
         <div className="mb-2 flex flex-wrap gap-1.5">
           {suggestions.map((suggestion) => (
             <button
               key={suggestion}
               type="button"
               onClick={() => sendMessage(suggestion)}
-              className="rounded-full border border-zinc-200 px-2.5 py-1 text-xs text-zinc-600 transition-colors hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-400 dark:hover:bg-zinc-800"
+              className="tag transition-colors hover:border-[var(--color-accent)] hover:text-foreground"
             >
               {suggestion}
             </button>
@@ -97,12 +97,12 @@ function ChatbotPanel({ locale, onClose }: { locale: Locale; onClose: () => void
             placeholder={
               locale === "fr" ? "Posez une question..." : "Ask a question..."
             }
-            className="min-w-0 flex-1 rounded-lg border border-zinc-300 bg-white px-3 py-2 text-base text-zinc-900 outline-none focus:border-blue-500 sm:text-sm dark:border-zinc-700 dark:bg-zinc-950 dark:text-zinc-50"
+            className="field-input min-w-0 flex-1 py-2 text-base sm:text-sm"
           />
           <button
             type="button"
             onClick={() => sendMessage()}
-            className="shrink-0 rounded-lg bg-blue-600 p-2 text-white hover:bg-blue-700"
+            className="button button-primary shrink-0 px-3"
             aria-label="Send message"
           >
             <Send className="h-4 w-4" />
@@ -122,8 +122,8 @@ export default function Chatbot() {
       <button
         type="button"
         onClick={() => setOpen(!open)}
-        className="fixed bottom-4 right-4 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-blue-600 text-white shadow-lg transition-transform hover:scale-105 sm:bottom-6 sm:right-6"
-        aria-label="Open resume assistant"
+        className="fixed bottom-4 right-4 z-50 flex h-14 w-14 items-center justify-center rounded-full border border-[var(--color-border-strong)] bg-[var(--color-text)] text-[var(--color-bg)] shadow-[var(--shadow-md)] transition-opacity hover:opacity-90 sm:bottom-6 sm:right-6"
+        aria-label={open ? "Close resume assistant" : "Open resume assistant"}
       >
         {open ? <X className="h-6 w-6" /> : <MessageCircle className="h-6 w-6" />}
       </button>
