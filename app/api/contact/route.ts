@@ -69,7 +69,8 @@ export async function POST(request: Request) {
       );
     }
   } else {
-    console.info("Contact form submission:", payload);
+    // Dev fallback when RESEND_API_KEY is unset — never log form body contents.
+    console.info("Contact form accepted (email delivery not configured)");
   }
 
   return NextResponse.json({ success: true });

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import ProjectCaseStudyContent from "@/components/ProjectCaseStudyContent";
 import { getCaseStudyProjects, getProjectBySlug } from "@/data/projects";
-import { profile } from "@/data/profile";
+import { pageMetadata } from "@/lib/seo";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -16,14 +16,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!project?.caseStudy) {
     return { title: "Project not found" };
   }
-  return {
+  return pageMetadata({
     title: project.title,
     description: project.description,
-    openGraph: {
-      title: `${project.title} | ${profile.name}`,
-      description: project.description,
-    },
-  };
+    path: `/projects/${project.slug}`,
+  });
 }
 
 export default async function ProjectCaseStudyPage({ params }: Props) {

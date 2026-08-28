@@ -1,12 +1,15 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { LanguageProvider } from "@/hooks/useLanguage";
-import Chatbot from "@/components/Chatbot";
+import JsonLd from "@/components/JsonLd";
+import LazyChatbot from "@/components/LazyChatbot";
 import { profile } from "@/data/profile";
-import { getSiteUrl } from "@/lib/site";
+import { pageMetadata } from "@/lib/seo";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -19,25 +22,18 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const siteUrl = getSiteUrl();
-
 export const metadata: Metadata = {
+  ...pageMetadata({
+    description: profile.summaryMeta,
+    path: "/",
+  }),
   title: {
     default: `${profile.name} | ${profile.title}`,
     template: `%s | ${profile.name}`,
   },
-  description: profile.summaryMeta,
-  metadataBase: new URL(siteUrl),
   authors: [{ name: profile.name, url: profile.github }],
   creator: profile.name,
   applicationName: profile.name,
-  openGraph: {
-    title: `${profile.name} | ${profile.title}`,
-    description: profile.summaryMeta,
-    type: "website",
-    url: siteUrl,
-    siteName: `${profile.name} Portfolio`,
-  },
   robots: { index: true, follow: true },
 };
 
@@ -51,14 +47,22 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} flex min-h-screen flex-col bg-background font-sans text-foreground antialiased`}
       >
+        <JsonLd />
         <ThemeProvider>
           <LanguageProvider>
+            <a href="#main-content" className="skip-link">
+              Skip to content
+            </a>
             <Navbar />
-            <main className="flex-1">{children}</main>
+            <main id="main-content" className="flex-1">
+              {children}
+            </main>
             <Footer />
-            <Chatbot />
+            <LazyChatbot />
           </LanguageProvider>
         </ThemeProvider>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );

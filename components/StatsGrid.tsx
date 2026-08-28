@@ -1,18 +1,24 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { profile } from "@/data/profile";
 
 export default function StatsGrid() {
+  const reduce = useReducedMotion();
+
   return (
     <div className="proof-grid">
       {profile.stats.map((stat, index) => (
         <motion.div
           key={stat.label}
-          initial={{ opacity: 0, y: 12 }}
+          initial={reduce ? false : { opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.35, delay: index * 0.06 }}
+          transition={
+            reduce
+              ? { duration: 0 }
+              : { duration: 0.35, delay: index * 0.06 }
+          }
           className="card proof-card text-center sm:text-left"
         >
           <span className="proof-value">{stat.value}</span>
