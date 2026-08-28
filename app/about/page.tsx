@@ -4,7 +4,7 @@ import { profile } from "@/data/profile";
 
 export const metadata: Metadata = {
   title: "About",
-  description: `About ${profile.name} — ${profile.title}`,
+  description: `About ${profile.name} - ${profile.title}`,
 };
 
 export default function AboutPage() {

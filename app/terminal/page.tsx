@@ -5,7 +5,7 @@ import PageLayout from "@/components/PageLayout";
 export const metadata: Metadata = {
   title: "Developer mode",
   description:
-    "CLI-style terminal for browsing résumé data — optional developer mode.",
+    "CLI-style terminal for browsing résumé data - optional developer mode.",
 };
 
 export default function TerminalPage() {

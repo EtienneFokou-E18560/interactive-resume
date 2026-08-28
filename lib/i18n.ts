@@ -50,7 +50,7 @@ export const translations = {
     projects: {
       title: "Projects",
       description:
-        "Engineering work across cloud platforms, reliability, and production AI — with clear labels for portfolio demos versus case studies.",
+        "Engineering work across cloud platforms, reliability, and production AI - with clear labels for portfolio demos versus case studies.",
       code: "Code",
       demo: "Demo",
       caseStudy: "Read case study",
@@ -67,7 +67,7 @@ export const translations = {
     contact: {
       title: "Contact Me",
       description:
-        "Open to Senior Platform Engineer and related SRE, cloud, and infrastructure roles. Prefer email — I typically respond within 1–2 business days.",
+        "Open to Senior Platform Engineer and related SRE, cloud, and infrastructure roles. Prefer email - I typically respond within 1 - 2 business days.",
       getInTouch: "Get in Touch",
       directContact: "Direct Contact",
       social: "Social",
@@ -83,7 +83,7 @@ export const translations = {
       considering:
         "Currently considering platform engineering, SRE, cloud infrastructure, and production AI platform roles.",
       preferredChannel: "Preferred channel: email",
-      responseTime: "Typical response time: 1–2 business days",
+      responseTime: "Typical response time: 1 - 2 business days",
       phoneNote: "Phone available on request for scheduled calls.",
     },
     chatbot: {
@@ -114,10 +114,10 @@ export const translations = {
     resumeDownload: {
       title: "Download Resume",
       description:
-        "Choose a role focus and generate a fresh PDF from the same data that powers this site — no stale attachments.",
+        "Choose a role focus and generate a fresh PDF from the same data that powers this site - no stale attachments.",
       roleLabel: "Target role",
       previewTitle: "Preview",
-      formatNote: "PDF only for now — generated on demand. More formats coming soon.",
+      formatNote: "PDF only for now - generated on demand. More formats coming soon.",
       generate: "Generate & Download PDF",
       generating: "Generating…",
       viewExperience: "View full experience on site",
@@ -176,7 +176,7 @@ export const translations = {
     projects: {
       title: "Projets",
       description:
-        "Travaux d'ingénierie en cloud, fiabilité et IA en production — avec des libellés clairs pour portfolio et études de cas.",
+        "Travaux d'ingénierie en cloud, fiabilité et IA en production - avec des libellés clairs pour portfolio et études de cas.",
       code: "Code",
       demo: "Démo",
       caseStudy: "Lire l'étude de cas",
@@ -193,7 +193,7 @@ export const translations = {
     contact: {
       title: "Me contacter",
       description:
-        "Ouvert aux postes Senior Platform Engineer, SRE, cloud et infrastructure. Préférez l'e-mail — réponse sous 1 à 2 jours ouvrés.",
+        "Ouvert aux postes Senior Platform Engineer, SRE, cloud et infrastructure. Préférez l'e-mail - réponse sous 1 à 2 jours ouvrés.",
       getInTouch: "Envoyer un message",
       directContact: "Contact direct",
       social: "Réseaux sociaux",
@@ -240,11 +240,11 @@ export const translations = {
     resumeDownload: {
       title: "Télécharger le CV",
       description:
-        "Choisissez un rôle cible et générez un PDF à jour à partir des mêmes données que ce site — pas de pièce jointe obsolète.",
+        "Choisissez un rôle cible et générez un PDF à jour à partir des mêmes données que ce site - pas de pièce jointe obsolète.",
       roleLabel: "Rôle cible",
       previewTitle: "Aperçu",
       formatNote:
-        "PDF uniquement pour l'instant — généré à la demande. D'autres formats bientôt.",
+        "PDF uniquement pour l'instant - généré à la demande. D'autres formats bientôt.",
       generate: "Générer et télécharger le PDF",
       generating: "Génération…",
       viewExperience: "Voir toute l'expérience sur le site",

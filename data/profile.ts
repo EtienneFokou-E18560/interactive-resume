@@ -13,11 +13,11 @@ export const profile = {
   summaryHero:
     "I build reliable cloud platforms and developer tooling that reduce operational toil and help teams ship safely. Over 10+ years at Microsoft, Gartner, and Aflac, I've worked across distributed systems, infrastructure automation, observability, and production AI workflows on AWS, Azure, and GCP.",
   summary:
-    "I turn complex infrastructure into systems teams can deploy, observe, and evolve with confidence. Over 10+ years at Microsoft, Gartner, and Aflac, I've built automation, CI/CD, and observability platforms that reduce toil, improve reliability, and accelerate delivery across AWS, Azure, and GCP. I also design Agentic AI workflows—with tool use, RAG, and production guardrails—that augment how engineers build and operate software.",
+    "I turn complex infrastructure into systems teams can deploy, observe, and evolve with confidence. Over 10+ years at Microsoft, Gartner, and Aflac, I've built automation, CI/CD, and observability platforms that reduce toil, improve reliability, and accelerate delivery across AWS, Azure, and GCP. I also design Agentic AI workflows - with tool use, RAG, and production guardrails - that augment how engineers build and operate software.",
   summaryMeta:
-    "Senior Platform Engineer with 10+ years at Microsoft, Gartner, and Aflac—AWS, Azure, GCP, SRE, and production AI.",
+    "Senior Platform Engineer with 10+ years at Microsoft, Gartner, and Aflac - AWS, Azure, GCP, SRE, and production AI.",
   bio: [
-    "I'm a Bellevue-based platform engineer focused on reliability, automation, and Agentic AI in production—not slide decks.",
+    "I'm a Bellevue-based platform engineer focused on reliability, automation, and Agentic AI in production - not slide decks.",
     "Day to day, that means infrastructure as code, GitOps-style delivery, observability, and on-call practices across multi-cloud enterprise environments.",
     "I work best partnering with teams to remove bottlenecks, tighten incident response, and ship changes safely at scale.",
   ],

@@ -42,7 +42,7 @@ export default function Timeline() {
                   }`}
                 >
                   <p className="text-sm font-medium text-emerald-600 dark:text-emerald-400">
-                    {item.start} – {item.end}
+                    {item.start} - {item.end}
                   </p>
                   <h3 className="mt-1 text-lg font-semibold text-zinc-900 dark:text-zinc-50">
                     {item.degree} in {item.field}
@@ -80,7 +80,7 @@ export default function Timeline() {
                 }`}
               >
                 <p className="text-sm font-medium text-blue-600 dark:text-blue-400">
-                  {item.start} – {item.end}
+                  {item.start} - {item.end}
                 </p>
                 <h3 className="mt-1 text-lg font-semibold text-zinc-900 dark:text-zinc-50">
                   {item.role}

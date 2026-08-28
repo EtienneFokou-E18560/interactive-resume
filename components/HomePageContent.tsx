@@ -55,7 +55,7 @@ export default function HomePageContent() {
                 {item.role} · {item.company}
               </h3>
               <p className="mt-1 text-sm text-[var(--color-text-muted)]">
-                {item.start} – {item.end}
+                {item.start} - {item.end}
                 {item.location ? ` · ${item.location}` : ""}
               </p>
               {item.scope && (

@@ -4,7 +4,7 @@ import { profile } from "@/data/profile";
 
 export const metadata: Metadata = {
   title: "Contact",
-  description: `Contact ${profile.name} — ${profile.title}`,
+  description: `Contact ${profile.name} - ${profile.title}`,
 };
 
 export default function ContactPage() {

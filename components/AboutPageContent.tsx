@@ -70,7 +70,7 @@ export default function AboutPageContent() {
                 {item.school}
               </p>
               <p className="mt-2 text-sm text-[var(--color-text-muted)]">
-                {item.start} – {item.end}
+                {item.start} - {item.end}
                 {item.location ? ` · ${item.location}` : ""}
               </p>
             </article>

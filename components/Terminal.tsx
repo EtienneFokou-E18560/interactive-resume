@@ -18,34 +18,34 @@ function buildCommands(): Record<string, string | string[]> {
   return {
     help: [
       "Available commands:",
-      "  about       - Professional summary",
-      "  experience  - Work history",
-      "  projects    - Key projects",
-      "  skills      - Technical skills",
-      "  education   - Academic background",
-      "  contact     - Contact information",
-      "  resume      - Download a role-tailored PDF resume",
-      "  name        - Set or show your name (saved in a cookie)",
-      "  clear       - Clear terminal",
-      "  help        - Show this help",
+      "  about - Professional summary",
+      "  experience - Work history",
+      "  projects - Key projects",
+      "  skills - Technical skills",
+      "  education - Academic background",
+      "  contact - Contact information",
+      "  resume - Download a role-tailored PDF resume",
+      "  name - Set or show your name (saved in a cookie)",
+      "  clear - Clear terminal",
+      "  help - Show this help",
     ],
     about: [profile.summary, "", ...profile.highlights.map((h) => `• ${h}`)],
     experience: experience.flatMap((e) => [
-      `${e.role} @ ${e.company} (${e.start} – ${e.end})`,
-      ...e.description.slice(0, 2).map((d) => `  - ${d}`),
+      `${e.role} @ ${e.company} (${e.start} - ${e.end})`,
+      ...e.description.slice(0, 2).map((d) => ` - ${d}`),
       "",
     ]),
     projects: projects.flatMap((p) => [
       `${p.title}`,
       `  ${p.description}`,
-      ...p.highlights.slice(0, 2).map((h) => `  - ${h}`),
+      ...p.highlights.slice(0, 2).map((h) => ` - ${h}`),
       `  Tech: ${p.technologies.join(", ")}`,
       "",
     ]),
     skills: techStack.join(", "),
     education: education.map(
       (e) =>
-        `${e.degree} in ${e.field} — ${e.school} (${e.end})${e.location ? `, ${e.location}` : ""}`
+        `${e.degree} in ${e.field} - ${e.school} (${e.end})${e.location ? `, ${e.location}` : ""}`
     ),
     contact: [
       `Name:  ${profile.name}`,
@@ -57,7 +57,7 @@ function buildCommands(): Record<string, string | string[]> {
       `Portfolio: ${profile.portfolio}`,
     ],
     resume:
-      "Generate a role-tailored PDF at /resume/download — choose SRE, DevOps, backend, cloud, or Agentic AI.",
+      "Generate a role-tailored PDF at /resume/download - choose SRE, DevOps, backend, cloud, or Agentic AI.",
   };
 }
 
