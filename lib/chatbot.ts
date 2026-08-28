@@ -159,8 +159,8 @@ export function getChatbotResponse(message: string, locale: Locale): string {
 
   if (match(msg, ["resume", "cv", "download", "télécharger"])) {
     return locale === "fr"
-      ? `Vous pouvez télécharger le CV de ${profile.name} depuis la page d'accueil ou via /resume.pdf`
-      : `You can download ${profile.name}'s resume from the home page or at /resume.pdf`;
+      ? `Générez un CV PDF adapté à votre rôle sur /resume/download — choisissez SRE, DevOps, backend, cloud, ou Agentic AI.`
+      : `Generate a role-tailored PDF resume at /resume/download — pick SRE, DevOps, backend, cloud, or Agentic AI variants.`;
   }
 
   if (match(msg, ["location", "where", "based", "où", "ville"])) {

@@ -83,14 +83,13 @@ export default function ContactPageContent() {
 
           <div>
             <h2 className="mb-4 text-xl font-semibold">{t.contact.resume}</h2>
-            <a
-              href="/resume.pdf"
-              download
+            <Link
+              href="/resume/download"
               className="inline-flex items-center gap-2 rounded-lg bg-zinc-900 px-5 py-3 text-sm font-medium text-white transition-colors hover:bg-zinc-700 dark:bg-zinc-50 dark:text-zinc-900 dark:hover:bg-zinc-200"
             >
               <Download className="h-4 w-4" />
               {t.contact.downloadPdf}
-            </a>
+            </Link>
           </div>
         </div>
       </div>

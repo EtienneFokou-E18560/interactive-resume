@@ -76,14 +76,13 @@ export default function Hero() {
             >
               {t.hero.projects}
             </Link>
-            <a
-              href="/resume.pdf"
-              download
+            <Link
+              href="/resume/download"
               className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-transparent px-6 py-3 text-sm font-medium text-zinc-600 transition-colors hover:bg-zinc-100 sm:w-auto dark:text-zinc-400 dark:hover:bg-zinc-900"
             >
               <Download className="h-4 w-4" />
               {t.hero.download}
-            </a>
+            </Link>
           </motion.div>
 
           <motion.div

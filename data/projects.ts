@@ -11,9 +11,9 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    title: "efokou-labs · GitOps Platform",
+    title: "efokou-labs GitOps Platform",
     description:
-      "Scattered demos lived in one-off repos and cloud accounts. I built a reproducible lab—kind, Argo CD, Terraform modules, and sample workloads—so any engineer can bootstrap a full stack from a fresh clone.",
+      "Scattered demos lived in one-off repos and cloud accounts. I built a reproducible lab with kind, Argo CD, Terraform modules, and sample workloads so any engineer can bootstrap a full stack from a fresh clone.",
     highlights: [
       "One kind cluster deploys Next.js, FastAPI, Postgres, and Redis through Argo CD overlays",
       "Terraform modules run create-and-destroy tests in CI; AWS demos are torn down after each run",

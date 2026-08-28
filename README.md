@@ -32,7 +32,7 @@ The site is designed to be:
 | Project portfolio | Interactive project cards with tech tags and links |
 | Architecture diagrams | Interactive cloud stack visualization |
 | Certifications section | Professional credentials display |
-| Downloadable PDF resume | One-click download from `/public/resume.pdf` |
+| Downloadable PDF resume | Role-tailored PDF generated on demand at `/resume/download` |
 | Contact form | Client-side form ready for API integration |
 | AI Resume Assistant | Floating chatbot with FAQ-style responses |
 | Terminal Mode | CLI-style interface for browsing resume data |
@@ -101,7 +101,8 @@ interactive-resume/
 │
 ├── public/
 │   ├── images/             # Project screenshots
-│   └── resume.pdf          # Downloadable resume
+│   ├── resume/             # On-demand PDF resume builder
+│   │   └── download/
 │
 ├── package.json
 ├── tsconfig.json
@@ -250,15 +251,15 @@ Edit `data/certifications.ts`:
 }
 ```
 
-### Add your PDF resume
+### Resume PDF (on demand)
 
-Place your resume file at:
+Resume content lives in `data/*` and role presets in `data/resumeVariants.ts`. PDFs are generated server-side when a visitor picks a role at `/resume/download` (API: `GET /api/resume?role=<variant-id>`).
 
-```
-public/resume.pdf
-```
+Supported variants: `senior-software-engineer`, `sre`, `devops-platform`, `cloud-infrastructure`, `backend-engineer`, `agentic-ai-platform`.
 
-The download button on the hero section links to this file automatically.
+Update profile, experience, projects, or skills in `data/` — downloads stay in sync. Tailor emphasis per role in `data/resumeVariants.ts`.
+
+`public/resume.pdf` is kept as a legacy fallback only; hero and contact links point to the download builder.
 
 ### Add translations
 

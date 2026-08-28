@@ -99,6 +99,18 @@ export const translations = {
         "Open to platform, SRE, and cloud engineering roles. Reach out to discuss your team, a project, or how I can help.",
       contact: "Start a Conversation",
     },
+    resumeDownload: {
+      title: "Download Resume",
+      description:
+        "Choose a role focus and generate a fresh PDF from the same data that powers this site — no stale attachments.",
+      roleLabel: "Target role",
+      previewTitle: "Preview",
+      formatNote: "PDF only for now — generated on demand. More formats coming soon.",
+      generate: "Generate & Download PDF",
+      generating: "Generating…",
+      viewExperience: "View full experience on site",
+      error: "Could not generate PDF. Please try again.",
+    },
     common: {
       allRightsReserved: "All rights reserved.",
     },
@@ -200,6 +212,19 @@ export const translations = {
       description:
         "Ouvert aux postes en plateforme, SRE et ingénierie cloud. Contactez-moi pour discuter de votre équipe ou d'un projet.",
       contact: "Démarrer une conversation",
+    },
+    resumeDownload: {
+      title: "Télécharger le CV",
+      description:
+        "Choisissez un rôle cible et générez un PDF à jour à partir des mêmes données que ce site — pas de pièce jointe obsolète.",
+      roleLabel: "Rôle cible",
+      previewTitle: "Aperçu",
+      formatNote:
+        "PDF uniquement pour l'instant — généré à la demande. D'autres formats bientôt.",
+      generate: "Générer et télécharger le PDF",
+      generating: "Génération…",
+      viewExperience: "Voir toute l'expérience sur le site",
+      error: "Impossible de générer le PDF. Veuillez réessayer.",
     },
     common: {
       allRightsReserved: "Tous droits réservés.",
