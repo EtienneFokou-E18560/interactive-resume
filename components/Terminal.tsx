@@ -1,6 +1,13 @@
 "use client";
 
-import { useState, useRef, useEffect, KeyboardEvent, useMemo } from "react";
+import {
+  useState,
+  useRef,
+  useEffect,
+  KeyboardEvent,
+  useMemo,
+  useSyncExternalStore,
+} from "react";
 import { Terminal as TerminalIcon } from "lucide-react";
 import { profile } from "@/data/profile";
 import { experience } from "@/data/experience";
@@ -13,6 +20,11 @@ import {
   setVisitorName,
   welcomeMessage,
 } from "@/lib/visitor";
+
+/** Cookie has no push API; empty subscribe keeps the client snapshot after hydration. */
+function subscribeVisitorName() {
+  return () => {};
+}
 
 function buildCommands(): Record<string, string | string[]> {
   return {
@@ -61,34 +73,33 @@ function buildCommands(): Record<string, string | string[]> {
   };
 }
 
-const DEFAULT_LINES = [
-  welcomeMessage(null),
-  "",
-  "Commands: about | experience | projects | skills | education | contact | resume | name",
-];
+const COMMAND_HINT =
+  "Commands: about | experience | projects | skills | education | contact | resume | name";
 
 export default function Terminal() {
   const commands = useMemo(() => buildCommands(), []);
-  const [lines, setLines] = useState<string[]>(DEFAULT_LINES);
+  const visitorName = useSyncExternalStore(
+    subscribeVisitorName,
+    getVisitorName,
+    () => null
+  );
+  const defaultLines = useMemo(
+    () => [welcomeMessage(visitorName), "", COMMAND_HINT],
+    [visitorName]
+  );
+  /** null = show default welcome; otherwise session transcript (incl. cleared []). */
+  const [lines, setLines] = useState<string[] | null>(null);
   const [input, setInput] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
   const outputRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const name = getVisitorName();
-    if (!name) return;
-    setLines((prev) => {
-      if (prev[0] !== welcomeMessage(null)) return prev;
-      return [welcomeMessage(name), ...prev.slice(1)];
-    });
-  }, []);
+  const displayLines = lines ?? defaultLines;
 
   useEffect(() => {
     outputRef.current?.scrollTo({
       top: outputRef.current.scrollHeight,
       behavior: "smooth",
     });
-  }, [lines]);
+  }, [displayLines]);
 
   function handleNameCommand(raw: string): string {
     const arg = raw.trim().slice(4).trim(); // drop "name"
@@ -109,6 +120,10 @@ export default function Terminal() {
     return `Nice to meet you, ${saved}. Welcome message will use your name next time.`;
   }
 
+  function appendOutput(...parts: string[]) {
+    setLines((prev) => [...(prev ?? defaultLines), ...parts]);
+  }
+
   function runCommand(cmd: string) {
     const trimmed = cmd.trim();
     const lower = trimmed.toLowerCase();
@@ -119,7 +134,7 @@ export default function Terminal() {
     }
 
     if (lower === "name" || lower.startsWith("name ")) {
-      setLines((prev) => [...prev, `$ ${cmd}`, handleNameCommand(trimmed)]);
+      appendOutput(`$ ${cmd}`, handleNameCommand(trimmed));
       return;
     }
 
@@ -130,7 +145,7 @@ export default function Terminal() {
         : output
       : `Command not found: ${trimmed}. Type 'help' for available commands.`;
 
-    setLines((prev) => [...prev, `$ ${cmd}`, response]);
+    appendOutput(`$ ${cmd}`, response);
   }
 
   function handleKeyDown(e: KeyboardEvent<HTMLInputElement>) {
@@ -166,7 +181,7 @@ export default function Terminal() {
         className="max-h-[min(50vh,28rem)] overflow-x-auto overflow-y-auto px-3 py-3 font-mono text-xs leading-relaxed text-emerald-700 sm:px-4 sm:py-4 sm:text-sm dark:text-green-400"
       >
         <div className="min-w-0 space-y-1 break-words whitespace-pre-wrap">
-          {lines.map((line, i) => (
+          {displayLines.map((line, i) => (
             <div key={`${i}-${line.slice(0, 24)}`} className="break-words">
               {line || "\u00A0"}
             </div>
