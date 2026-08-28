@@ -143,7 +143,7 @@ export function getChatbotResponse(message: string, locale: Locale): string {
     return [
       `Name: ${profile.name}`,
       `Email: ${profile.email}`,
-      `Phone: ${profile.phone}`,
+      `Phone: Available on request for scheduled calls`,
       `Location: ${profile.location}`,
       `LinkedIn: ${profile.linkedin}`,
       `GitHub: ${profile.github}`,

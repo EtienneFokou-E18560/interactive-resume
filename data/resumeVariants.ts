@@ -154,7 +154,7 @@ export const resumeVariants: ResumeVariant[] = [
       "LLM orchestration, RAG, guardrails, and AI in production workflows.",
     targetTitle: "Platform Engineer, Agentic AI",
     summary:
-      "Platform Engineer specializing in Agentic AI and LLM workflows with 10+ years of cloud and SRE experience at Microsoft, Gartner, and Aflac. Builds production orchestration for tool use, RAG, evaluation harnesses, and observability integration so AI capabilities augment real engineering workflows safely.",
+      "Platform Engineer specializing in Agentic AI and LLM workflows, with 10+ years of cloud and SRE experience spanning Microsoft, Gartner, and Aflac. Builds production orchestration for tool use, RAG, evaluation harnesses, and observability integration so AI capabilities augment real engineering workflows safely.",
     skillCategoryOrder: [
       "Production AI Workflows",
       "Backend and Distributed Systems",

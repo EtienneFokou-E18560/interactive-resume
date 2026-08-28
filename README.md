@@ -368,8 +368,8 @@ Expected Lighthouse scores:
 
 | Metric | Target |
 |--------|--------|
-| Performance | 95+ |
-| Accessibility | 100 |
+| Performance | 90+ |
+| Accessibility | 95+ |
 | SEO | 100 |
 
 ---
@@ -380,9 +380,9 @@ Expected Lighthouse scores:
 - [ ] Interactive coding playground
 - [ ] GitHub contribution graph
 - [ ] Blog section
-- [ ] Resume analytics
+- [x] Resume analytics (Vercel Analytics + Speed Insights)
 - [ ] Visitor dashboard
-- [ ] Multi-theme support
+- [x] Multi-theme support (system-aware light / dark toggle)
 - [ ] CMS integration
 
 ---

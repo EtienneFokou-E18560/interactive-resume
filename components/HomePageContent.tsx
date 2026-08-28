@@ -118,7 +118,10 @@ export default function HomePageContent() {
       <Section>
         <p className="text-center text-sm text-[var(--color-text-muted)]">
           {t.home.developerModeHint}{" "}
-          <Link href="/terminal" className="text-accent hover:text-[var(--color-accent-hover)]">
+          <Link
+            href="/terminal"
+            className="text-accent underline underline-offset-2 hover:text-[var(--color-accent-hover)]"
+          >
             {t.home.developerMode}
           </Link>
         </p>

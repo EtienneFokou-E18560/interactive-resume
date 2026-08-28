@@ -20,9 +20,9 @@ export const experience: Experience[] = [
     location: "Remote",
     url: "https://www.gartner.com",
     scope:
-      "Platform and backend delivery for enterprise research and data systems serving global clients.",
+      "Platform and backend delivery for enterprise research and data systems.",
     description: [
-      "Designing distributed backend services for enterprise research platforms that support thousands of global clients across multiple product surfaces",
+      "Designing distributed backend services for enterprise research platforms that support global product surfaces",
       "Standardized CI/CD with GitHub Actions and Jenkins for faster time-to-production across multiple engineering teams",
       "Implemented Terraform infrastructure as code across AWS and Azure for faster, repeatable environment provisioning",
       "Containerized microservices with Docker and Kubernetes to improve portability and scale for production workloads",

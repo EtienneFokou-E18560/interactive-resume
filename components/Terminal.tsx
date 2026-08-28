@@ -62,7 +62,7 @@ function buildCommands(): Record<string, string | string[]> {
     contact: [
       `Name:  ${profile.name}`,
       `Email: ${profile.email}`,
-      `Phone: ${profile.phone}`,
+      `Phone: Available on request for scheduled calls`,
       `Location: ${profile.location}`,
       `LinkedIn: ${profile.linkedin}`,
       `GitHub: ${profile.github}`,
