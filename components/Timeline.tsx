@@ -1,12 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { MapPin, GraduationCap } from "lucide-react";
 import { experience } from "@/data/experience";
 import { education } from "@/data/education";
 
 export default function Timeline() {
+  const reduce = useReducedMotion();
   const timelineItems = [
     ...experience.map((item) => ({ type: "experience" as const, item })),
     ...education.map((item) => ({ type: "education" as const, item })),
@@ -24,10 +25,14 @@ export default function Timeline() {
           return (
             <motion.div
               key={`edu-${item.school}`}
-              initial={{ opacity: 0, y: 20 }}
+              initial={reduce ? false : { opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              transition={
+                reduce
+                  ? { duration: 0 }
+                  : { duration: 0.5, delay: index * 0.1 }
+              }
               className={`relative mb-10 flex flex-col sm:mb-12 sm:flex-row ${
                 index % 2 === 0 ? "sm:flex-row-reverse" : ""
               }`}
@@ -64,10 +69,14 @@ export default function Timeline() {
         return (
           <motion.div
             key={`${item.company}-${item.start}`}
-            initial={{ opacity: 0, y: 20 }}
+            initial={reduce ? false : { opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
+            transition={
+              reduce
+                ? { duration: 0 }
+                : { duration: 0.5, delay: index * 0.1 }
+            }
             className={`relative mb-10 flex flex-col sm:mb-12 sm:flex-row ${
               index % 2 === 0 ? "sm:flex-row-reverse" : ""
             }`}

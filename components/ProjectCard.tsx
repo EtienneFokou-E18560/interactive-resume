@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { ExternalLink, ArrowRight } from "lucide-react";
 import { FaGithub } from "react-icons/fa";
 import Link from "next/link";
@@ -12,15 +12,17 @@ import { useLanguage } from "@/hooks/useLanguage";
 
 export default function ProjectCard({ project }: { project: Project }) {
   const { t } = useLanguage();
+  const reduce = useReducedMotion();
   const [imageError, setImageError] = useState(false);
   const showImage = project.image && !imageError;
   const hasCaseStudy = Boolean(project.caseStudy);
 
   return (
     <motion.article
-      initial={{ opacity: 0, y: 16 }}
+      initial={reduce ? false : { opacity: 0, y: 16 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
+      transition={reduce ? { duration: 0 } : undefined}
       className="card card-interactive group flex h-full flex-col overflow-hidden"
     >
       <div className="relative flex h-40 items-center justify-center overflow-hidden bg-[var(--color-bg-subtle)]">

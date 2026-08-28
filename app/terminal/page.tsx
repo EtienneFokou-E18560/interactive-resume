@@ -1,11 +1,22 @@
 import type { Metadata } from "next";
-import Terminal from "@/components/Terminal";
+import dynamic from "next/dynamic";
 import PageLayout from "@/components/PageLayout";
+import { pageMetadata } from "@/lib/seo";
+
+const Terminal = dynamic(() => import("@/components/Terminal"), {
+  loading: () => (
+    <p className="text-sm text-[var(--color-text-muted)]">Loading terminal…</p>
+  ),
+});
 
 export const metadata: Metadata = {
-  title: "Developer mode",
-  description:
-    "CLI-style terminal for browsing résumé data — optional developer mode.",
+  ...pageMetadata({
+    title: "Developer mode",
+    description:
+      "CLI-style terminal for browsing resume data - optional developer mode.",
+    path: "/terminal",
+  }),
+  robots: { index: false, follow: false },
 };
 
 export default function TerminalPage() {
