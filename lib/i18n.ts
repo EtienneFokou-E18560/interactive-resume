@@ -13,9 +13,9 @@ export const translations = {
       close: "Close menu",
     },
     hero: {
-      download: "Download Resume",
-      contact: "Get in Touch",
-      projects: "View Projects",
+      download: "Download Résumé",
+      contact: "Discuss a Platform Role",
+      projects: "View Selected Engineering Work",
       portfolio: "Portfolio",
     },
     home: {
@@ -38,7 +38,7 @@ export const translations = {
     experience: {
       title: "Experience",
       description:
-        "A detailed look at my professional journey across cloud engineering, software development, and site reliability.",
+        "Outcome-focused roles across platform engineering, cloud infrastructure, and site reliability at Gartner, Microsoft, and Aflac.",
       timeline: "Timeline",
       allRoles: "All Roles",
     },
@@ -52,7 +52,7 @@ export const translations = {
     skills: {
       title: "Skills",
       description:
-        "Core competencies in cloud platforms, DevOps tooling, and backend development.",
+        "Evidence-based competencies in platform engineering, cloud, automation, reliability, and production AI.",
       certifications: "Certifications",
       architecture: "Cloud Architecture",
       viewCredential: "View credential",
@@ -82,7 +82,7 @@ export const translations = {
       experience: (title: string) =>
         `I have experience at Gartner, Microsoft, and Aflac as a ${title}.`,
       skills:
-        "My core skills include Python, Go, AWS, Azure, GCP, Terraform, Docker, Kubernetes, Prometheus, and Grafana.",
+        "My core skills include platform and cloud engineering (AWS, Azure, GCP), infrastructure automation (Terraform, Ansible, GitOps), reliability/observability, backend systems (Python, Go), and production AI workflows.",
       contact: (email: string, linkedin: string) =>
         `You can reach me at ${email} or via ${linkedin}.`,
       default:
@@ -96,8 +96,8 @@ export const translations = {
     cta: {
       title: "Let's build something reliable together",
       description:
-        "Open to platform, SRE, and cloud engineering roles. Reach out to discuss your team, a project, or how I can help.",
-      contact: "Start a Conversation",
+        "Open to Senior Platform Engineer and related SRE, cloud, and infrastructure roles. Reach out to discuss your team or a project.",
+      contact: "Discuss a Platform Engineering Role",
     },
     resumeDownload: {
       title: "Download Resume",
@@ -128,8 +128,8 @@ export const translations = {
     },
     hero: {
       download: "Télécharger le CV",
-      contact: "Me contacter",
-      projects: "Voir les projets",
+      contact: "Discuter d'un poste plateforme",
+      projects: "Voir les travaux sélectionnés",
       portfolio: "Portfolio",
     },
     home: {
@@ -152,7 +152,7 @@ export const translations = {
     experience: {
       title: "Expérience",
       description:
-        "Un aperçu détaillé de mon parcours professionnel en ingénierie cloud, développement logiciel et fiabilité.",
+        "Rôles axés sur les résultats en ingénierie de plateforme, cloud et fiabilité chez Gartner, Microsoft et Aflac.",
       timeline: "Chronologie",
       allRoles: "Tous les postes",
     },
@@ -166,7 +166,7 @@ export const translations = {
     skills: {
       title: "Compétences",
       description:
-        "Compétences clés en plateformes cloud, outils DevOps et développement backend.",
+        "Compétences fondées sur des preuves en plateforme, cloud, automatisation, fiabilité et IA en production.",
       certifications: "Certifications",
       architecture: "Architecture Cloud",
       viewCredential: "Voir la certification",
@@ -196,7 +196,7 @@ export const translations = {
       experience: (title: string) =>
         `J'ai de l'expérience chez Gartner, Microsoft et Aflac en tant que ${title}.`,
       skills:
-        "Mes compétences principales incluent Python, Go, AWS, Azure, GCP, Terraform, Docker, Kubernetes, Prometheus et Grafana.",
+        "Mes compétences principales couvrent la plateforme et le cloud (AWS, Azure, GCP), l'automatisation (Terraform, Ansible, GitOps), la fiabilité, le backend (Python, Go) et l'IA en production.",
       contact: (email: string, linkedin: string) =>
         `Vous pouvez me joindre à ${email} ou via ${linkedin}.`,
       default:
@@ -210,8 +210,8 @@ export const translations = {
     cta: {
       title: "Construisons quelque chose de fiable ensemble",
       description:
-        "Ouvert aux postes en plateforme, SRE et ingénierie cloud. Contactez-moi pour discuter de votre équipe ou d'un projet.",
-      contact: "Démarrer une conversation",
+        "Ouvert aux postes Senior Platform Engineer, SRE, cloud et infrastructure. Contactez-moi pour discuter de votre équipe ou d'un projet.",
+      contact: "Discuter d'un rôle plateforme",
     },
     resumeDownload: {
       title: "Télécharger le CV",

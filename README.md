@@ -8,7 +8,7 @@ A modern, interactive resume and portfolio built with **Next.js**, **React**, **
 
 ## About This Project
 
-This is the personal portfolio site of **Etienne Fokou**, a Senior Software Engineer specializing in cloud engineering and site reliability. Instead of a static PDF, the site presents career history, skills, and projects as an interactive web application with animations, dark mode, bilingual support, and optional assistant features.
+This is the personal portfolio site of **Etienne Fokou**, a Senior Platform Engineer specializing in cloud platforms, SRE, and production AI. Instead of a static PDF, the site presents career history, skills, and projects as an interactive web application with animations, dark mode, bilingual support, and optional assistant features.
 
 The site is designed to be:
 
@@ -27,7 +27,7 @@ The site is designed to be:
 | Responsive design | Mobile-first layout across all screen sizes |
 | Dark / Light mode | System-aware theme toggle via `next-themes` |
 | Animated career timeline | Visual work history with Framer Motion |
-| Technical skills dashboard | Animated progress bars grouped by category |
+| Technical skills dashboard | Evidence-based competencies grouped by category |
 | Expandable work experience | Accordion-style experience cards |
 | Project portfolio | Interactive project cards with tech tags and links |
 | Architecture diagrams | Interactive cloud stack visualization |
@@ -76,7 +76,7 @@ interactive-resume/
 │   ├── Navbar.tsx          # Navigation + theme/language toggles
 │   ├── Footer.tsx          # Footer with social links
 │   ├── Timeline.tsx        # Career timeline
-│   ├── SkillChart.tsx        # Skills progress bars
+│   ├── SkillChart.tsx        # Evidence-based skill groups
 │   ├── ExperienceCard.tsx  # Expandable job cards
 │   ├── ProjectCard.tsx       # Project showcase cards
 │   ├── ContactForm.tsx       # Contact form
@@ -89,7 +89,7 @@ interactive-resume/
 │   ├── profile.ts          # Personal info & summary
 │   ├── experience.ts       # Work history
 │   ├── projects.ts         # Portfolio projects
-│   ├── skills.ts           # Skill categories & levels
+│   ├── skills.ts           # Skill categories & evidence
 │   └── certifications.ts   # Certifications
 │
 ├── hooks/
@@ -236,7 +236,7 @@ Edit `data/projects.ts`:
 
 ### Update skills
 
-Edit `data/skills.ts` — adjust categories, skill names, and proficiency levels (0–100).
+Edit `data/skills.ts` — adjust categories, skill names, and evidence strings (production context, not percentages).
 
 ### Add certifications
 

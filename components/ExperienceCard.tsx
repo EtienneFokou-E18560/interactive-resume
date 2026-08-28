@@ -44,6 +44,11 @@ export default function ExperienceCard({ item }: { item: Experience }) {
               {item.location}
             </p>
           )}
+          {item.scope && (
+            <p className="mt-2 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+              {item.scope}
+            </p>
+          )}
         </div>
         <ChevronDown
           className={`h-5 w-5 shrink-0 text-zinc-400 transition-transform dark:text-zinc-500 ${

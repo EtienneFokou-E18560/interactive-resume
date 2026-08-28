@@ -64,21 +64,15 @@ export default function Hero() {
             className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap"
           >
             <Link
-              href="/contact"
-              className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-zinc-900 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-zinc-700 sm:w-auto dark:bg-zinc-50 dark:text-zinc-900 dark:hover:bg-zinc-200"
+              href="/projects"
+              className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full bg-zinc-900 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-zinc-700 sm:w-auto dark:bg-zinc-50 dark:text-zinc-900 dark:hover:bg-zinc-200"
             >
-              {t.hero.contact}
+              {t.hero.projects}
               <ArrowRight className="h-4 w-4" />
             </Link>
             <Link
-              href="/projects"
-              className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-zinc-300 px-6 py-3 text-sm font-medium text-zinc-900 transition-colors hover:bg-zinc-50 sm:w-auto dark:border-zinc-700 dark:text-zinc-50 dark:hover:bg-zinc-900"
-            >
-              {t.hero.projects}
-            </Link>
-            <Link
               href="/resume/download"
-              className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-transparent px-6 py-3 text-sm font-medium text-zinc-600 transition-colors hover:bg-zinc-100 sm:w-auto dark:text-zinc-400 dark:hover:bg-zinc-900"
+              className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full border border-zinc-300 px-6 py-3 text-sm font-medium text-zinc-900 transition-colors hover:bg-zinc-50 sm:w-auto dark:border-zinc-700 dark:text-zinc-50 dark:hover:bg-zinc-900"
             >
               <Download className="h-4 w-4" />
               {t.hero.download}
@@ -121,10 +115,20 @@ export default function Hero() {
             <a
               href={`mailto:${profile.email}`}
               className="inline-flex items-center gap-2 text-sm text-zinc-500 transition-colors hover:text-zinc-900 dark:hover:text-zinc-50"
+              aria-label={`Email ${profile.email}`}
             >
               <Mail className="h-4 w-4" />
-              <span className="truncate">{profile.email}</span>
+              <span className="hidden truncate sm:inline">{profile.email}</span>
             </a>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+            className="mt-8 w-full max-w-2xl lg:hidden"
+          >
+            <StatsGrid />
           </motion.div>
         </div>
 
@@ -134,13 +138,13 @@ export default function Hero() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="order-1 flex flex-col items-center gap-6 lg:order-2 lg:items-end lg:gap-8"
         >
-          <div className="lg:hidden">
-            <ProfileAvatar size={180} />
+          <div className="hidden sm:block lg:hidden">
+            <ProfileAvatar size={160} />
           </div>
           <div className="hidden lg:block">
             <ProfileAvatar size={220} />
           </div>
-          <div className="w-full max-w-sm">
+          <div className="hidden w-full max-w-md lg:block">
             <StatsGrid />
           </div>
         </motion.div>

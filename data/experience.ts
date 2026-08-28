@@ -5,6 +5,8 @@ export interface Experience {
   end: string;
   location?: string;
   url?: string;
+  /** One-line scope for the role */
+  scope?: string;
   description: string[];
   technologies?: string[];
 }
@@ -17,13 +19,15 @@ export const experience: Experience[] = [
     end: "Present",
     location: "Remote",
     url: "https://www.gartner.com",
+    scope:
+      "Platform and backend delivery for enterprise research and data systems serving global clients.",
     description: [
-      "Designing scalable backend services and distributed systems for enterprise research and data platforms serving thousands of global clients",
-      "Building CI/CD pipelines with GitHub Actions and Jenkins to improve deployment frequency and reduce time-to-production",
-      "Implementing infrastructure as code with Terraform across AWS and Azure for version-controlled, repeatable provisioning",
-      "Developing containerized microservices with Docker and Kubernetes to improve portability and scalability",
-      "Integrating Prometheus, Grafana, and Datadog for proactive performance monitoring and MTTR reduction",
-      "Leading on-call rotations, incident response, blameless post-mortems, and automation initiatives",
+      "Designing distributed backend services for enterprise research platforms that support thousands of global clients across [METRIC] product surfaces",
+      "Standardized CI/CD with GitHub Actions and Jenkins, targeting [METRIC]% faster time-to-production across [METRIC] engineering teams",
+      "Implemented Terraform infrastructure as code across AWS and Azure, cutting environment provisioning effort by [METRIC]% for repeatable releases",
+      "Containerized microservices with Docker and Kubernetes to improve portability and scale for production workloads",
+      "Integrated Prometheus, Grafana, and Datadog for proactive monitoring aimed at [METRIC]% lower MTTR",
+      "Leading on-call rotations, incident response, and blameless post-mortems with automation that reduces recurring toil",
     ],
     technologies: [
       "AWS",
@@ -47,13 +51,15 @@ export const experience: Experience[] = [
     end: "Jun 2025",
     location: "Redmond, WA",
     url: "https://www.microsoft.com",
+    scope:
+      "Azure platform reliability, automation, and delivery for critical enterprise services.",
     description: [
-      "Designed and maintained scalable Azure cloud infrastructure supporting critical enterprise services with high availability",
-      "Developed automation tools in Python, Bash, and Go for monitoring, deployment, and incident response",
-      "Built and optimized CI/CD pipelines to accelerate software delivery across multiple engineering teams",
-      "Conducted capacity planning, performance analysis, and system tuning under peak load conditions",
-      "Improved monitoring and alerting with cloud-native observability tools to proactively resolve issues",
-      "Implemented disaster recovery and business continuity plans meeting defined RTO and RPO targets",
+      "Operated Azure cloud infrastructure for critical enterprise services with high-availability targets across [METRIC] regions or service boundaries",
+      "Built automation in Python, Bash, and Go for monitoring, deployment, and incident response, saving [METRIC] engineering hours per release cycle",
+      "Optimized CI/CD pipelines that accelerated delivery for [METRIC] engineering teams",
+      "Drove capacity planning and performance tuning under peak load, improving latency or throughput by [METRIC]%",
+      "Strengthened cloud-native observability and alerting to catch issues earlier and reduce MTTD/MTTR by [METRIC]%",
+      "Implemented disaster recovery and continuity plans meeting defined RTO and RPO targets for production systems",
     ],
     technologies: [
       "Azure",
@@ -73,13 +79,15 @@ export const experience: Experience[] = [
     end: "May 2022",
     location: "Columbus, GA",
     url: "https://www.aflac.com",
+    scope:
+      "Platform automation, AWS migration proofs, and self-service delivery for enterprise systems teams.",
     description: [
-      "Automated cluster creation and platform updates for Docker, Jenkins, and Akana using Ansible playbooks",
-      "Led AWS cloud migration proof of concept using AWS Proton with ECS environment and service templates",
-      "Designed self-service CI/CD pipeline capabilities enabling developers to independently build and deploy code",
-      "Authored RACI documentation and operational runbooks, reducing average incident resolution time",
-      "Supported load testing, penetration testing, and infrastructure validation for reliability and security",
-      "Collaborated with cross-functional teams to evaluate emerging technologies and recommend improvements",
+      "Automated Docker, Jenkins, and Akana cluster updates with Ansible, reducing manual platform maintenance by [METRIC]%",
+      "Led an AWS migration proof of concept with AWS Proton and ECS templates, validating a path to [METRIC] environments under version control",
+      "Designed self-service CI/CD so developers could build and deploy independently, increasing release cadence by [METRIC]%",
+      "Authored RACI docs and runbooks that reduced average incident resolution time by [METRIC]%",
+      "Supported load testing, penetration testing, and infrastructure validation for reliability and security gates",
+      "Partnered with cross-functional teams to evaluate emerging technologies and recommend platform improvements",
     ],
     technologies: [
       "AWS",
