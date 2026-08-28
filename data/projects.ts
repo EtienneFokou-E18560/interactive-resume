@@ -76,7 +76,7 @@ export const projects: Project[] = [
         "CI validates modules; GitOps overlays keep app deployment declarative; AWS resources are torn down after each run.",
       results: [
         "Engineers can bootstrap a full stack from a fresh clone without bespoke setup notes",
-        "Infrastructure demos stay auditable and disposable ([METRIC] orphan resources avoided in CI)",
+        "Infrastructure demos stay auditable and disposable — CI teardown avoids leftover cloud resources",
       ],
     },
   },
@@ -115,7 +115,7 @@ export const projects: Project[] = [
         "Dashboards and alert routes aim to reduce MTTD/MTTR; runbooks and on-call practices accompany the tooling.",
       results: [
         "Unified visibility across service boundaries",
-        "Targeted [METRIC]% lower MTTR through earlier detection and clearer ownership",
+        "Earlier detection and clearer ownership in support of lower MTTR",
       ],
     },
   },
@@ -155,8 +155,8 @@ export const projects: Project[] = [
       reliability:
         "Repeatable provisioning and shared pipelines reduce snowflake environments and failed handoffs.",
       results: [
-        "Provisioning effort reduced by [METRIC]% for repeatable environments",
-        "Release cadence increased by [METRIC]% for adopting teams",
+        "Faster provisioning for repeatable environments through version-controlled IaC",
+        "Faster release cadence for multiple adopting engineering teams via shared pipeline patterns",
       ],
     },
   },
@@ -200,7 +200,7 @@ export const projects: Project[] = [
         "Guardrails, evaluation, and shared observability make failure modes visible the same way other services are operated.",
       results: [
         "Reliable multi-step completions with explicit tool boundaries",
-        "Latency and cost tracked alongside platform telemetry ([METRIC] visibility into spend and p95 latency)",
+        "Latency and cost tracked alongside platform telemetry for production visibility",
       ],
     },
   },
