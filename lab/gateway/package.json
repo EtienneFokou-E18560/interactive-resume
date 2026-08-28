@@ -1,0 +1,17 @@
+{
+  "name": "engineering-lab-gateway",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "start": "node src/server.js",
+    "build:image": "docker build -t etienne-lab-sandbox:local -f ../sandbox/Dockerfile .."
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "dockerode": "^4.0.4",
+    "ws": "^8.18.1"
+  }
+}
