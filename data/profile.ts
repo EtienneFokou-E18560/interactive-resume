@@ -1,8 +1,9 @@
 export const profile = {
   name: "Etienne Fokou",
+  headline: "Platform Engineer for cloud reliability, automation & Agentic AI",
   title: "Senior Software Engineer",
   subtitle:
-    "Cloud Infrastructure & Distributed Systems · Backend & Platform Engineering",
+    "Cloud · SRE · DevOps · Agentic AI/LLM",
   location: "Bellevue, WA",
   email: "efokou279@gmail.com",
   phone: "(678) 650-4245",
@@ -11,23 +12,23 @@ export const profile = {
   linkedin: "https://www.linkedin.com/in/efokou/",
   avatar: "/images/profile.jpg",
   summaryHero:
-    "I help companies turn complex engineering challenges into reliable, scalable, and highly automated systems. With 10+ years across Microsoft, Gartner, and Aflac, I combine software engineering, cloud infrastructure, SRE, DevOps, and Agentic AI/LLM experience.",
+    "I help enterprise teams ship faster, operate safely, and put Agentic AI to work in real engineering workflows—10+ years at Microsoft, Gartner, and Aflac.",
   summary:
-    "I help companies turn complex engineering challenges into reliable, scalable, and highly automated systems. With 10+ years of experience across Microsoft, Gartner, and Aflac, I bring a combination of software engineering, cloud infrastructure, SRE, DevOps, and Agentic AI/LLM experience that allows me to contribute beyond simply writing code—I build systems that are easier to operate, scale, and evolve. I've worked across distributed systems, CI/CD, cloud platforms, observability, automation, and AI-assisted development using technologies such as Python, Kubernetes, Terraform, AWS, Azure, OCI, OpenAI, Claude, Gemini, Cursor, and GitHub Copilot. If your team needs an engineer who can quickly understand complex environments, automate what slows the organization down, improve reliability, and apply modern AI capabilities to real engineering workflows, I bring the breadth and hands-on experience to make an immediate impact.",
+    "I turn complex infrastructure into systems teams can deploy, observe, and evolve with confidence. Over 10+ years at Microsoft, Gartner, and Aflac, I've built automation, CI/CD, and observability platforms that reduce toil, improve reliability, and accelerate delivery across AWS, Azure, and OCI. I also design Agentic AI workflows—with tool use, RAG, and production guardrails—that augment how engineers build and operate software. If you need someone who can ramp quickly in complex environments, automate what slows the org down, and bring modern AI into practical platform work, I can contribute from day one.",
   summaryMeta:
-    "Senior engineer with 10+ years at Microsoft, Gartner, and Aflac—cloud, SRE, DevOps, and Agentic AI.",
+    "Platform engineer with 10+ years at Microsoft, Gartner, and Aflac—cloud, SRE, DevOps, and Agentic AI.",
   bio: [
-    "Based in Bellevue, Washington, I focus on platform engineering, site reliability, and applying Agentic AI to production workflows—not just prototypes.",
-    "My work spans distributed systems, infrastructure as code, CI/CD, observability, and automation across AWS, Azure, and OCI in enterprise environments.",
-    "I partner with teams to reduce operational toil, improve incident response, and ship changes safely at scale.",
+    "I'm a Bellevue-based platform engineer focused on reliability, automation, and Agentic AI in production—not slide decks.",
+    "Day to day, that means infrastructure as code, GitOps-style delivery, observability, and on-call practices across multi-cloud enterprise environments.",
+    "I work best partnering with teams to remove bottlenecks, tighten incident response, and ship changes safely at scale.",
   ],
   highlights: [
     "10+ years building distributed systems and cloud infrastructure",
-    "Expertise across AWS, Azure, and Google Cloud Platform",
+    "Multi-cloud delivery across AWS, Azure, and OCI",
     "Infrastructure as Code with Terraform, Ansible, and CloudFormation",
-    "CI/CD with GitHub Actions, Jenkins, GitOps, and ArgoCD",
+    "CI/CD and GitOps with GitHub Actions, Jenkins, and Argo CD",
     "Observability with Prometheus, Grafana, Datadog, and ELK Stack",
-    "Incident response, on-call operations, and reliability engineering",
+    "Agentic AI workflows with LLM orchestration, RAG, and production guardrails",
   ],
   stats: [
     { label: "Years Experience", value: "10+" },

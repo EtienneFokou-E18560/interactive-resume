@@ -6,16 +6,17 @@ export interface Project {
   github?: string;
   demo?: string;
   image?: string;
+  featured?: boolean;
 }
 
 export const projects: Project[] = [
   {
-    title: "efokou-labs engineering portfolio",
+    title: "efokou-labs · GitOps Platform",
     description:
-      "Public GitHub org for cloud, SRE, and GitOps work: one kind cluster, Argo CD, Terraform modules, and sample workloads instead of isolated demo accounts.",
+      "Scattered demos lived in one-off repos and cloud accounts. I built a reproducible lab—kind, Argo CD, Terraform modules, and sample workloads—so any engineer can bootstrap a full stack from a fresh clone.",
     highlights: [
-      "kind + Argo CD platform with GitOps overlays for Next.js, FastAPI, Postgres, and Redis",
-      "Versioned Terraform modules with create-and-destroy tests; AWS used for demos, then torn down",
+      "One kind cluster deploys Next.js, FastAPI, Postgres, and Redis through Argo CD overlays",
+      "Terraform modules run create-and-destroy tests in CI; AWS demos are torn down after each run",
     ],
     technologies: [
       "Kubernetes",
@@ -30,15 +31,34 @@ export const projects: Project[] = [
     github: "https://github.com/efokou-labs",
     demo: "https://efokou-labs.github.io/system-design-notes/",
     image: "/images/cloud-infra.svg",
+    featured: true,
+  },
+  {
+    title: "Enterprise Observability Rollout",
+    description:
+      "Production microservices had fragmented metrics and logs, slowing incident response. I led rollout of Prometheus, Grafana, ELK, and PagerDuty alerting across distributed services.",
+    highlights: [
+      "Unified dashboards and alerting improved detection and resolution across service boundaries",
+      "Centralized log pipelines in ELK and CloudWatch shortened root-cause analysis during outages",
+    ],
+    technologies: [
+      "Prometheus",
+      "Grafana",
+      "Datadog",
+      "ELK Stack",
+      "AWS CloudWatch",
+      "PagerDuty",
+    ],
+    image: "/images/observability.svg",
+    featured: true,
   },
   {
     title: "Cloud Infrastructure Automation",
     description:
-      "Automated cloud infrastructure provisioning and CI/CD pipeline optimization using IaC and GitOps workflows across multiple engineering teams.",
+      "Manual provisioning and inconsistent releases blocked multiple engineering teams. I standardized Terraform, Ansible, and CI/CD pipelines for auditable, repeatable delivery.",
     highlights: [
-      "Automated cloud infrastructure provisioning using Terraform and Ansible, reducing manual setup time",
-      "Built and optimized CI/CD pipelines with Jenkins and GitHub Actions across engineering teams",
-      "Ensured consistent, version-controlled deployments with repeatable infrastructure workflows",
+      "IaC replaced manual environment setup with version-controlled, repeatable provisioning",
+      "Shared Jenkins and GitHub Actions patterns increased release cadence across teams",
     ],
     technologies: [
       "Terraform",
@@ -53,32 +73,12 @@ export const projects: Project[] = [
     image: "/images/cloud-infra.svg",
   },
   {
-    title: "Distributed System Monitoring",
-    description:
-      "Centralized observability platform with log aggregation pipelines across distributed microservices, reducing MTTD and MTTR for production services.",
-    highlights: [
-      "Implemented centralized observability with Prometheus and Grafana, reducing MTTD and MTTR",
-      "Built log aggregation pipelines using ELK Stack and AWS CloudWatch for faster root cause analysis",
-      "Integrated PagerDuty alerting for proactive incident detection across microservices",
-    ],
-    technologies: [
-      "Prometheus",
-      "Grafana",
-      "Datadog",
-      "ELK Stack",
-      "AWS CloudWatch",
-      "PagerDuty",
-    ],
-    image: "/images/observability.svg",
-  },
-  {
     title: "Agentic AI Platform",
     description:
-      "Orchestration layer for LLM-powered agents with tool use, retrieval, and guardrails for production workflows across cloud environments.",
+      "LLM workflows needed grounding, guardrails, and ops visibility. I built orchestration for tool use, RAG, and telemetry wired into existing Prometheus and Grafana stacks.",
     highlights: [
-      "Designed multi-step agent workflows with tool routing, context management, and human-in-the-loop checkpoints for reliable task completion",
-      "Built RAG pipelines and prompt/evaluation harnesses to ground agent responses in internal docs and reduce hallucinations",
-      "Integrated agent telemetry with existing observability stacks for latency, cost, and failure-rate monitoring",
+      "Multi-step agents with tool routing and human-in-the-loop checkpoints for reliable completions",
+      "RAG and evaluation harnesses grounded answers in internal docs; latency and cost tracked in production",
     ],
     technologies: [
       "Python",
@@ -94,3 +94,5 @@ export const projects: Project[] = [
     image: "/images/agentic-ai.svg",
   },
 ];
+
+export const featuredProjects = projects.filter((p) => p.featured);

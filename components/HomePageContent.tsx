@@ -10,7 +10,7 @@ import Terminal from "@/components/Terminal";
 import TechStack from "@/components/TechStack";
 import CallToAction from "@/components/CallToAction";
 import Section from "@/components/Section";
-import { projects } from "@/data/projects";
+import { featuredProjects } from "@/data/projects";
 import { experience } from "@/data/experience";
 import { certifications } from "@/data/certifications";
 import { profile } from "@/data/profile";
@@ -94,8 +94,8 @@ export default function HomePageContent() {
 
       <Section alt>
         <SectionHeader title={t.home.projects} href="/projects" viewAll={t.home.viewAll} />
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {projects.map((project) => (
+        <div className="grid gap-6 sm:grid-cols-2">
+          {featuredProjects.map((project) => (
             <ProjectCard key={project.title} project={project} />
           ))}
         </div>

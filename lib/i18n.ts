@@ -15,6 +15,7 @@ export const translations = {
     hero: {
       download: "Download Resume",
       contact: "Get in Touch",
+      projects: "View Projects",
       portfolio: "Portfolio",
     },
     home: {
@@ -93,9 +94,9 @@ export const translations = {
       backHome: "Back to home",
     },
     cta: {
-      title: "Let's build something great together",
+      title: "Let's build something reliable together",
       description:
-        "Open to cloud engineering, DevOps, and backend opportunities. Get in touch about collaborations, consulting, or full-time roles.",
+        "Open to platform, SRE, and cloud engineering roles. Reach out to discuss your team, a project, or how I can help.",
       contact: "Start a Conversation",
     },
     common: {
@@ -116,6 +117,7 @@ export const translations = {
     hero: {
       download: "Télécharger le CV",
       contact: "Me contacter",
+      projects: "Voir les projets",
       portfolio: "Portfolio",
     },
     home: {
@@ -194,9 +196,9 @@ export const translations = {
       backHome: "Retour à l'accueil",
     },
     cta: {
-      title: "Construisons quelque chose d'exceptionnel",
+      title: "Construisons quelque chose de fiable ensemble",
       description:
-        "Ouvert aux opportunités en ingénierie cloud, DevOps et backend. Contactez-moi pour des collaborations ou des postes.",
+        "Ouvert aux postes en plateforme, SRE et ingénierie cloud. Contactez-moi pour discuter de votre équipe ou d'un projet.",
       contact: "Démarrer une conversation",
     },
     common: {
