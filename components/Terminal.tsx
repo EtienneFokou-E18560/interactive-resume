@@ -24,6 +24,7 @@ function buildCommands(): Record<string, string | string[]> {
       "  skills      - Technical skills",
       "  education   - Academic background",
       "  contact     - Contact information",
+      "  resume      - Download a role-tailored PDF resume",
       "  name        - Set or show your name (saved in a cookie)",
       "  clear       - Clear terminal",
       "  help        - Show this help",
@@ -55,13 +56,15 @@ function buildCommands(): Record<string, string | string[]> {
       `GitHub: ${profile.github}`,
       `Portfolio: ${profile.portfolio}`,
     ],
+    resume:
+      "Generate a role-tailored PDF at /resume/download — choose SRE, DevOps, backend, cloud, or Agentic AI.",
   };
 }
 
 const DEFAULT_LINES = [
   welcomeMessage(null),
   "",
-  "Commands: about | experience | projects | skills | education | contact | name",
+  "Commands: about | experience | projects | skills | education | contact | resume | name",
 ];
 
 export default function Terminal() {
