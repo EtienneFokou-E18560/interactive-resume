@@ -61,10 +61,10 @@ export default function ResumeDownloadContent() {
             {resumeVariants.map((variant) => (
               <label
                 key={variant.id}
-                className={`flex cursor-pointer gap-3 rounded-xl border p-4 transition-colors ${
+                className={`card flex cursor-pointer gap-3 p-4 transition-colors ${
                   selectedRole === variant.id
-                    ? "border-blue-500 bg-blue-50/50 dark:border-blue-400 dark:bg-blue-950/30"
-                    : "border-zinc-200 bg-white hover:border-zinc-300 dark:border-zinc-800 dark:bg-zinc-900 dark:hover:border-zinc-700"
+                    ? "border-[var(--color-accent)] bg-[var(--color-accent-soft)]"
+                    : "hover:border-[var(--color-border-strong)]"
                 }`}
               >
                 <input
@@ -73,13 +73,13 @@ export default function ResumeDownloadContent() {
                   value={variant.id}
                   checked={selectedRole === variant.id}
                   onChange={() => setSelectedRole(variant.id)}
-                  className="mt-1 h-4 w-4 shrink-0 accent-blue-600"
+                  className="mt-1 h-4 w-4 shrink-0 accent-[var(--color-accent)]"
                 />
                 <span className="min-w-0">
-                  <span className="block font-medium text-zinc-900 dark:text-zinc-50">
+                  <span className="block font-medium text-foreground">
                     {variant.label}
                   </span>
-                  <span className="mt-1 block text-sm text-zinc-600 dark:text-zinc-400">
+                  <span className="mt-1 block text-sm text-[var(--color-text-secondary)]">
                     {variant.description}
                   </span>
                 </span>
@@ -89,35 +89,37 @@ export default function ResumeDownloadContent() {
         </fieldset>
 
         {selected && (
-          <div className="rounded-xl border border-zinc-200 bg-zinc-50 p-5 dark:border-zinc-800 dark:bg-zinc-900/50">
-            <p className="text-xs font-medium uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
-              {t.resumeDownload.previewTitle}
-            </p>
-            <p className="mt-2 font-semibold text-zinc-900 dark:text-zinc-50">
+          <div className="card bg-[var(--color-bg-subtle)] p-5">
+            <p className="eyebrow mb-0">{t.resumeDownload.previewTitle}</p>
+            <p className="mt-2 font-semibold text-foreground">
               {selected.targetTitle}
             </p>
-            <p className="mt-2 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+            <p className="mt-2 text-sm leading-relaxed text-[var(--color-text-secondary)]">
               {selected.summary}
             </p>
           </div>
         )}
 
-        <p className="text-sm text-zinc-500 dark:text-zinc-400">
+        <p className="text-sm text-[var(--color-text-muted)]">
           {t.resumeDownload.formatNote}
         </p>
 
         {error && (
-          <p className="text-sm text-red-600 dark:text-red-400" role="alert">
+          <p
+            className="text-sm"
+            style={{ color: "var(--color-danger)" }}
+            role="alert"
+          >
             {error}
           </p>
         )}
 
-        <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+        <div className="button-row">
           <button
             type="button"
             onClick={handleDownload}
             disabled={loading}
-            className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-zinc-900 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-zinc-700 disabled:opacity-60 sm:w-auto dark:bg-zinc-50 dark:text-zinc-900 dark:hover:bg-zinc-200"
+            className="button button-primary disabled:opacity-60"
           >
             {loading ? (
               <Loader2 className="h-4 w-4 animate-spin" />
@@ -126,10 +128,7 @@ export default function ResumeDownloadContent() {
             )}
             {loading ? t.resumeDownload.generating : t.resumeDownload.generate}
           </button>
-          <Link
-            href="/experience"
-            className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-zinc-300 px-6 py-3 text-sm font-medium text-zinc-900 transition-colors hover:bg-zinc-50 sm:w-auto dark:border-zinc-700 dark:text-zinc-50 dark:hover:bg-zinc-900"
-          >
+          <Link href="/experience" className="button button-secondary">
             {t.resumeDownload.viewExperience}
             <ArrowRight className="h-4 w-4" />
           </Link>

@@ -37,26 +37,21 @@ export default function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="mx-auto max-w-lg space-y-6">
+    <form onSubmit={handleSubmit} className="mx-auto max-w-lg space-y-5">
       <div>
         <label
           htmlFor="name"
-          className="mb-2 block text-sm font-medium text-zinc-700 dark:text-zinc-300"
+          className="mb-2 block text-sm font-medium text-[var(--color-text-secondary)]"
         >
           {t.contact.name}
         </label>
-        <input
-          id="name"
-          name="name"
-          required
-          className="w-full rounded-lg border border-zinc-300 bg-white px-4 py-3 text-zinc-900 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-50"
-        />
+        <input id="name" name="name" required className="field-input" />
       </div>
 
       <div>
         <label
           htmlFor="email"
-          className="mb-2 block text-sm font-medium text-zinc-700 dark:text-zinc-300"
+          className="mb-2 block text-sm font-medium text-[var(--color-text-secondary)]"
         >
           {t.contact.email}
         </label>
@@ -65,14 +60,14 @@ export default function ContactForm() {
           name="email"
           type="email"
           required
-          className="w-full rounded-lg border border-zinc-300 bg-white px-4 py-3 text-zinc-900 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-50"
+          className="field-input"
         />
       </div>
 
       <div>
         <label
           htmlFor="message"
-          className="mb-2 block text-sm font-medium text-zinc-700 dark:text-zinc-300"
+          className="mb-2 block text-sm font-medium text-[var(--color-text-secondary)]"
         >
           {t.contact.message}
         </label>
@@ -81,14 +76,14 @@ export default function ContactForm() {
           name="message"
           required
           rows={5}
-          className="w-full resize-none rounded-lg border border-zinc-300 bg-white px-4 py-3 text-zinc-900 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-50"
+          className="field-input resize-none"
         />
       </div>
 
       <button
         type="submit"
         disabled={status === "loading"}
-        className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-zinc-900 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-zinc-700 disabled:opacity-50 dark:bg-zinc-50 dark:text-zinc-900 dark:hover:bg-zinc-200"
+        className="button button-primary w-full disabled:opacity-50"
       >
         {status === "loading" ? (
           <Loader2 className="h-4 w-4 animate-spin" />
@@ -99,12 +94,20 @@ export default function ContactForm() {
       </button>
 
       {status === "success" && (
-        <p className="text-center text-sm text-green-600 dark:text-green-400">
+        <p
+          className="text-center text-sm"
+          style={{ color: "var(--color-success)" }}
+          role="status"
+        >
           {t.contact.success}
         </p>
       )}
       {status === "error" && (
-        <p className="text-center text-sm text-red-600 dark:text-red-400">
+        <p
+          className="text-center text-sm"
+          style={{ color: "var(--color-danger)" }}
+          role="alert"
+        >
           {t.contact.error}
         </p>
       )}

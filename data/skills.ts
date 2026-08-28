@@ -1,48 +1,153 @@
+export interface Skill {
+  name: string;
+  /** Production context, years, or representative outcome — not a percentage */
+  evidence: string;
+}
+
 export interface SkillCategory {
   name: string;
-  skills: { name: string; level: number }[];
+  skills: Skill[];
 }
 
 export const skills: SkillCategory[] = [
   {
-    name: "Programming Languages",
+    name: "Platform and Cloud Engineering",
     skills: [
-      { name: "Python", level: 92 },
-      { name: "Go", level: 85 },
-      { name: "Java", level: 82 },
-      { name: "C#", level: 78 },
-      { name: "JavaScript/Node.js", level: 80 },
-      { name: "Bash", level: 88 },
+      {
+        name: "AWS",
+        evidence:
+          "Production ECS, Lambda, and migration proofs; IaC and CI/CD for enterprise environments",
+      },
+      {
+        name: "Azure",
+        evidence:
+          "Platform operations for critical enterprise services, capacity planning, and DR targets",
+      },
+      {
+        name: "GCP",
+        evidence:
+          "Multi-cloud delivery and platform patterns alongside AWS and Azure workloads",
+      },
+      {
+        name: "Kubernetes",
+        evidence:
+          "Production platform operations, GitOps delivery, observability, and incident response",
+      },
+      {
+        name: "Docker",
+        evidence:
+          "Containerized microservices and cluster automation across enterprise platforms",
+      },
     ],
   },
   {
-    name: "Cloud Platforms",
+    name: "Infrastructure Automation",
     skills: [
-      { name: "AWS", level: 90 },
-      { name: "Azure", level: 88 },
-      { name: "GCP", level: 82 },
-      { name: "AWS ECS/Lambda", level: 85 },
+      {
+        name: "Terraform",
+        evidence:
+          "Version-controlled provisioning across AWS and Azure; module testing in CI",
+      },
+      {
+        name: "Ansible",
+        evidence:
+          "Cluster creation and platform updates for Docker, Jenkins, and related tooling",
+      },
+      {
+        name: "GitHub Actions",
+        evidence:
+          "Standardized CI/CD and create-and-destroy infrastructure tests",
+      },
+      {
+        name: "Jenkins",
+        evidence:
+          "Enterprise pipelines and self-service developer delivery paths",
+      },
+      {
+        name: "Argo CD",
+        evidence:
+          "GitOps overlays for reproducible lab and platform workloads (efokou-labs)",
+      },
     ],
   },
   {
-    name: "DevOps & Infrastructure",
+    name: "Reliability and Observability",
     skills: [
-      { name: "Terraform", level: 90 },
-      { name: "Ansible", level: 85 },
-      { name: "Docker", level: 88 },
-      { name: "Kubernetes", level: 84 },
-      { name: "GitHub Actions", level: 88 },
-      { name: "Jenkins", level: 85 },
+      {
+        name: "Prometheus",
+        evidence:
+          "Metrics and alerting for distributed services and AI workflow telemetry",
+      },
+      {
+        name: "Grafana",
+        evidence:
+          "Unified dashboards for production operations and MTTR reduction",
+      },
+      {
+        name: "Datadog",
+        evidence:
+          "Enterprise monitoring and incident response alongside cloud-native stacks",
+      },
+      {
+        name: "ELK Stack",
+        evidence:
+          "Centralized log pipelines for faster root-cause analysis during outages",
+      },
+      {
+        name: "PagerDuty",
+        evidence:
+          "On-call alerting and incident workflows across service boundaries",
+      },
     ],
   },
   {
-    name: "Observability & Reliability",
+    name: "Backend and Distributed Systems",
     skills: [
-      { name: "Prometheus", level: 88 },
-      { name: "Grafana", level: 90 },
-      { name: "Datadog", level: 85 },
-      { name: "ELK Stack", level: 82 },
-      { name: "PagerDuty", level: 80 },
+      {
+        name: "Python",
+        evidence:
+          "Automation, services, and Agentic AI orchestration in production contexts",
+      },
+      {
+        name: "Go",
+        evidence:
+          "Platform tooling, monitoring helpers, and cloud automation",
+      },
+      {
+        name: "Java",
+        evidence:
+          "Enterprise systems engineering and platform integration work",
+      },
+      {
+        name: "JavaScript / Node.js",
+        evidence:
+          "Full-stack delivery for portfolio platforms and developer-facing UIs",
+      },
+      {
+        name: "Bash",
+        evidence:
+          "Operational automation for deployment, monitoring, and incident response",
+      },
+    ],
+  },
+  {
+    name: "Production AI Workflows",
+    skills: [
+      {
+        name: "LLM orchestration",
+        evidence:
+          "Multi-step agents with tool routing and human-in-the-loop checkpoints",
+      },
+      {
+        name: "RAG",
+        evidence:
+          "Grounded answers over internal docs with evaluation harnesses",
+      },
+      {
+        name: "Observability for AI",
+        evidence:
+          "Latency and cost telemetry wired into Prometheus and Grafana stacks",
+      },
     ],
   },
 ];
