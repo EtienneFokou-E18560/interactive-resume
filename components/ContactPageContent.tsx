@@ -48,19 +48,9 @@ export default function ContactPageContent() {
                   {profile.email}
                 </a>
               </li>
-              <li className="flex flex-col gap-1 text-[var(--color-text-secondary)]">
-                <span className="flex items-center gap-3">
-                  <Phone className="h-5 w-5 shrink-0 text-accent" />
-                  <a
-                    href={`tel:${profile.phone.replace(/\s/g, "")}`}
-                    className="hover:text-accent"
-                  >
-                    {profile.phone}
-                  </a>
-                </span>
-                <span className="pl-8 text-xs text-[var(--color-text-muted)]">
-                  {t.contact.phoneNote}
-                </span>
+              <li className="flex items-center gap-3 text-[var(--color-text-secondary)]">
+                <Phone className="h-5 w-5 shrink-0 text-accent" />
+                <span className="text-sm">{t.contact.phoneNote}</span>
               </li>
               <li className="flex items-center gap-3 text-[var(--color-text-secondary)]">
                 <MapPin className="h-5 w-5 shrink-0 text-accent" />
