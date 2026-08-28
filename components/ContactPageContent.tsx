@@ -13,6 +13,18 @@ export default function ContactPageContent() {
 
   return (
     <PageLayout title={t.contact.title} description={t.contact.description}>
+      <div className="mb-10 grid gap-3 sm:grid-cols-3">
+        <div className="card p-4 text-sm text-[var(--color-text-secondary)]">
+          {t.contact.considering}
+        </div>
+        <div className="card p-4 text-sm text-[var(--color-text-secondary)]">
+          {t.contact.preferredChannel}
+        </div>
+        <div className="card p-4 text-sm text-[var(--color-text-secondary)]">
+          {t.contact.responseTime}
+        </div>
+      </div>
+
       <div className="grid gap-12 lg:grid-cols-2">
         <div>
           <h2 className="mb-6 text-xl font-semibold text-foreground">
@@ -36,14 +48,19 @@ export default function ContactPageContent() {
                   {profile.email}
                 </a>
               </li>
-              <li className="flex items-center gap-3 text-[var(--color-text-secondary)]">
-                <Phone className="h-5 w-5 shrink-0 text-accent" />
-                <a
-                  href={`tel:${profile.phone.replace(/\s/g, "")}`}
-                  className="hover:text-accent"
-                >
-                  {profile.phone}
-                </a>
+              <li className="flex flex-col gap-1 text-[var(--color-text-secondary)]">
+                <span className="flex items-center gap-3">
+                  <Phone className="h-5 w-5 shrink-0 text-accent" />
+                  <a
+                    href={`tel:${profile.phone.replace(/\s/g, "")}`}
+                    className="hover:text-accent"
+                  >
+                    {profile.phone}
+                  </a>
+                </span>
+                <span className="pl-8 text-xs text-[var(--color-text-muted)]">
+                  {t.contact.phoneNote}
+                </span>
               </li>
               <li className="flex items-center gap-3 text-[var(--color-text-secondary)]">
                 <MapPin className="h-5 w-5 shrink-0 text-accent" />

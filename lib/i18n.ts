@@ -28,6 +28,11 @@ export const translations = {
       terminal: "Terminal Mode",
       techStack: "Tech Stack",
       viewAll: "View all",
+      selectedExperience: "Selected experience",
+      caseStudies: "Featured case studies",
+      focusAreas: "Focus areas",
+      developerMode: "Developer mode",
+      developerModeHint: "Prefer a CLI view of the same data?",
     },
     about: {
       title: "About Me",
@@ -45,9 +50,11 @@ export const translations = {
     projects: {
       title: "Projects",
       description:
-        "A collection of applications and platforms I have built across cloud, backend, and full-stack development.",
+        "Engineering work across cloud platforms, reliability, and production AI — with clear labels for portfolio demos versus case studies.",
       code: "Code",
       demo: "Demo",
+      caseStudy: "Read case study",
+      caseStudyOnly: "Case study (no public repo)",
     },
     skills: {
       title: "Skills",
@@ -60,7 +67,7 @@ export const translations = {
     contact: {
       title: "Contact Me",
       description:
-        "Interested in working together? Send a message or reach out directly through any of the channels below.",
+        "Open to Senior Platform Engineer and related SRE, cloud, and infrastructure roles. Prefer email — I typically respond within 1–2 business days.",
       getInTouch: "Get in Touch",
       directContact: "Direct Contact",
       social: "Social",
@@ -73,6 +80,11 @@ export const translations = {
       send: "Send Message",
       success: "Message sent successfully!",
       error: "Failed to send message. Please try again.",
+      considering:
+        "Currently considering platform engineering, SRE, cloud infrastructure, and production AI platform roles.",
+      preferredChannel: "Preferred channel: email",
+      responseTime: "Typical response time: 1–2 business days",
+      phoneNote: "Phone available on request for scheduled calls.",
     },
     chatbot: {
       title: "Resume Assistant",
@@ -142,6 +154,11 @@ export const translations = {
       terminal: "Mode Terminal",
       techStack: "Stack Technique",
       viewAll: "Voir tout",
+      selectedExperience: "Expérience sélectionnée",
+      caseStudies: "Études de cas",
+      focusAreas: "Domaines clés",
+      developerMode: "Mode développeur",
+      developerModeHint: "Préférez une vue CLI des mêmes données ?",
     },
     about: {
       title: "À propos de moi",
@@ -159,9 +176,11 @@ export const translations = {
     projects: {
       title: "Projets",
       description:
-        "Une collection d'applications et de plateformes que j'ai construites en cloud, backend et full-stack.",
+        "Travaux d'ingénierie en cloud, fiabilité et IA en production — avec des libellés clairs pour portfolio et études de cas.",
       code: "Code",
       demo: "Démo",
+      caseStudy: "Lire l'étude de cas",
+      caseStudyOnly: "Étude de cas (pas de dépôt public)",
     },
     skills: {
       title: "Compétences",
@@ -174,7 +193,7 @@ export const translations = {
     contact: {
       title: "Me contacter",
       description:
-        "Intéressé par une collaboration ? Envoyez un message ou contactez-moi directement.",
+        "Ouvert aux postes Senior Platform Engineer, SRE, cloud et infrastructure. Préférez l'e-mail — réponse sous 1 à 2 jours ouvrés.",
       getInTouch: "Envoyer un message",
       directContact: "Contact direct",
       social: "Réseaux sociaux",
@@ -187,6 +206,11 @@ export const translations = {
       send: "Envoyer",
       success: "Message envoyé avec succès !",
       error: "Échec de l'envoi. Veuillez réessayer.",
+      considering:
+        "Ouvert aux postes en ingénierie de plateforme, SRE, cloud et IA en production.",
+      preferredChannel: "Canal préféré : e-mail",
+      responseTime: "Délai de réponse typique : 1 à 2 jours ouvrés",
+      phoneNote: "Téléphone disponible sur demande pour les appels planifiés.",
     },
     chatbot: {
       title: "Assistant CV",

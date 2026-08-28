@@ -3,16 +3,18 @@
 import { useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, ArrowRight } from "lucide-react";
 import { FaGithub } from "react-icons/fa";
 import Link from "next/link";
 import type { Project } from "@/data/projects";
+import { projectClassificationLabels } from "@/data/projects";
 import { useLanguage } from "@/hooks/useLanguage";
 
 export default function ProjectCard({ project }: { project: Project }) {
   const { t } = useLanguage();
   const [imageError, setImageError] = useState(false);
   const showImage = project.image && !imageError;
+  const hasCaseStudy = Boolean(project.caseStudy);
 
   return (
     <motion.article
@@ -39,6 +41,9 @@ export default function ProjectCard({ project }: { project: Project }) {
       </div>
 
       <div className="flex flex-1 flex-col p-5 sm:p-6">
+        <p className="eyebrow mb-2">
+          {projectClassificationLabels[project.classification]}
+        </p>
         <h3 className="text-lg font-semibold tracking-tight text-foreground">
           {project.title}
         </h3>
@@ -59,7 +64,7 @@ export default function ProjectCard({ project }: { project: Project }) {
         </ul>
 
         <div className="mt-4 flex flex-wrap gap-2">
-          {project.technologies.slice(0, 6).map((tech) => (
+          {project.technologies.slice(0, 5).map((tech) => (
             <span key={tech} className="tag">
               {tech}
             </span>
@@ -67,6 +72,15 @@ export default function ProjectCard({ project }: { project: Project }) {
         </div>
 
         <div className="mt-4 flex flex-wrap gap-3">
+          {hasCaseStudy && (
+            <Link
+              href={`/projects/${project.slug}`}
+              className="inline-flex items-center gap-1 text-sm font-medium text-accent hover:text-[var(--color-accent-hover)]"
+            >
+              {t.projects.caseStudy}
+              <ArrowRight className="h-3.5 w-3.5" />
+            </Link>
+          )}
           {project.github && (
             <Link
               href={project.github}
@@ -88,6 +102,11 @@ export default function ProjectCard({ project }: { project: Project }) {
               <ExternalLink className="h-4 w-4" />
               {t.projects.demo}
             </Link>
+          )}
+          {!hasCaseStudy && !project.github && !project.demo && (
+            <span className="text-sm text-[var(--color-text-muted)]">
+              {t.projects.caseStudyOnly}
+            </span>
           )}
         </div>
       </div>
