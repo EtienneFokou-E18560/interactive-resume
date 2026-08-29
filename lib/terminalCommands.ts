@@ -12,7 +12,7 @@ export const PORTFOLIO_COMMANDS = [
   "help",
 ] as const;
 
-/** Lab shell demos — listed in help but not executable until Phase 2+. */
+/** Lab shell demos - listed in help but not executable until Phase 2+. */
 export const LAB_PREVIEW_COMMANDS = [
   "ls",
   "pwd",
@@ -68,7 +68,7 @@ export function completeCommand(partial: string): string | null {
 }
 
 export const LAB_COMING_SOON =
-  "Engineering Lab commands are not live yet. Launch Engineering Lab (coming soon) will open a temporary, isolated sandbox for GitOps demos. Portfolio commands still work — try `help`.";
+  "Engineering Lab commands are not live yet. Launch Engineering Lab (coming soon) will open a temporary, isolated sandbox for GitOps demos. Portfolio commands still work - try `help`.";
 
 export function helpLines(): string[] {
   return [
@@ -87,6 +87,6 @@ export function helpLines(): string[] {
     "Engineering Lab (coming soon)",
     "  ls pwd tree cat head tail grep find",
     "  python git kubectl terraform",
-    "  Prepared local demos only — no production clusters or cloud credentials.",
+    "  Prepared local demos only - no production clusters or cloud credentials.",
   ];
 }

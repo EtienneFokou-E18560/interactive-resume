@@ -53,7 +53,7 @@ export default function ProjectCaseStudyContent({ project }: { project: Project 
           )}
           {!project.github && !project.demo && (
             <p className="text-sm text-[var(--color-text-muted)]">
-              No public repository — presented as a technical case study.
+              No public repository - presented as a technical case study.
             </p>
           )}
         </div>

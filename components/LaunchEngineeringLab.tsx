@@ -42,7 +42,7 @@ export default function LaunchEngineeringLab() {
       <p>
         {enabled
           ? "Local lab gateway detected. Launching opens an xterm session against a disposable container."
-          : "Until a lab gateway is configured, use the simulated portfolio CLI below — it works instantly with no sandbox required."}
+          : "Until a lab gateway is configured, use the simulated portfolio CLI below - it works instantly with no sandbox required."}
       </p>
       <div className="lab-launch-actions">
         {enabled ? (
@@ -71,8 +71,8 @@ export default function LaunchEngineeringLab() {
         )}
         <span className="lab-launch-note">
           {enabled
-            ? "Local PoC — sessions idle-out and expire automatically"
-            : "Coming soon — set NEXT_PUBLIC_LAB_WS_URL for local PoC"}
+            ? "Local PoC - sessions idle-out and expire automatically"
+            : "Coming soon - set NEXT_PUBLIC_LAB_WS_URL for local PoC"}
         </span>
       </div>
     </div>

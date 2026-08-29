@@ -24,7 +24,7 @@ export default function TerminalPage() {
   return (
     <PageLayout
       title="Developer mode"
-      description="Use the simulated portfolio CLI instantly. Engineering Lab — a temporary isolated sandbox for GitOps demos — is coming soon and stays separate from production systems."
+      description="Use the simulated portfolio CLI instantly. Engineering Lab - a temporary isolated sandbox for GitOps demos - is coming soon and stays separate from production systems."
     >
       <LaunchEngineeringLab />
       <Terminal />

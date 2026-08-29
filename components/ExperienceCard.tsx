@@ -36,7 +36,7 @@ export default function ExperienceCard({ item }: { item: Experience }) {
               item.company
             )}
             {" · "}
-            {item.start} – {item.end}
+            {item.start} - {item.end}
           </p>
           {item.location && (
             <p className="mt-1 flex items-center gap-1.5 text-sm text-[var(--color-text-muted)]">

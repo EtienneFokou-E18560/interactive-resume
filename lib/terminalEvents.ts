@@ -5,7 +5,7 @@ export type TerminalCommandCategory =
   | "unknown"
   | "lab_preview";
 
-/** Anonymous terminal events — never include command text or PII. */
+/** Anonymous terminal events - never include command text or PII. */
 export function trackTerminalCommand(category: TerminalCommandCategory) {
   track("terminal_command", { category });
 }

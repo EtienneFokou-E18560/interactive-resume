@@ -1,6 +1,6 @@
 export interface Skill {
   name: string;
-  /** Production context, years, or representative outcome — not a percentage */
+  /** Production context, years, or representative outcome - not a percentage */
   evidence: string;
 }
 

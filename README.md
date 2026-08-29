@@ -12,10 +12,10 @@ This is the personal portfolio site of **Etienne Fokou**, a Senior Platform Engi
 
 The site is designed to be:
 
-- **Fast** — statically generated pages with optimized assets
-- **Accessible** — semantic HTML, keyboard navigation, and WCAG-minded patterns
-- **Customizable** — content lives in typed TypeScript data files, not a CMS
-- **Deployable anywhere** — standard Next.js build output, compatible with Vercel, Docker, or any Node.js host
+- **Fast** - statically generated pages with optimized assets
+- **Accessible** - semantic HTML, keyboard navigation, and WCAG-minded patterns
+- **Customizable** - content lives in typed TypeScript data files, not a CMS
+- **Deployable anywhere** - standard Next.js build output, compatible with Vercel, Docker, or any Node.js host
 
 ---
 
@@ -138,10 +138,10 @@ Create a `.env.local` file in the project root:
 ```env
 NEXT_PUBLIC_SITE_URL=http://localhost:3000
 
-# Optional — for contact form email delivery
+# Optional - for contact form email delivery
 RESEND_API_KEY=your_resend_api_key
 
-# Optional — for future database features
+# Optional - for future database features
 DATABASE_URL=file:./dev.db
 ```
 
@@ -179,7 +179,7 @@ The build produces statically prerendered pages for `/` and `/about`, optimized 
 
 ## Customization Guide
 
-All resume content is managed through typed data files in the `data/` directory. Edit these files to update the site — no component changes required for most updates.
+All resume content is managed through typed data files in the `data/` directory. Edit these files to update the site - no component changes required for most updates.
 
 ### Update personal information
 
@@ -236,7 +236,7 @@ Edit `data/projects.ts`:
 
 ### Update skills
 
-Edit `data/skills.ts` — adjust categories, skill names, and evidence strings (production context, not percentages).
+Edit `data/skills.ts` - adjust categories, skill names, and evidence strings (production context, not percentages).
 
 ### Add certifications
 
@@ -257,7 +257,7 @@ Resume content lives in `data/*` and role presets in `data/resumeVariants.ts`. P
 
 Supported variants: `senior-software-engineer`, `sre`, `devops-platform`, `cloud-infrastructure`, `backend-engineer`, `agentic-ai-platform`.
 
-Update profile, experience, projects, or skills in `data/` — downloads stay in sync. Tailor emphasis per role in `data/resumeVariants.ts`.
+Update profile, experience, projects, or skills in `data/` - downloads stay in sync. Tailor emphasis per role in `data/resumeVariants.ts`.
 
 `public/resume.pdf` is kept as a legacy fallback only; hero and contact links point to the download builder.
 
@@ -271,7 +271,7 @@ Edit `lib/i18n.ts` to add or modify English and French strings for navigation, h
 
 This project can be deployed to any platform that supports Next.js.
 
-**AWS (Terraform + GitHub Actions):** infrastructure and CI/CD live in a separate repository — [interactive-resume-infra](https://github.com/EtienneFokou-E18560/interactive-resume-infra).
+**AWS (Terraform + GitHub Actions):** infrastructure and CI/CD live in a separate repository - [interactive-resume-infra](https://github.com/EtienneFokou-E18560/interactive-resume-infra).
 
 The app uses `output: "standalone"` in `next.config.ts` so the infra repo can build a production Docker image.
 
@@ -279,7 +279,7 @@ The app uses `output: "standalone"` in `next.config.ts` so the infra repo can bu
 
 This repo is configured for Vercel (`vercel.json`). Framework: Next.js. Install/build use npm.
 
-**Option A — Dashboard (Git-connected, auto-deploy on push)**
+**Option A - Dashboard (Git-connected, auto-deploy on push)**
 
 1. Push this repository to GitHub
 2. Import at [vercel.com/new](https://vercel.com/new) → select `interactive-resume`
@@ -294,7 +294,7 @@ This repo is configured for Vercel (`vercel.json`). Framework: Next.js. Install/
 
 5. Deploy. Later pushes to `main` redeploy Production; PRs get Preview URLs.
 
-**Option B — CLI**
+**Option B - CLI**
 
 ```bash
 npm i -g vercel   # or use npx
@@ -326,9 +326,9 @@ docker run --rm -p 3000:3000 interactive-resume:local
 
 ### Other platforms
 
-- **Netlify** — connect GitHub repo, build command: `npm run build`
-- **Azure Static Web Apps** — connect repository, auto-deploys on push
-- **Cloudflare Pages** — prefer Cloudflare Workers + `@opennextjs/cloudflare` for full Next.js support
+- **Netlify** - connect GitHub repo, build command: `npm run build`
+- **Azure Static Web Apps** - connect repository, auto-deploys on push
+- **Cloudflare Pages** - prefer Cloudflare Workers + `@opennextjs/cloudflare` for full Next.js support
 
 Set `NEXT_PUBLIC_SITE_URL` to your production domain in all environments.
 
