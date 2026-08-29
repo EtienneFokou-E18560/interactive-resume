@@ -17,7 +17,7 @@ export default function StatsGrid() {
           transition={
             reduce
               ? { duration: 0 }
-              : { duration: 0.3, delay: index * 0.05, ease: "easeOut" }
+              : { duration: 0.3, delay: index * 0.05, ease: "easeOut" as const }
           }
           className="card proof-card text-center sm:text-left"
         >

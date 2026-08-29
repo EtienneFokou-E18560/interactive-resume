@@ -22,7 +22,9 @@ export default function ProjectCard({ project }: { project: Project }) {
       initial={reduce ? false : { opacity: 0.35, y: 12 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={reduce ? { duration: 0 } : { duration: 0.3, ease: "easeOut" }}
+      transition={
+        reduce ? { duration: 0 } : { duration: 0.3, ease: "easeOut" as const }
+      }
       className="card card-interactive project-card group flex h-full flex-col overflow-hidden"
     >
       <div className="project-banner relative">
