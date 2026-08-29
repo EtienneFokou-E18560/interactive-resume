@@ -69,6 +69,9 @@ export default function EngineeringLabClient({ onEnded }: Props) {
     window.addEventListener("resize", onResize);
 
     return () => {
+      // Intentional unmount (incl. React Strict Mode remount) must not
+      // treat the socket close as an end-session signal for the parent.
+      endedRef.current = true;
       dataSub.dispose();
       window.removeEventListener("resize", onResize);
       ws.close();
