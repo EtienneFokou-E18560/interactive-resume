@@ -404,3 +404,36 @@
   cursor: not-allowed;
 }
 
+.lab-session {
+  margin-block-end: var(--space-6);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: #111113;
+}
+
+.lab-session-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  border-bottom: 1px solid var(--color-border);
+  padding: 0.625rem 0.75rem;
+  background: var(--color-surface);
+}
+
+.lab-xterm {
+  height: min(50vh, 28rem);
+  padding: 0.5rem;
+  overflow: hidden;
+}
+
+.lab-xterm .xterm {
+  height: 100%;
+}
+
+.lab-xterm .xterm-viewport {
+  overflow-y: auto !important;
+}
+
