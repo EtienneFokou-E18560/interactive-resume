@@ -4,19 +4,18 @@ import { useEffect, useRef } from "react";
 import { Terminal } from "@xterm/xterm";
 import { FitAddon } from "@xterm/addon-fit";
 import "@xterm/xterm/css/xterm.css";
-import { getLabWsUrl } from "@/lib/lab";
 import { trackLabLaunchRequested } from "@/lib/terminalEvents";
 
 type Props = {
+  wsUrl: string;
   onEnded: () => void;
 };
 
-export default function EngineeringLabClient({ onEnded }: Props) {
+export default function EngineeringLabClient({ wsUrl, onEnded }: Props) {
   const hostRef = useRef<HTMLDivElement>(null);
   const endedRef = useRef(false);
 
   useEffect(() => {
-    const wsUrl = getLabWsUrl();
     const host = hostRef.current;
     if (!wsUrl || !host) return;
 
@@ -77,7 +76,7 @@ export default function EngineeringLabClient({ onEnded }: Props) {
       ws.close();
       term.dispose();
     };
-  }, [onEnded]);
+  }, [wsUrl, onEnded]);
 
   return (
     <div className="lab-session">

@@ -11,6 +11,7 @@
     "lab:build": "docker build -t etienne-lab-sandbox:local -f lab/sandbox/Dockerfile lab",
     "lab:gateway": "npm --prefix lab/gateway start",
     "lab:adversarial": "node lab/scripts/adversarial-smoke.mjs",
+    "lab:beta-smoke": "node lab/scripts/beta-recovery-smoke.mjs",
     "vercel": "vercel",
     "deploy": "vercel --prod"
   },

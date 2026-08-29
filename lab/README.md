@@ -1,8 +1,8 @@
-# Engineering Lab (local hardened PoC)
+# Engineering Lab (local private beta)
 
-Phase 3: disposable Docker sandboxes behind a WebSocket gateway with read-only rootfs, tmpfs workspace, rate limits, output caps, and a kill switch. The portfolio xterm client enables when `NEXT_PUBLIC_LAB_WS_URL` is set.
+Phase 4: hardened Docker sandboxes behind a local WebSocket gateway, invite-gated from the portfolio. Public HTTPS hosting is deferred.
 
-**Do not expose this gateway to the public internet.** HTTPS, invite codes, and production deploy are Phase 4.
+**Do not expose this gateway to the public internet.** See [PRIVATE_BETA.md](./PRIVATE_BETA.md) for the operator runbook.
 
 ## Prerequisites
 
@@ -21,7 +21,7 @@ npm run lab:build
 ```bash
 cd lab/gateway
 npm install
-LAB_ADMIN_TOKEN=dev-lab-admin npm start
+LAB_REQUIRE_ADMIN=1 LAB_ADMIN_TOKEN=dev-lab-admin npm start
 ```
 
 Health: `http://localhost:4091/health` → `{ ok, disabled, sessions, max, maxPerIp }`
@@ -40,26 +40,35 @@ Health: `http://localhost:4091/health` → `{ ok, disabled, sessions, max, maxPe
 | Origins | `LAB_ALLOWED_ORIGINS` | localhost:3000, 127.0.0.1:3000, :3460 |
 | Kill at boot | `LAB_DISABLED` | `0` |
 | Admin token | `LAB_ADMIN_TOKEN` | (empty = admin API disabled) |
+| Require admin | `LAB_REQUIRE_ADMIN` | `0` (set `1` for private beta) |
 | Sandbox | read-only rootfs, tmpfs `/home/visitor` 32m + `/tmp` 16m, no network, CapDrop ALL, 256 MB / 0.5 CPU / 32 PIDs |
 
 ### Kill switch
 
 ```bash
-# disable + destroy all sessions
 curl -X POST -H "Authorization: Bearer $LAB_ADMIN_TOKEN" http://localhost:4091/admin/kill
-
-# re-enable launches
 curl -X POST -H "Authorization: Bearer $LAB_ADMIN_TOKEN" http://localhost:4091/admin/enable
 ```
 
-## 3. Run the portfolio with lab enabled
+## 3. Run the portfolio
+
+Owner local (no invite UI):
 
 ```bash
-# from repo root
 NEXT_PUBLIC_LAB_WS_URL=ws://localhost:4091/lab npm run dev
 ```
 
-Open `/terminal` and click **Launch Engineering Lab**.
+Invite-gated private beta:
+
+```bash
+LAB_INVITE_CODE=shared-invite \
+LAB_WS_URL=ws://localhost:4091/lab \
+npm run dev
+```
+
+Open `/terminal`, unlock with the invite code if prompted, then **Launch Engineering Lab**.
+
+Without `LAB_INVITE_CODE` and without `NEXT_PUBLIC_LAB_WS_URL`, the lab panel stays hidden (production default).
 
 ## Isolation check
 
@@ -68,19 +77,20 @@ Open `/terminal` and click **Launch Engineering Lab**.
 3. In session A: `touch marker.txt` then `ls`
 4. In session B: `ls` — `marker.txt` must not appear.
 
-## Adversarial smoke
-
-With Docker available and the image built:
+## Smoke tests
 
 ```bash
 npm run lab:adversarial
+npm run lab:beta-smoke
 ```
 
-See [SECURITY.md](./SECURITY.md) for the checklist.
+See [SECURITY.md](./SECURITY.md) and [PRIVATE_BETA.md](./PRIVATE_BETA.md).
 
 ## Security notes
 
 - Command allowlist is enforced inside `lab-shell` (no shell metacharacters; no `python3 -c`).
 - Gateway enforces Origin, capacity, per-IP limits, create rate, output size, and kill switch.
-- Structured logs use session ids and IP hashes — not typed command content.
-- Client IP for limits uses `X-Forwarded-For` first hop when present; only trust that behind a known proxy (Phase 4).
+- Portfolio invite codes are server-only (`LAB_INVITE_CODE`); never log typed codes.
+- Structured gateway logs use session ids and IP hashes — not typed command content.
+- Client IP for limits uses `X-Forwarded-For` first hop when present; only trust that behind a known proxy.
+- Public TLS termination / always-on hosted gateway remains deferred (paid host).
