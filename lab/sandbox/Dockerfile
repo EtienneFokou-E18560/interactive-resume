@@ -1,16 +1,17 @@
 FROM alpine:3.20
 
+# Minimal toolkit only — no apk client for visitor, no curl/wget/ssh/python.
 RUN apk add --no-cache \
       bash \
       coreutils \
       findutils \
       git \
       grep \
-      python3 \
       tree \
     && adduser -D -u 10001 -h /home/visitor visitor \
     && mkdir -p /opt/lab \
-    && chown -R root:root /opt/lab
+    && chown -R root:root /opt/lab \
+    && rm -f /sbin/apk /usr/bin/apk /bin/apk 2>/dev/null || true
 
 COPY sample-repo /opt/lab/sample-repo
 COPY sandbox/lab-shell.sh /usr/local/bin/lab-shell

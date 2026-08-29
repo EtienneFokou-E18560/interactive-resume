@@ -1,5 +1,5 @@
 #!/bin/sh
-# Restricted line-oriented shell for the Engineering Lab PoC.
+# Restricted line-oriented shell for the Engineering Lab (hardened PoC).
 # Commands are dispatched without `sh -c` to avoid chaining/injection.
 set -eu
 
@@ -14,13 +14,13 @@ cd "$WORKSPACE"
 
 print_help() {
   cat <<'EOF'
-Engineering Lab (local PoC)
+Engineering Lab (hardened PoC)
 
-Workspace: ~/lab  (copy of the sample GitOps repo)
+Workspace: ~/lab  (copy of the sample GitOps repo on tmpfs)
 
 Allowed commands:
   help ls pwd tree cat head tail grep find touch
-  python3 git kubectl terraform clear cd echo exit
+  git kubectl terraform clear cd echo exit
 
 Examples:
   ls
@@ -165,11 +165,7 @@ while true; do
       esac
       ;;
     python|python3)
-      if [ "${1:-}" = "-c" ] && [ "$#" -eq 2 ]; then
-        python3 -c "$2" || true
-      else
-        echo "python3 (lab): only 'python3 -c \"expression\"' is allowed"
-      fi
+      echo "python3 is not available in the hardened lab. Use cat/ls/git stubs instead."
       ;;
     kubectl)
       run_kubectl
