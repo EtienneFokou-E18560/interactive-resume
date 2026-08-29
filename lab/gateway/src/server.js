@@ -1,5 +1,5 @@
 import http from "node:http";
-import { randomUUID } from "node:crypto";
+import { createHash, randomUUID } from "node:crypto";
 import { WebSocketServer } from "ws";
 import Docker from "dockerode";
 
@@ -8,6 +8,11 @@ const IMAGE = process.env.LAB_SANDBOX_IMAGE || "etienne-lab-sandbox:local";
 const IDLE_MS = Number(process.env.LAB_IDLE_MS || 5 * 60 * 1000);
 const MAX_MS = Number(process.env.LAB_MAX_MS || 10 * 60 * 1000);
 const MAX_SESSIONS = Number(process.env.LAB_MAX_SESSIONS || 5);
+const MAX_SESSIONS_PER_IP = Number(process.env.LAB_MAX_SESSIONS_PER_IP || 2);
+const CREATE_RATE = Number(process.env.LAB_CREATE_RATE || 3);
+const CREATE_WINDOW_MS = Number(process.env.LAB_CREATE_WINDOW_MS || 60_000);
+const MAX_OUTPUT_BYTES = Number(process.env.LAB_MAX_OUTPUT_BYTES || 1_048_576);
+const ADMIN_TOKEN = process.env.LAB_ADMIN_TOKEN || "";
 const ALLOWED_ORIGINS = (
   process.env.LAB_ALLOWED_ORIGINS ||
   "http://localhost:3000,http://127.0.0.1:3000,http://localhost:3460"
@@ -23,24 +28,86 @@ const docker = new Docker({
 /** @type {Map<string, Session>} */
 const sessions = new Map();
 
+/** @type {Map<string, number[]>} */
+const createTimestampsByIp = new Map();
+
+let labsDisabled =
+  process.env.LAB_DISABLED === "1" || process.env.LAB_DISABLED === "true";
+
 /**
  * @typedef {object} Session
  * @property {string} id
+ * @property {string} clientIp
  * @property {import('dockerode').Container} container
  * @property {import('ws').WebSocket} ws
  * @property {NodeJS.Timeout} idleTimer
  * @property {NodeJS.Timeout} maxTimer
  * @property {() => void} resetIdle
  * @property {NodeJS.ReadWriteStream | null} stream
+ * @property {number} outputBytes
  */
 
 function log(event, fields = {}) {
   console.log(JSON.stringify({ ts: new Date().toISOString(), event, ...fields }));
 }
 
+function hashIp(ip) {
+  return createHash("sha256").update(ip || "unknown").digest("hex").slice(0, 12);
+}
+
+function clientIpFromRequest(req) {
+  const xff = req.headers["x-forwarded-for"];
+  if (typeof xff === "string" && xff.trim()) {
+    return xff.split(",")[0].trim();
+  }
+  if (Array.isArray(xff) && xff[0]) {
+    return String(xff[0]).split(",")[0].trim();
+  }
+  const addr = req.socket?.remoteAddress || "";
+  return addr.replace(/^::ffff:/, "") || "unknown";
+}
+
 function originAllowed(origin) {
   if (!origin) return false;
   return ALLOWED_ORIGINS.includes(origin);
+}
+
+/** Strip OSC/DCS/APC/PM sequences; keep normal CSI (clear, colors). */
+function sanitizeTerminalOutput(text) {
+  return text
+    .replace(/\x1b\][^\x07\x1b]*(?:\x07|\x1b\\)?/g, "")
+    .replace(/\x1b[P_^][^\x1b]*(?:\x1b\\)?/g, "");
+}
+
+function sessionsForIp(ip) {
+  let n = 0;
+  for (const s of sessions.values()) {
+    if (s.clientIp === ip) n += 1;
+  }
+  return n;
+}
+
+function recordCreate(ip) {
+  const now = Date.now();
+  const prev = createTimestampsByIp.get(ip) || [];
+  const next = prev.filter((t) => now - t < CREATE_WINDOW_MS);
+  next.push(now);
+  createTimestampsByIp.set(ip, next);
+  return next.length;
+}
+
+function createCountInWindow(ip) {
+  const now = Date.now();
+  const prev = createTimestampsByIp.get(ip) || [];
+  const next = prev.filter((t) => now - t < CREATE_WINDOW_MS);
+  createTimestampsByIp.set(ip, next);
+  return next.length;
+}
+
+function adminAuthorized(req) {
+  if (!ADMIN_TOKEN) return false;
+  const header = req.headers.authorization || "";
+  return header === `Bearer ${ADMIN_TOKEN}`;
 }
 
 async function destroySession(id, reason) {
@@ -68,7 +135,17 @@ async function destroySession(id, reason) {
   } catch {
     /* ignore */
   }
-  log("session_ended", { id, reason, active: sessions.size });
+  log("session_ended", {
+    id,
+    reason,
+    active: sessions.size,
+    ipHash: hashIp(session.clientIp),
+  });
+}
+
+async function destroyAllSessions(reason) {
+  const ids = [...sessions.keys()];
+  await Promise.all(ids.map((id) => destroySession(id, reason)));
 }
 
 async function createSandbox(id) {
@@ -81,6 +158,11 @@ async function createSandbox(id) {
     NetworkDisabled: true,
     HostConfig: {
       AutoRemove: true,
+      ReadonlyRootfs: true,
+      Tmpfs: {
+        "/home/visitor": "rw,nosuid,nodev,noexec,size=32m,uid=10001,gid=10001",
+        "/tmp": "rw,nosuid,nodev,noexec,size=16m,uid=10001,gid=10001",
+      },
       Memory: 256 * 1024 * 1024,
       NanoCpus: 500_000_000,
       PidsLimit: 32,
@@ -113,8 +195,21 @@ async function attachShell(session) {
 
   stream.on("data", (chunk) => {
     session.resetIdle();
-    if (session.ws.readyState === session.ws.OPEN) {
-      session.ws.send(chunk.toString("utf8"));
+    const raw = chunk.toString("utf8");
+    const text = sanitizeTerminalOutput(raw);
+    session.outputBytes += Buffer.byteLength(text, "utf8");
+    if (session.outputBytes > MAX_OUTPUT_BYTES) {
+      log("security_output_limit", {
+        id: session.id,
+        bytes: session.outputBytes,
+        max: MAX_OUTPUT_BYTES,
+        ipHash: hashIp(session.clientIp),
+      });
+      void destroySession(session.id, "output_limit");
+      return;
+    }
+    if (session.ws.readyState === session.ws.OPEN && text) {
+      session.ws.send(text);
     }
   });
   stream.on("end", () => {
@@ -139,14 +234,55 @@ function scheduleTimers(session) {
   }, MAX_MS);
 }
 
-const server = http.createServer((req, res) => {
-  if (req.url === "/health") {
+function readBody(req) {
+  return new Promise((resolve) => {
+    const chunks = [];
+    req.on("data", (c) => chunks.push(c));
+    req.on("end", () => resolve(Buffer.concat(chunks).toString("utf8")));
+    req.on("error", () => resolve(""));
+  });
+}
+
+const server = http.createServer(async (req, res) => {
+  const url = req.url?.split("?")[0] || "";
+
+  if (req.method === "GET" && url === "/health") {
     res.writeHead(200, { "content-type": "application/json" });
     res.end(
-      JSON.stringify({ ok: true, sessions: sessions.size, max: MAX_SESSIONS })
+      JSON.stringify({
+        ok: true,
+        disabled: labsDisabled,
+        sessions: sessions.size,
+        max: MAX_SESSIONS,
+        maxPerIp: MAX_SESSIONS_PER_IP,
+      })
     );
     return;
   }
+
+  if (req.method === "POST" && (url === "/admin/kill" || url === "/admin/enable")) {
+    await readBody(req);
+    if (!adminAuthorized(req)) {
+      log("admin_unauthorized", { path: url });
+      res.writeHead(401, { "content-type": "application/json" });
+      res.end(JSON.stringify({ ok: false, error: "unauthorized" }));
+      return;
+    }
+    if (url === "/admin/kill") {
+      labsDisabled = true;
+      await destroyAllSessions("kill_switch");
+      log("kill_switch", { disabled: true, active: sessions.size });
+      res.writeHead(200, { "content-type": "application/json" });
+      res.end(JSON.stringify({ ok: true, disabled: true, sessions: 0 }));
+      return;
+    }
+    labsDisabled = false;
+    log("labs_enabled", { disabled: false });
+    res.writeHead(200, { "content-type": "application/json" });
+    res.end(JSON.stringify({ ok: true, disabled: false }));
+    return;
+  }
+
   res.writeHead(404);
   res.end("not found");
 });
@@ -155,20 +291,56 @@ const wss = new WebSocketServer({ server, path: "/lab" });
 
 wss.on("connection", async (ws, req) => {
   const origin = req.headers.origin || "";
+  const clientIp = clientIpFromRequest(req);
+  const ipHash = hashIp(clientIp);
+
   if (!originAllowed(origin)) {
-    log("reject_origin", { origin });
+    log("reject_origin", { origin, ipHash });
     ws.close(1008, "origin not allowed");
     return;
   }
 
+  if (labsDisabled) {
+    log("reject_disabled", { ipHash });
+    ws.send(
+      "Engineering Lab is temporarily disabled. Use the simulated portfolio CLI.\r\n"
+    );
+    ws.close(1013, "disabled");
+    return;
+  }
+
   if (sessions.size >= MAX_SESSIONS) {
-    log("reject_capacity", { active: sessions.size });
+    log("reject_capacity", { active: sessions.size, ipHash });
     ws.send(
       "Lab capacity reached. Try again later, or use the simulated portfolio CLI.\r\n"
     );
     ws.close(1013, "capacity");
     return;
   }
+
+  if (sessionsForIp(clientIp) >= MAX_SESSIONS_PER_IP) {
+    log("reject_ip_capacity", {
+      activeForIp: sessionsForIp(clientIp),
+      maxPerIp: MAX_SESSIONS_PER_IP,
+      ipHash,
+    });
+    ws.send(
+      "Per-client lab limit reached. End an existing session or use the simulated CLI.\r\n"
+    );
+    ws.close(1013, "ip_capacity");
+    return;
+  }
+
+  if (createCountInWindow(clientIp) >= CREATE_RATE) {
+    log("reject_rate", { ipHash, rate: CREATE_RATE, windowMs: CREATE_WINDOW_MS });
+    ws.send(
+      "Lab launch rate limit exceeded. Wait a moment, or use the simulated portfolio CLI.\r\n"
+    );
+    ws.close(1013, "rate_limited");
+    return;
+  }
+
+  recordCreate(clientIp);
 
   const id = randomUUID();
   /** @type {Session | undefined} */
@@ -179,20 +351,22 @@ wss.on("connection", async (ws, req) => {
     const container = await createSandbox(id);
     session = {
       id,
+      clientIp,
       container,
       ws,
       idleTimer: setTimeout(() => {}, 0),
       maxTimer: setTimeout(() => {}, 0),
       resetIdle: () => {},
       stream: null,
+      outputBytes: 0,
     };
     sessions.set(id, session);
     scheduleTimers(session);
     await attachShell(session);
-    log("session_started", { id, active: sessions.size });
+    log("session_started", { id, active: sessions.size, ipHash });
     ws.send(`[lab] ready — session ${id.slice(0, 8)}\r\n`);
   } catch (err) {
-    log("session_failed", { id, error: String(err) });
+    log("session_failed", { id, error: String(err), ipHash });
     ws.send(
       "Failed to start sandbox. Is Docker running and the image built?\r\n"
     );
@@ -227,14 +401,19 @@ server.listen(PORT, () => {
     idleMs: IDLE_MS,
     maxMs: MAX_MS,
     maxSessions: MAX_SESSIONS,
+    maxSessionsPerIp: MAX_SESSIONS_PER_IP,
+    createRate: CREATE_RATE,
+    createWindowMs: CREATE_WINDOW_MS,
+    maxOutputBytes: MAX_OUTPUT_BYTES,
+    disabled: labsDisabled,
+    adminConfigured: Boolean(ADMIN_TOKEN),
     origins: ALLOWED_ORIGINS,
   });
 });
 
 async function shutdown() {
   log("gateway_shutdown");
-  const ids = [...sessions.keys()];
-  await Promise.all(ids.map((id) => destroySession(id, "shutdown")));
+  await destroyAllSessions("shutdown");
   server.close();
   process.exit(0);
 }
