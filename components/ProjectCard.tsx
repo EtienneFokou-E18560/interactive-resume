@@ -19,11 +19,11 @@ export default function ProjectCard({ project }: { project: Project }) {
 
   return (
     <motion.article
-      initial={reduce ? false : { opacity: 0, y: 16 }}
+      initial={reduce ? false : { opacity: 0.35, y: 12 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={reduce ? { duration: 0 } : undefined}
-      className="card card-interactive group flex h-full flex-col overflow-hidden"
+      transition={reduce ? { duration: 0 } : { duration: 0.3, ease: "easeOut" }}
+      className="card card-interactive project-card group flex h-full flex-col overflow-hidden"
     >
       <div className="project-banner relative">
         {showImage ? (

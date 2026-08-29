@@ -122,7 +122,7 @@ export default function Chatbot() {
       <button
         type="button"
         onClick={() => setOpen(!open)}
-        className="fixed bottom-4 right-4 z-50 flex h-14 w-14 items-center justify-center rounded-full border border-[var(--color-border-strong)] bg-[var(--color-text)] text-[var(--color-bg)] shadow-[var(--shadow-md)] transition-opacity hover:opacity-90 sm:bottom-6 sm:right-6"
+        className="chat-button"
         aria-label={open ? "Close resume assistant" : "Open resume assistant"}
       >
         {open ? <X className="h-6 w-6" /> : <MessageCircle className="h-6 w-6" />}
