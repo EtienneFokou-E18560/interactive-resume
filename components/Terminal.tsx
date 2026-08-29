@@ -275,7 +275,7 @@ export default function Terminal() {
           <span className="h-2.5 w-2.5 rounded-full bg-yellow-500/80" />
           <span className="h-2.5 w-2.5 rounded-full bg-green-500/80" />
         </div>
-        <div className="flex min-w-0 flex-1 items-center gap-2 text-[var(--color-text-muted)]">
+        <div className="flex min-w-0 flex-1 items-center gap-2 text-[var(--terminal-muted)]">
           <TerminalIcon className="h-3.5 w-3.5 shrink-0 sm:h-4 sm:w-4" />
           <span className="truncate font-mono text-xs sm:text-sm">
             {profile.name.toLowerCase().replace(/\s+/g, "-")} ~ portfolio

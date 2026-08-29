@@ -3,7 +3,6 @@
 import { useCallback, useState } from "react";
 import dynamic from "next/dynamic";
 import { isLabEnabled } from "@/lib/lab";
-import { trackLabLaunchRequested } from "@/lib/terminalEvents";
 
 const EngineeringLabClient = dynamic(
   () => import("@/components/EngineeringLabClient"),
@@ -23,11 +22,11 @@ export default function LaunchEngineeringLab() {
 
   const endSession = useCallback(() => setActive(false), []);
 
-  function handlePreviewActivate() {
-    trackLabLaunchRequested();
+  if (!enabled) {
+    return null;
   }
 
-  if (active && enabled) {
+  if (active) {
     return <EngineeringLabClient onEnded={endSession} />;
   }
 
@@ -40,39 +39,19 @@ export default function LaunchEngineeringLab() {
         production clusters or cloud credentials.
       </p>
       <p>
-        {enabled
-          ? "Local lab gateway detected. Launching opens an xterm session against a disposable container."
-          : "Until a lab gateway is configured, use the simulated portfolio CLI below - it works instantly with no sandbox required."}
+        Local lab gateway detected. Launching opens an xterm session against a
+        disposable container.
       </p>
       <div className="lab-launch-actions">
-        {enabled ? (
-          <button
-            type="button"
-            className="button button-primary"
-            onClick={() => setActive(true)}
-          >
-            Launch Engineering Lab
-          </button>
-        ) : (
-          <button
-            type="button"
-            className="button button-secondary"
-            aria-disabled="true"
-            onClick={handlePreviewActivate}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" || e.key === " ") {
-                e.preventDefault();
-                handlePreviewActivate();
-              }
-            }}
-          >
-            Launch Engineering Lab
-          </button>
-        )}
+        <button
+          type="button"
+          className="button button-primary"
+          onClick={() => setActive(true)}
+        >
+          Launch Engineering Lab
+        </button>
         <span className="lab-launch-note">
-          {enabled
-            ? "Local PoC - sessions idle-out and expire automatically"
-            : "Coming soon - set NEXT_PUBLIC_LAB_WS_URL for local PoC"}
+          Local PoC - sessions idle-out and expire automatically
         </span>
       </div>
     </div>

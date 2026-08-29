@@ -11,13 +11,13 @@ export default function StatsGrid() {
       {profile.stats.map((stat, index) => (
         <motion.div
           key={stat.label}
-          initial={reduce ? false : { opacity: 0, y: 12 }}
+          initial={reduce ? false : { opacity: 0.35, y: 8 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={
             reduce
               ? { duration: 0 }
-              : { duration: 0.35, delay: index * 0.06 }
+              : { duration: 0.3, delay: index * 0.05, ease: "easeOut" as const }
           }
           className="card proof-card text-center sm:text-left"
         >

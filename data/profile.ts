@@ -29,19 +29,19 @@ export const profile = {
     "Observability with Prometheus, Grafana, Datadog, and ELK Stack",
     "Agentic AI workflows with LLM orchestration, RAG, and production guardrails",
   ],
-  /** Honest scope proof points until exact metrics are verified */
+  /** Verified scope proof points (no invented percentages) */
   stats: [
     {
-      label: "Provisioning and deployment lead time",
-      value: "FASTER",
+      label: "Platform and cloud engineering",
+      value: "10+ YEARS",
     },
     {
-      label: "Engineering teams and services supported",
-      value: "MULTIPLE",
+      label: "AWS, Azure, and GCP",
+      value: "3 CLOUDS",
     },
     {
-      label: "Mean time to recovery (MTTR)",
-      value: "LOWER",
+      label: "Platform delivery and reliability",
+      value: "MULTI-TEAM",
     },
   ],
 };
