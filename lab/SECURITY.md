@@ -43,6 +43,13 @@ Local hardened PoC (Phase 3) + local private beta (Phase 4). Do not expose the g
 - [x] Recovery / capacity beta smoke (`npm run lab:beta-smoke`)
 - [ ] Public HTTPS gateway on a paid always-on host (deferred)
 
+## Phase 5 prep (flags only — no public host)
+
+- [x] `LAB_PUBLIC_ENABLED` / `LAB_PUBLIC_ROLLOUT_PERCENT` (default off / 0%)
+- [x] Anonymous `lab_bucket` cookie for deterministic rollout
+- [x] Analytics hooks: launch success/fail, session ended, rollout exposure (no command text)
+- [ ] Enable public rollout on production (blocked until paid always-on host)
+
 ## Privacy and operations
 
 - [x] Command payloads are not logged (structured reason codes + IP hash only)
