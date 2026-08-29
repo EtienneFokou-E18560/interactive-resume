@@ -1,10 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" role="img" aria-label="Log Parser Dashboard project">
   <defs>
     <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#ffedd5"/>
-      <stop offset="100%" stop-color="#ea580c"/>
+      <stop offset="0%" stop-color="#303238"/>
+      <stop offset="100%" stop-color="#1B1D22"/>
     </linearGradient>
   </defs>
   <rect width="800" height="450" fill="url(#bg)"/>
-  <text x="400" y="230" text-anchor="middle" font-family="system-ui,sans-serif" font-size="48" font-weight="700" fill="#ffffff">Log Parser</text>
+  <rect x="0" y="449" width="800" height="1" fill="#34363D"/>
+  <text x="400" y="230" text-anchor="middle" font-family="system-ui,sans-serif" font-size="48" font-weight="700" fill="#F5F5F5">Log Parser</text>
 </svg>

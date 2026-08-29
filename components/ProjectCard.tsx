@@ -25,18 +25,18 @@ export default function ProjectCard({ project }: { project: Project }) {
       transition={reduce ? { duration: 0 } : undefined}
       className="card card-interactive group flex h-full flex-col overflow-hidden"
     >
-      <div className="relative flex h-40 items-center justify-center overflow-hidden bg-[var(--color-bg-subtle)]">
+      <div className="project-banner relative">
         {showImage ? (
           <Image
             src={project.image!}
             alt={project.title}
             fill
-            className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+            className="object-cover transition-transform duration-300 group-hover:scale-[1.02] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             onError={() => setImageError(true)}
           />
         ) : (
-          <span className="text-4xl font-bold text-[var(--color-border-strong)]">
+          <span className="project-banner__title" aria-hidden="true">
             {project.title.charAt(0)}
           </span>
         )}
