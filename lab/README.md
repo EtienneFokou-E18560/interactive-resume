@@ -2,6 +2,8 @@
 
 Phase 4: hardened Docker sandboxes behind a local WebSocket gateway, invite-gated from the portfolio. Public HTTPS hosting is deferred.
 
+Phase 5 prep: feature flags + analytics hooks for a future public rollout (`LAB_PUBLIC_ENABLED`, `LAB_PUBLIC_ROLLOUT_PERCENT`). Defaults keep public off. See [PHASE5_PREP.md](./PHASE5_PREP.md).
+
 **Do not expose this gateway to the public internet.** See [PRIVATE_BETA.md](./PRIVATE_BETA.md) for the operator runbook.
 
 ## Prerequisites

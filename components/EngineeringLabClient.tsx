@@ -4,7 +4,14 @@ import { useEffect, useRef } from "react";
 import { Terminal } from "@xterm/xterm";
 import { FitAddon } from "@xterm/addon-fit";
 import "@xterm/xterm/css/xterm.css";
-import { trackLabLaunchRequested } from "@/lib/terminalEvents";
+import {
+  labDurationBucket,
+  trackLabLaunchFailed,
+  trackLabLaunchRequested,
+  trackLabLaunchSucceeded,
+  trackLabSessionEnded,
+  type LabSessionEndReason,
+} from "@/lib/terminalEvents";
 
 type Props = {
   wsUrl: string;
@@ -14,11 +21,18 @@ type Props = {
 export default function EngineeringLabClient({ wsUrl, onEnded }: Props) {
   const hostRef = useRef<HTMLDivElement>(null);
   const endedRef = useRef(false);
+  const readyRef = useRef(false);
+  const failedRef = useRef(false);
+  const startedAtRef = useRef(0);
 
   useEffect(() => {
     const host = hostRef.current;
     if (!wsUrl || !host) return;
 
+    endedRef.current = false;
+    readyRef.current = false;
+    failedRef.current = false;
+    startedAtRef.current = Date.now();
     trackLabLaunchRequested();
 
     const term = new Terminal({
@@ -40,23 +54,39 @@ export default function EngineeringLabClient({ wsUrl, onEnded }: Props) {
 
     const ws = new WebSocket(wsUrl);
 
+    const endWith = (reason: LabSessionEndReason) => {
+      if (endedRef.current) return;
+      endedRef.current = true;
+      const durationMs = Date.now() - startedAtRef.current;
+      trackLabSessionEnded(reason, labDurationBucket(durationMs));
+      onEnded();
+    };
+
     ws.onopen = () => {
       term.focus();
     };
 
     ws.onmessage = (event) => {
-      term.write(typeof event.data === "string" ? event.data : "");
+      const text = typeof event.data === "string" ? event.data : "";
+      term.write(text);
+      if (!readyRef.current && text.includes("[lab] ready")) {
+        readyRef.current = true;
+        trackLabLaunchSucceeded();
+      }
     };
 
     ws.onerror = () => {
+      if (!failedRef.current) {
+        failedRef.current = true;
+        trackLabLaunchFailed();
+      }
       term.writeln("\r\n[lab] connection error — is the gateway running?");
     };
 
     ws.onclose = () => {
       if (!endedRef.current) {
         term.writeln("\r\n[lab] disconnected");
-        endedRef.current = true;
-        onEnded();
+        endWith(failedRef.current ? "error" : "remote");
       }
     };
 
@@ -88,14 +118,23 @@ export default function EngineeringLabClient({ wsUrl, onEnded }: Props) {
           type="button"
           className="button button-secondary"
           onClick={() => {
-            endedRef.current = true;
+            if (!endedRef.current) {
+              const durationMs = Date.now() - startedAtRef.current;
+              endedRef.current = true;
+              trackLabSessionEnded("client", labDurationBucket(durationMs));
+            }
             onEnded();
           }}
         >
           End session
         </button>
       </div>
-      <div ref={hostRef} className="lab-xterm" role="region" aria-label="Engineering Lab terminal" />
+      <div
+        ref={hostRef}
+        className="lab-xterm"
+        role="region"
+        aria-label="Engineering Lab terminal"
+      />
     </div>
   );
 }
