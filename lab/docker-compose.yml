@@ -1,0 +1,14 @@
+services:
+  gateway:
+    image: node:22-bookworm-slim
+    working_dir: /app
+    volumes:
+      - ./gateway:/app
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      LAB_GATEWAY_PORT: "4091"
+      LAB_SANDBOX_IMAGE: etienne-lab-sandbox:local
+      LAB_ALLOWED_ORIGINS: "http://localhost:3000,http://127.0.0.1:3000,http://localhost:3460"
+    ports:
+      - "4091:4091"
+    command: sh -c "npm install && npm start"
