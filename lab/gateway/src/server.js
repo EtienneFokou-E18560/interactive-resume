@@ -13,6 +13,9 @@ const CREATE_RATE = Number(process.env.LAB_CREATE_RATE || 3);
 const CREATE_WINDOW_MS = Number(process.env.LAB_CREATE_WINDOW_MS || 60_000);
 const MAX_OUTPUT_BYTES = Number(process.env.LAB_MAX_OUTPUT_BYTES || 1_048_576);
 const ADMIN_TOKEN = process.env.LAB_ADMIN_TOKEN || "";
+const REQUIRE_ADMIN =
+  process.env.LAB_REQUIRE_ADMIN === "1" ||
+  process.env.LAB_REQUIRE_ADMIN === "true";
 const ALLOWED_ORIGINS = (
   process.env.LAB_ALLOWED_ORIGINS ||
   "http://localhost:3000,http://127.0.0.1:3000,http://localhost:3460"
@@ -20,6 +23,17 @@ const ALLOWED_ORIGINS = (
   .split(",")
   .map((s) => s.trim())
   .filter(Boolean);
+
+if (REQUIRE_ADMIN && !ADMIN_TOKEN) {
+  console.error(
+    JSON.stringify({
+      ts: new Date().toISOString(),
+      event: "gateway_boot_failed",
+      error: "LAB_REQUIRE_ADMIN=1 but LAB_ADMIN_TOKEN is empty",
+    })
+  );
+  process.exit(1);
+}
 
 const docker = new Docker({
   socketPath: process.env.DOCKER_SOCKET || "/var/run/docker.sock",
@@ -407,6 +421,7 @@ server.listen(PORT, () => {
     maxOutputBytes: MAX_OUTPUT_BYTES,
     disabled: labsDisabled,
     adminConfigured: Boolean(ADMIN_TOKEN),
+    requireAdmin: REQUIRE_ADMIN,
     origins: ALLOWED_ORIGINS,
   });
 });

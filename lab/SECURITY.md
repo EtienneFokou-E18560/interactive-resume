@@ -1,6 +1,6 @@
 # Engineering Lab — Security Checklist
 
-Local hardened PoC (Phase 3). Do not expose the gateway to the public internet. Trusted reverse-proxy IP handling is Phase 4.
+Local hardened PoC (Phase 3) + local private beta (Phase 4). Do not expose the gateway to the public internet. Public HTTPS hosting is deferred.
 
 ## Container isolation
 
@@ -26,21 +26,32 @@ Local hardened PoC (Phase 3). Do not expose the gateway to the public internet. 
 ## Session gateway
 
 - [x] Session identifiers are random UUIDs, short-lived, bound to one sandbox
-- [x] Origin allowlist is enforced (secure WebSockets / TLS are Phase 4)
+- [x] Origin allowlist is enforced (TLS / public reverse proxy deferred)
 - [x] Session creation is rate limited per client IP
 - [x] Per-IP and global concurrency limits exist
 - [x] Idle and maximum-lifetime timers are enforced server-side
 - [x] Global kill switch terminates and disables labs (`POST /admin/kill`)
 - [x] Capacity / disable / rate failures fail closed with simulated-CLI guidance
+- [x] `LAB_REQUIRE_ADMIN=1` fails closed without `LAB_ADMIN_TOKEN`
+
+## Private beta (Phase 4)
+
+- [x] Portfolio invite unlock via server-only `LAB_INVITE_CODE` (httpOnly cookie)
+- [x] Server-side `LAB_WS_URL` returned only after successful unlock
+- [x] No visitor-facing env-var / setup instructions
+- [x] Operator runbook (`PRIVATE_BETA.md`)
+- [x] Recovery / capacity beta smoke (`npm run lab:beta-smoke`)
+- [ ] Public HTTPS gateway on a paid always-on host (deferred)
 
 ## Privacy and operations
 
 - [x] Command payloads are not logged (structured reason codes + IP hash only)
+- [x] Invite codes are never logged
 - [x] Logs are JSON operational / security events
-- [ ] Log retention period (ops policy — Phase 4+)
-- [ ] Alerts for blocked commands / unusual volume (Phase 4+)
-- [ ] Image CVE scanning schedule (Phase 4+)
-- [ ] Dependency update owner / schedule (Phase 4+)
+- [ ] Log retention period (ops policy — later)
+- [ ] Alerts for blocked commands / unusual volume (later)
+- [ ] Image CVE scanning schedule (later)
+- [ ] Dependency update owner / schedule (later)
 
 ## Adversarial tests (`npm run lab:adversarial`)
 
@@ -52,3 +63,9 @@ Local hardened PoC (Phase 3). Do not expose the gateway to the public internet. 
 - [x] Kill switch ends sessions and blocks new ones
 - [x] Output flood hits cap and session ends
 - [x] Session containers disappear after termination
+
+## Recovery tests (`npm run lab:beta-smoke`)
+
+- [x] Mid-session container kill disconnects cleanly and frees capacity
+- [x] Filling `LAB_MAX_SESSIONS` rejects the next connect
+- [x] Kill switch rejects new connects; enable restores launches
