@@ -16,7 +16,7 @@ export default function LaunchEngineeringLab() {
         attach to production clusters or cloud credentials.
       </p>
       <p>
-        Until the lab is live, use the simulated portfolio CLI below — it works
+        Until the lab is live, use the simulated portfolio CLI below - it works
         instantly with no sandbox required.
       </p>
       <div className="lab-launch-actions">
@@ -34,7 +34,7 @@ export default function LaunchEngineeringLab() {
         >
           Launch Engineering Lab
         </button>
-        <span className="lab-launch-note">Coming soon — preview only</span>
+        <span className="lab-launch-note">Coming soon - preview only</span>
       </div>
     </div>
   );

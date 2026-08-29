@@ -70,13 +70,13 @@ export const projects: Project[] = [
       ],
       tradeoffs: [
         "Local kind favors fast iteration over production multi-tenant realism",
-        "AWS demos are intentionally ephemeral—less long-lived showcase, more honest teardown hygiene",
+        "AWS demos are intentionally ephemeral - less long-lived showcase, more honest teardown hygiene",
       ],
       reliability:
         "CI validates modules; GitOps overlays keep app deployment declarative; AWS resources are torn down after each run.",
       results: [
         "Engineers can bootstrap a full stack from a fresh clone without bespoke setup notes",
-        "Infrastructure demos stay auditable and disposable — CI teardown avoids leftover cloud resources",
+        "Infrastructure demos stay auditable and disposable - CI teardown avoids leftover cloud resources",
       ],
     },
   },
@@ -194,7 +194,7 @@ export const projects: Project[] = [
       ],
       tradeoffs: [
         "Human checkpoints improve reliability at the cost of full automation speed",
-        "This is a reference architecture and demonstration path—not a claim of a large public SaaS deployment",
+        "This is a reference architecture and demonstration path - not a claim of a large public SaaS deployment",
       ],
       reliability:
         "Guardrails, evaluation, and shared observability make failure modes visible the same way other services are operated.",

@@ -16,7 +16,7 @@ function formatExperience(): string {
         .slice(0, 2)
         .map((d) => `  • ${d}`)
         .join("\n");
-      return `${job.role} @ ${job.company}\n  ${job.start} – ${job.end} · ${job.location ?? ""}\n${bullets}`;
+      return `${job.role} @ ${job.company}\n  ${job.start} - ${job.end} · ${job.location ?? ""}\n${bullets}`;
     })
     .join("\n\n");
 }
@@ -48,7 +48,7 @@ function companyDetail(company: string): string | null {
 
   return [
     `${job.role} @ ${job.company}`,
-    `${job.start} – ${job.end} · ${job.location ?? ""}`,
+    `${job.start} - ${job.end} · ${job.location ?? ""}`,
     "",
     ...job.description.map((d) => `• ${d}`),
     "",
@@ -159,8 +159,8 @@ export function getChatbotResponse(message: string, locale: Locale): string {
 
   if (match(msg, ["resume", "cv", "download", "télécharger"])) {
     return locale === "fr"
-      ? `Générez un CV PDF adapté à votre rôle sur /resume/download — choisissez SRE, DevOps, backend, cloud, ou Agentic AI.`
-      : `Generate a role-tailored PDF resume at /resume/download — pick SRE, DevOps, backend, cloud, or Agentic AI variants.`;
+      ? `Générez un CV PDF adapté à votre rôle sur /resume/download - choisissez SRE, DevOps, backend, cloud, ou Agentic AI.`
+      : `Generate a role-tailored PDF resume at /resume/download - pick SRE, DevOps, backend, cloud, or Agentic AI variants.`;
   }
 
   if (match(msg, ["location", "where", "based", "où", "ville"])) {
