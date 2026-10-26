@@ -8,6 +8,7 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import { LanguageProvider } from "@/hooks/useLanguage";
 import JsonLd from "@/components/JsonLd";
 import LazyChatbot from "@/components/LazyChatbot";
+import TrackLinkClicks from "@/components/TrackLinkClicks";
 import { profile } from "@/data/profile";
 import { pageMetadata } from "@/lib/seo";
 import "./globals.css";
@@ -62,6 +63,7 @@ export default function RootLayout({
           </LanguageProvider>
         </ThemeProvider>
         <Analytics />
+        <TrackLinkClicks />
         <SpeedInsights />
       </body>
     </html>

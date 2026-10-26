@@ -9,6 +9,7 @@ import {
   resumeVariants,
 } from "@/data/resumeVariants";
 import { useLanguage } from "@/hooks/useLanguage";
+import { trackResumeGenerated } from "@/lib/siteEvents";
 
 export default function ResumeDownloadContent() {
   const { t } = useLanguage();
@@ -40,6 +41,7 @@ export default function ResumeDownloadContent() {
       anchor.download = filename;
       anchor.click();
       URL.revokeObjectURL(url);
+      trackResumeGenerated(selectedRole);
     } catch {
       setError(t.resumeDownload.error);
     } finally {
