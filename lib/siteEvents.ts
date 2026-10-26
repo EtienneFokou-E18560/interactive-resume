@@ -43,3 +43,8 @@ export function trackLinkEvent(event: LinkEvent, page: string) {
 export function trackResumeGenerated(role: string) {
   track("resume_download", { format: "generated", role });
 }
+
+/** `status` is the HTTP status of a failed send, or "network" when the request never completed. */
+export function trackContactSubmit(result: "success" | "error", status?: number | "network") {
+  track("contact_submit", status === undefined ? { result } : { result, status });
+}

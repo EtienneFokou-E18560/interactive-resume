@@ -4,6 +4,7 @@ import { useState, FormEvent } from "react";
 import { Send, Loader2 } from "lucide-react";
 import { profile } from "@/data/profile";
 import { useLanguage } from "@/hooks/useLanguage";
+import { trackContactSubmit } from "@/lib/siteEvents";
 import { setVisitorName } from "@/lib/visitor";
 
 export default function ContactForm() {
@@ -19,22 +20,31 @@ export default function ContactForm() {
     const form = e.currentTarget;
     const data = Object.fromEntries(new FormData(form));
 
+    let res: Response;
     try {
-      const res = await fetch("/api/contact", {
+      res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
-
-      if (!res.ok) throw new Error("Failed");
-      if (typeof data.name === "string") {
-        setVisitorName(data.name);
-      }
-      setStatus("success");
-      form.reset();
     } catch {
+      trackContactSubmit("error", "network");
       setStatus("error");
+      return;
     }
+
+    if (!res.ok) {
+      trackContactSubmit("error", res.status);
+      setStatus("error");
+      return;
+    }
+
+    trackContactSubmit("success");
+    if (typeof data.name === "string") {
+      setVisitorName(data.name);
+    }
+    setStatus("success");
+    form.reset();
   }
 
   return (
