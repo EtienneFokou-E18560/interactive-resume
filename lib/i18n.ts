@@ -79,7 +79,7 @@ export const translations = {
       message: "Message",
       send: "Send Message",
       success: "Message sent successfully!",
-      error: "Failed to send message. Please try again.",
+      error: "Your message could not be sent. Please email me directly at",
       considering:
         "Currently considering platform engineering, SRE, cloud infrastructure, and production AI platform roles.",
       preferredChannel: "Preferred channel: email",
@@ -205,7 +205,7 @@ export const translations = {
       message: "Message",
       send: "Envoyer",
       success: "Message envoyé avec succès !",
-      error: "Échec de l'envoi. Veuillez réessayer.",
+      error: "Votre message n'a pas pu être envoyé. Écrivez-moi directement à",
       considering:
         "Ouvert aux postes en ingénierie de plateforme, SRE, cloud et IA en production.",
       preferredChannel: "Canal préféré : e-mail",
