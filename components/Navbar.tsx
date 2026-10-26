@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Moon, Sun, Globe, Menu, X } from "lucide-react";
-import { useSyncExternalStore, useState, useEffect } from "react";
+import { useSyncExternalStore, useState, useEffect, useRef } from "react";
 import { useTheme } from "next-themes";
 import { useLanguage } from "@/hooks/useLanguage";
 import { cn } from "@/lib/utils";
@@ -23,6 +23,7 @@ export default function Navbar() {
   const { setTheme, resolvedTheme } = useTheme();
   const { t, locale, setLocale } = useLanguage();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
   const mounted = useSyncExternalStore(
     () => () => {},
     () => true,
@@ -40,8 +41,28 @@ export default function Navbar() {
     setMobileOpen(false);
   }
 
+  // Esc closes the mobile menu and puts focus back on its button.
+  useEffect(() => {
+    if (!mobileOpen) return;
+    function onKeyDown(e: KeyboardEvent) {
+      if (e.key !== "Escape") return;
+      setMobileOpen(false);
+      menuButtonRef.current?.focus();
+    }
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [mobileOpen]);
+
   return (
-    <header className="site-header">
+    <header
+      className="site-header"
+      onBlur={(e) => {
+        // Close the mobile menu once keyboard focus leaves the header.
+        if (mobileOpen && !e.currentTarget.contains(e.relatedTarget as Node | null)) {
+          setMobileOpen(false);
+        }
+      }}
+    >
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6">
         <Link
           href="/"
@@ -94,11 +115,13 @@ export default function Navbar() {
           )}
 
           <button
+            ref={menuButtonRef}
             type="button"
             onClick={() => setMobileOpen(!mobileOpen)}
             className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-[var(--radius-sm)] text-[var(--color-text-muted)] transition-colors hover:bg-[var(--color-surface-hover)] hover:text-foreground md:hidden"
             aria-label={mobileOpen ? t.nav.close : t.nav.menu}
             aria-expanded={mobileOpen}
+            aria-controls="mobile-menu"
           >
             {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
@@ -106,7 +129,10 @@ export default function Navbar() {
       </nav>
 
       {mobileOpen && (
-        <div className="border-t border-[var(--color-border)] bg-[var(--color-bg)] px-4 py-4 md:hidden">
+        <div
+          id="mobile-menu"
+          className="border-t border-[var(--color-border)] bg-[var(--color-bg)] px-4 py-4 md:hidden"
+        >
           <ul className="space-y-1">
             {navItems.map(({ href, key }) => (
               <li key={href}>
