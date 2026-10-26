@@ -46,12 +46,12 @@ export const profile = {
       value: "10+ YEARS",
     },
     {
-      label: "AWS, Azure, and GCP",
+      label: "Azure, AWS, and GCP",
       value: "3 CLOUDS",
     },
     {
-      label: "Platform delivery and reliability",
-      value: "MULTI-TEAM",
+      label: "Engineering teams supported",
+      value: "12 TEAMS",
     },
   ],
 };
