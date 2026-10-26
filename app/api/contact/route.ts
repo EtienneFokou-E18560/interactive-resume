@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { profile } from "@/data/profile";
+import { clientIp, createRateLimiter } from "@/lib/rateLimit";
 
 interface ContactPayload {
   name?: unknown;
@@ -11,7 +12,18 @@ interface ContactPayload {
 
 const MAX_LENGTH = { name: 200, email: 320, message: 5000 };
 
+/** 5 messages per 10 minutes per IP. */
+const rateLimit = createRateLimiter({ limit: 5, windowMs: 10 * 60 * 1000 });
+
 export async function POST(request: Request) {
+  const limited = rateLimit(clientIp(request));
+  if (!limited.ok) {
+    return NextResponse.json(
+      { error: "Too many messages, please try again later" },
+      { status: 429, headers: { "Retry-After": String(limited.retryAfterSec) } }
+    );
+  }
+
   let body: ContactPayload;
 
   try {
