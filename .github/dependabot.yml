@@ -1,0 +1,20 @@
+# One grouped dependency PR a month, so updates don't trickle in one package at a time.
+# Each PR gets a Vercel preview build; Dependabot itself uses no Actions minutes.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: "/"
+    schedule:
+      interval: monthly
+      day: monday
+      time: "15:00"
+      timezone: Etc/UTC
+    open-pull-requests-limit: 3
+    groups:
+      # Minor and patch updates for everything, in one PR.
+      minor-and-patch:
+        update-types: [minor, patch]
+        patterns: ["*"]
+    # Majors (Next, React, framer-motion...) arrive one per PR so each can be read and tested.
+    commit-message:
+      prefix: deps
