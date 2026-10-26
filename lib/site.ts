@@ -15,5 +15,5 @@ export function getSiteUrl(): string {
     return `https://${process.env.VERCEL_URL}`;
   }
 
-  return "https://etiennefokouresume.vercel.app";
+  return "https://etienne.cieltd.org";
 }
