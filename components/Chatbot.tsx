@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useId } from "react";
 import { MessageCircle, X, Send } from "lucide-react";
 import {
   getChatbotResponse,
@@ -10,12 +10,27 @@ import {
 import { useLanguage } from "@/hooks/useLanguage";
 import type { Locale } from "@/lib/i18n";
 
-function ChatbotPanel({ locale, onClose }: { locale: Locale; onClose: () => void }) {
+function ChatbotPanel({
+  id,
+  locale,
+  onClose,
+}: {
+  id: string;
+  locale: Locale;
+  onClose: () => void;
+}) {
   const [messages, setMessages] = useState<
     { role: "user" | "assistant"; text: string }[]
   >([{ role: "assistant", text: getChatbotGreeting(locale) }]);
   const [input, setInput] = useState("");
   const outputRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const titleId = `${id}-title`;
+
+  // Move focus into the panel when it opens, so keyboard and screen-reader users land in it.
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, []);
 
   useEffect(() => {
     outputRef.current?.scrollTo({
@@ -40,10 +55,17 @@ function ChatbotPanel({ locale, onClose }: { locale: Locale; onClose: () => void
   const suggestions = chatbotSuggestions[locale];
 
   return (
-    <div className="card fixed bottom-20 right-4 z-50 flex h-[min(28rem,calc(100vh-6rem))] w-[min(22rem,calc(100vw-2rem))] flex-col overflow-hidden shadow-[var(--shadow-md)] sm:bottom-24 sm:right-6 sm:w-96">
+    <div
+      id={id}
+      role="dialog"
+      aria-labelledby={titleId}
+      onKeyDown={(e) => e.key === "Escape" && onClose()}
+      className="card fixed bottom-20 right-4 z-50 flex h-[min(28rem,calc(100vh-6rem))] w-[min(22rem,calc(100vw-2rem))] flex-col overflow-hidden shadow-[var(--shadow-md)] sm:bottom-24 sm:right-6 sm:w-96">
       <div className="flex items-center justify-between border-b border-[var(--color-border)] px-4 py-3">
         <div>
-          <p className="font-medium text-foreground">Resume Assistant</p>
+          <p id={titleId} className="font-medium text-foreground">
+            Resume Assistant
+          </p>
           <p className="text-xs text-[var(--color-text-muted)]">
             {locale === "fr"
               ? "Réponses basées sur le CV du site"
@@ -60,7 +82,12 @@ function ChatbotPanel({ locale, onClose }: { locale: Locale; onClose: () => void
         </button>
       </div>
 
-      <div ref={outputRef} className="flex-1 space-y-3 overflow-y-auto p-4">
+      <div
+        ref={outputRef}
+        role="log"
+        aria-live="polite"
+        className="flex-1 space-y-3 overflow-y-auto p-4"
+      >
         {messages.map((msg, i) => (
           <div
             key={`${msg.role}-${i}-${msg.text.slice(0, 24)}`}
@@ -91,6 +118,8 @@ function ChatbotPanel({ locale, onClose }: { locale: Locale; onClose: () => void
 
         <div className="flex gap-2">
           <input
+            ref={inputRef}
+            aria-label={locale === "fr" ? "Votre question" : "Your question"}
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && sendMessage()}
@@ -116,14 +145,24 @@ function ChatbotPanel({ locale, onClose }: { locale: Locale; onClose: () => void
 export default function Chatbot() {
   const { locale } = useLanguage();
   const [open, setOpen] = useState(false);
+  const panelId = useId();
+  const launcherRef = useRef<HTMLButtonElement>(null);
+
+  function close() {
+    setOpen(false);
+    launcherRef.current?.focus();
+  }
 
   return (
     <>
       <button
+        ref={launcherRef}
         type="button"
         onClick={() => setOpen(!open)}
         className="chat-button"
         aria-label={open ? "Close resume assistant" : "Open resume assistant"}
+        aria-expanded={open}
+        aria-controls={open ? panelId : undefined}
       >
         {open ? <X className="h-6 w-6" /> : <MessageCircle className="h-6 w-6" />}
       </button>
@@ -131,8 +170,9 @@ export default function Chatbot() {
       {open && (
         <ChatbotPanel
           key={locale}
+          id={panelId}
           locale={locale}
-          onClose={() => setOpen(false)}
+          onClose={close}
         />
       )}
     </>
