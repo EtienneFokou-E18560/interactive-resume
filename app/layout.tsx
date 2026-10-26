@@ -7,6 +7,7 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import { LanguageProvider } from "@/hooks/useLanguage";
 import JsonLd from "@/components/JsonLd";
 import LazyChatbot from "@/components/LazyChatbot";
+import MotionProvider from "@/components/MotionProvider";
 import SiteAnalytics from "@/components/SiteAnalytics";
 import TrackLinkClicks from "@/components/TrackLinkClicks";
 import { profile } from "@/data/profile";
@@ -50,17 +51,19 @@ export default function RootLayout({
       >
         <JsonLd />
         <ThemeProvider>
-          <LanguageProvider>
-            <a href="#main-content" className="skip-link">
-              Skip to content
-            </a>
-            <Navbar />
-            <main id="main-content" className="flex-1">
-              {children}
-            </main>
-            <Footer />
-            <LazyChatbot />
-          </LanguageProvider>
+          <MotionProvider>
+            <LanguageProvider>
+              <a href="#main-content" className="skip-link">
+                Skip to content
+              </a>
+              <Navbar />
+              <main id="main-content" className="flex-1">
+                {children}
+              </main>
+              <Footer />
+              <LazyChatbot />
+            </LanguageProvider>
+          </MotionProvider>
         </ThemeProvider>
         <SiteAnalytics />
         <TrackLinkClicks />
