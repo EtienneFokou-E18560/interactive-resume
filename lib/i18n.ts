@@ -17,6 +17,7 @@ export const translations = {
       contact: "Discuss a Platform Role",
       projects: "View Selected Engineering Work",
       portfolio: "Portfolio",
+      now: "Now:",
     },
     home: {
       about: "About",
@@ -43,7 +44,7 @@ export const translations = {
     experience: {
       title: "Experience",
       description:
-        "Outcome-focused roles across platform engineering, cloud infrastructure, and site reliability at Gartner, Microsoft, and Aflac.",
+        "Outcome-focused roles across platform engineering, cloud infrastructure, and site reliability at CIE LTD (founder), Gartner, Microsoft, and Aflac.",
       timeline: "Timeline",
       allRoles: "All Roles",
     },
@@ -92,7 +93,7 @@ export const translations = {
         `Hi! Ask me about ${name}'s experience, skills, or contact info.`,
       placeholder: "Ask a question...",
       experience: (title: string) =>
-        `I have experience at Gartner, Microsoft, and Aflac as a ${title}.`,
+        `I founded CIE LTD (Askel and InboxLink) and have experience at Gartner, Microsoft, and Aflac as a ${title}.`,
       skills:
         "My core skills include platform and cloud engineering (AWS, Azure, GCP), infrastructure automation (Terraform, Ansible, GitOps), reliability/observability, backend systems (Python, Go), and production AI workflows.",
       contact: (email: string, linkedin: string) =>
@@ -143,6 +144,7 @@ export const translations = {
       contact: "Discuter d'un poste plateforme",
       projects: "Voir les travaux sélectionnés",
       portfolio: "Portfolio",
+      now: "En ce moment :",
     },
     home: {
       about: "À propos",
@@ -169,7 +171,7 @@ export const translations = {
     experience: {
       title: "Expérience",
       description:
-        "Rôles axés sur les résultats en ingénierie de plateforme, cloud et fiabilité chez Gartner, Microsoft et Aflac.",
+        "Rôles axés sur les résultats en ingénierie de plateforme, cloud et fiabilité chez CIE LTD (fondateur), Gartner, Microsoft et Aflac.",
       timeline: "Chronologie",
       allRoles: "Tous les postes",
     },
@@ -218,7 +220,7 @@ export const translations = {
         `Bonjour ! Posez-moi des questions sur l'expérience, les compétences ou le contact de ${name}.`,
       placeholder: "Posez une question...",
       experience: (title: string) =>
-        `J'ai de l'expérience chez Gartner, Microsoft et Aflac en tant que ${title}.`,
+        `J'ai fondé CIE LTD (Askel et InboxLink) et j'ai de l'expérience chez Gartner, Microsoft et Aflac en tant que ${title}.`,
       skills:
         "Mes compétences principales couvrent la plateforme et le cloud (AWS, Azure, GCP), l'automatisation (Terraform, Ansible, GitOps), la fiabilité, le backend (Python, Go) et l'IA en production.",
       contact: (email: string, linkedin: string) =>

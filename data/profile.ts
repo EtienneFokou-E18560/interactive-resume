@@ -12,6 +12,16 @@ export const profile = {
   avatar: "/images/profile.jpg",
   summaryHero:
     "I build reliable cloud platforms and developer tooling that reduce operational toil and help teams ship safely. Over 10+ years at Microsoft, Gartner, and Aflac, I've worked across distributed systems, infrastructure automation, observability, and production AI workflows on AWS, Azure, and GCP.",
+  /** One line of proof under the name: live work a reviewer can open. */
+  proof: {
+    text: "Founder of CIE LTD: I built and run Askel, a production job-search app, and InboxLink, its open-source Gmail connector.",
+    href: "/projects/askel",
+  },
+  /** What I'm doing now; update the date whenever the line changes. */
+  now: {
+    text: "Building Askel at CIE LTD. Open to Senior Platform Engineer, SRE and production AI platform roles.",
+    updated: "Oct 2026",
+  },
   summary:
     "I turn complex infrastructure into systems teams can deploy, observe, and evolve with confidence. Over 10+ years at Microsoft, Gartner, and Aflac, I've built automation, CI/CD, and observability platforms that reduce toil, improve reliability, and accelerate delivery across AWS, Azure, and GCP. I also design Agentic AI workflows - with tool use, RAG, and production guardrails - that augment how engineers build and operate software.",
   summaryMeta:

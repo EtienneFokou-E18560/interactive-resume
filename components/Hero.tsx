@@ -41,6 +41,18 @@ export default function Hero() {
           </motion.p>
 
           <motion.p
+            {...fadeUpProps(reduce, 0.12)}
+            className="reading-width mt-4 text-base font-medium leading-relaxed text-foreground sm:text-lg"
+          >
+            <Link
+              href={profile.proof.href}
+              className="underline decoration-accent underline-offset-4 transition-colors hover:text-accent"
+            >
+              {profile.proof.text}
+            </Link>
+          </motion.p>
+
+          <motion.p
             {...fadeUpProps(reduce, 0.15)}
             className="reading-width mt-4 text-base leading-relaxed text-[var(--color-text-secondary)] sm:text-lg"
           >
@@ -48,15 +60,23 @@ export default function Hero() {
           </motion.p>
 
           <motion.div {...fadeUpProps(reduce, 0.2)} className="button-row mt-8">
-            <Link href="/projects" className="button button-primary">
-              {t.hero.projects}
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-            <Link href="/resume/download" className="button button-secondary">
+            <Link href="/resume/download" className="button button-primary">
               <Download className="h-4 w-4" />
               {t.hero.download}
             </Link>
+            <Link href="/contact" className="button button-secondary">
+              {t.hero.contact}
+              <ArrowRight className="h-4 w-4" />
+            </Link>
           </motion.div>
+
+          <motion.p
+            {...fadeUpProps(reduce, 0.22)}
+            className="mt-4 text-sm text-[var(--color-text-muted)]"
+          >
+            <span className="font-semibold">{t.hero.now}</span> {profile.now.text}{" "}
+            <span className="whitespace-nowrap">({profile.now.updated})</span>
+          </motion.p>
 
           <motion.div
             {...fadeUpProps(reduce, 0.25)}
