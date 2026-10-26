@@ -1,0 +1,52 @@
+# Weekly check that the live site still works: every sitemap page loads, the résumé PDF
+# generates, and the contact API answers. A failed scheduled run emails the repo owner.
+# About 1 minute a run, so roughly 5 Actions minutes a month.
+name: Production check
+
+on:
+  schedule:
+    - cron: "0 15 * * 1" # Mondays 15:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      # Set the SITE_URL repository variable when the site moves to its own domain.
+      SITE_URL: ${{ vars.SITE_URL || 'https://etiennefokouresume.vercel.app' }}
+    steps:
+      - name: Pages in the sitemap load
+        run: |
+          set -euo pipefail
+          urls=$(curl -fsS "$SITE_URL/sitemap.xml" | grep -o '<loc>[^<]*' | sed 's/<loc>//')
+          [ -n "$urls" ] || { echo "::error::sitemap.xml lists no URLs"; exit 1; }
+          failed=0
+          for url in $urls "$SITE_URL/robots.txt" "$SITE_URL/opengraph-image"; do
+            code=$(curl -s -o /dev/null -w '%{http_code}' "$url")
+            echo "$code $url"
+            [ "$code" = "200" ] || { echo "::error::$url returned $code"; failed=1; }
+          done
+          exit $failed
+
+      - name: Résumé PDF generates
+        run: |
+          set -euo pipefail
+          type=$(curl -fsS -o /tmp/resume.pdf -w '%{content_type}' "$SITE_URL/api/resume?role=senior-platform-engineer")
+          size=$(wc -c < /tmp/resume.pdf)
+          echo "$type, $size bytes"
+          [ "$type" = "application/pdf" ] && [ "$size" -gt 2000 ] || { echo "::error::résumé PDF failed ($type, $size bytes)"; exit 1; }
+
+      - name: Contact API answers (sends nothing)
+        run: |
+          set -euo pipefail
+          # A bad email must be rejected with 400; the honeypot request is accepted and dropped.
+          bad=$(curl -s -o /dev/null -w '%{http_code}' -X POST "$SITE_URL/api/contact" \
+            -H 'Content-Type: application/json' -d '{"name":"Check","email":"not-an-email","message":"x"}')
+          trap=$(curl -s -o /dev/null -w '%{http_code}' -X POST "$SITE_URL/api/contact" \
+            -H 'Content-Type: application/json' -d '{"name":"Check","email":"check@example.com","message":"x","website":"bot"}')
+          echo "bad email: $bad, honeypot: $trap"
+          [ "$bad" = "400" ] && [ "$trap" = "200" ] || { echo "::error::contact API answered $bad / $trap"; exit 1; }
