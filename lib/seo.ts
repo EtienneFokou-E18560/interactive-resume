@@ -15,6 +15,8 @@ type PageMetaInput = {
   title?: string;
   description: string;
   path: string;
+  /** Social card path; defaults to the site-wide `/opengraph-image`. */
+  image?: string;
 };
 
 /**
@@ -25,6 +27,7 @@ export function pageMetadata({
   title,
   description,
   path,
+  image = ogImagePath,
 }: PageMetaInput): Metadata {
   const url = canonicalUrl(path);
   const displayTitle = title
@@ -42,13 +45,13 @@ export function pageMetadata({
       url,
       type: "website",
       siteName: `${profile.name} Portfolio`,
-      images: [{ url: ogImagePath, width: 1200, height: 630, alt: displayTitle }],
+      images: [{ url: image, width: 1200, height: 630, alt: displayTitle }],
     },
     twitter: {
       card: "summary_large_image",
       title: displayTitle,
       description,
-      images: [ogImagePath],
+      images: [image],
     },
   };
 }
