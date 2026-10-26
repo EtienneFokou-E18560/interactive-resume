@@ -13,6 +13,32 @@ export interface Experience {
 
 export const experience: Experience[] = [
   {
+    company: "CIE LTD",
+    role: "Founder and Owner",
+    start: "2021",
+    end: "Present",
+    location: "Bellevue, WA",
+    url: "https://cieltd.org",
+    scope:
+      "Software company building Askel, a job-search workspace, and InboxLink, an open-source Gmail connector.",
+    description: [
+      "Built and run Askel (getaskel.com) end to end: product, Next.js and React Native apps, Neon Postgres, Vercel staging and production",
+      "Built InboxLink, a standalone Gmail connector service with a typed SDK published on npm, used by Askel in production",
+      "Keep releases safe with CI on every pull request: 3,467 automated tests, type checks, lint and production builds",
+      "Score the email classifier against a set of 7,000 real recruiting emails before each change ships",
+    ],
+    technologies: [
+      "TypeScript",
+      "Next.js",
+      "React Native",
+      "Neon Postgres",
+      "Vercel",
+      "GitHub Actions",
+      "Claude API",
+      "OAuth 2.0",
+    ],
+  },
+  {
     company: "Gartner",
     role: "Senior Software Engineer",
     start: "Jul 2025",
