@@ -3,13 +3,15 @@ import { ExternalLink, ArrowLeft } from "lucide-react";
 import { FaGithub } from "react-icons/fa";
 import type { Project } from "@/data/projects";
 import { projectClassificationLabels } from "@/data/projects";
+import EnglishOnlyNote from "@/components/EnglishOnlyNote";
 
 export default function ProjectCaseStudyContent({ project }: { project: Project }) {
   const study = project.caseStudy;
   if (!study) return null;
 
   return (
-    <article className="mx-auto max-w-3xl px-4 py-16 sm:px-6">
+    // The write-up is English whatever the UI language, so screen readers use English pronunciation.
+    <article lang="en" className="mx-auto max-w-3xl px-4 py-16 sm:px-6">
       <Link
         href="/projects"
         className="inline-flex items-center gap-2 text-sm text-[var(--color-text-muted)] hover:text-accent"
@@ -19,6 +21,7 @@ export default function ProjectCaseStudyContent({ project }: { project: Project 
       </Link>
 
       <header className="mt-8 border-b border-[var(--color-border)] pb-8">
+        <EnglishOnlyNote className="mb-4" />
         <p className="eyebrow">
           {projectClassificationLabels[project.classification]}
         </p>

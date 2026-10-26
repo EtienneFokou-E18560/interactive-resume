@@ -56,6 +56,7 @@ export const translations = {
       demo: "Demo",
       caseStudy: "Read case study",
       caseStudyOnly: "Case study (no public repo)",
+      englishOnly: "Project write-ups are in English only.",
     },
     skills: {
       title: "Skills",
@@ -183,6 +184,7 @@ export const translations = {
       demo: "Démo",
       caseStudy: "Lire l'étude de cas",
       caseStudyOnly: "Étude de cas (pas de dépôt public)",
+      englishOnly: "Les descriptions de projets sont disponibles en anglais uniquement.",
     },
     skills: {
       title: "Compétences",
