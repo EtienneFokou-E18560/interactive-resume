@@ -42,6 +42,19 @@ export default function HomePageContent() {
     <>
       <Hero />
 
+      <Section alt>
+        <SectionHeader
+          title={t.home.caseStudies}
+          href="/projects"
+          viewAll={t.home.viewAll}
+        />
+        <div className="grid gap-6 sm:grid-cols-2">
+          {featuredProjects.map((project) => (
+            <ProjectCard key={project.slug} project={project} />
+          ))}
+        </div>
+      </Section>
+
       <Section>
         <SectionHeader
           title={t.home.selectedExperience}
@@ -80,19 +93,6 @@ export default function HomePageContent() {
       </Section>
 
       <Section alt>
-        <SectionHeader
-          title={t.home.caseStudies}
-          href="/projects"
-          viewAll={t.home.viewAll}
-        />
-        <div className="grid gap-6 sm:grid-cols-2">
-          {featuredProjects.map((project) => (
-            <ProjectCard key={project.slug} project={project} />
-          ))}
-        </div>
-      </Section>
-
-      <Section>
         <SectionHeader
           title={t.home.focusAreas}
           href="/skills"
