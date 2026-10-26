@@ -2,6 +2,7 @@
 
 import { useState, FormEvent } from "react";
 import { Send, Loader2 } from "lucide-react";
+import { profile } from "@/data/profile";
 import { useLanguage } from "@/hooks/useLanguage";
 import { setVisitorName } from "@/lib/visitor";
 
@@ -80,6 +81,12 @@ export default function ContactForm() {
         />
       </div>
 
+      {/* Honeypot: off-screen and skipped by keyboard and screen readers, so only bots fill it in. */}
+      <div aria-hidden="true" className="absolute -left-[9999px] h-px w-px overflow-hidden">
+        <label htmlFor="website">Website</label>
+        <input id="website" name="website" type="text" tabIndex={-1} autoComplete="off" />
+      </div>
+
       <button
         type="submit"
         disabled={status === "loading"}
@@ -108,7 +115,10 @@ export default function ContactForm() {
           style={{ color: "var(--color-danger)" }}
           role="alert"
         >
-          {t.contact.error}
+          {t.contact.error}{" "}
+          <a href={`mailto:${profile.email}`} className="underline">
+            {profile.email}
+          </a>
         </p>
       )}
     </form>
