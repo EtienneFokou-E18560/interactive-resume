@@ -68,7 +68,7 @@ export const translations = {
     contact: {
       title: "Contact Me",
       description:
-        "Open to Senior Platform Engineer and related SRE, cloud, and infrastructure roles. Prefer email - I typically respond within 1-2 business days.",
+        "Open to senior software, platform, SRE, cloud, and production AI roles. Prefer email - I typically respond within 1-2 business days.",
       getInTouch: "Get in Touch",
       directContact: "Direct Contact",
       social: "Social",
@@ -109,7 +109,7 @@ export const translations = {
     cta: {
       title: "Let's build something reliable together",
       description:
-        "Open to Senior Platform Engineer and related SRE, cloud, and infrastructure roles. Reach out to discuss your team or a project.",
+        "Open to senior software, platform, SRE, cloud, and production AI roles. Reach out to discuss your team or a project.",
       contact: "Discuss a Platform Engineering Role",
     },
     resumeDownload: {
@@ -195,7 +195,7 @@ export const translations = {
     contact: {
       title: "Me contacter",
       description:
-        "Ouvert aux postes Senior Platform Engineer, SRE, cloud et infrastructure. Préférez l'e-mail - réponse sous 1 à 2 jours ouvrés.",
+        "Ouvert aux postes senior en logiciel, plateforme, SRE, cloud et IA en production. Préférez l'e-mail - réponse sous 1 à 2 jours ouvrés.",
       getInTouch: "Envoyer un message",
       directContact: "Contact direct",
       social: "Réseaux sociaux",
@@ -236,7 +236,7 @@ export const translations = {
     cta: {
       title: "Construisons quelque chose de fiable ensemble",
       description:
-        "Ouvert aux postes Senior Platform Engineer, SRE, cloud et infrastructure. Contactez-moi pour discuter de votre équipe ou d'un projet.",
+        "Ouvert aux postes senior en logiciel, plateforme, SRE, cloud et IA en production. Contactez-moi pour discuter de votre équipe ou d'un projet.",
       contact: "Discuter d'un rôle plateforme",
     },
     resumeDownload: {
