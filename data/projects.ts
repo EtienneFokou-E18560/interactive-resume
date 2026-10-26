@@ -36,6 +36,97 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    slug: "askel",
+    title: "Askel Job-Search Workspace",
+    classification: "deployed",
+    description:
+      "Job seekers lose track of applications and interviews buried in their inbox. I built and run Askel, a production app that reads Gmail and Calendar, proposes board updates for review, and keeps every application, interview and contact in one place.",
+    highlights: [
+      "Live at getaskel.com with separate staging and production, 495 merged pull requests since Aug 2026",
+      "3,467 automated tests, plus an email classifier checked against a set of 7,000 real recruiting emails",
+    ],
+    technologies: [
+      "Next.js",
+      "TypeScript",
+      "React",
+      "Auth.js",
+      "Neon Postgres",
+      "Vercel",
+      "GitHub Actions",
+      "Claude API",
+      "React Native",
+    ],
+    demo: "https://www.getaskel.com",
+    image: "/images/ai-monitoring.svg",
+    featured: true,
+    caseStudy: {
+      problem:
+        "A job search spreads across email threads, calendar invites and booking links. Updating a tracker by hand falls behind within a week, and a missed recruiter reply can cost an offer.",
+      role: "Founder and sole engineer at CIE LTD: product, architecture, code, infrastructure, releases and support.",
+      decisions: [
+        "Sync proposes, the user accepts: email and calendar changes land in a Review Queue, and opt-in auto-apply for clear cases can always be undone",
+        "Rule-based email classifier first, with optional Claude passes for polish and questions, so the core works without a model call",
+        "Browser working copy plus a Neon-backed board with optimistic concurrency, so two devices stay in step without losing edits",
+        "Gmail access through InboxLink, a separate connector service, instead of mail code inside the app",
+      ],
+      tradeoffs: [
+        "Asking the user to accept changes is slower than full automation, but nothing changes on the board without the user seeing it",
+        "Read-only mail and calendar scopes limit features (no sending on the user's behalf) in exchange for a smaller security surface",
+      ],
+      reliability:
+        "Every pull request runs lint, type checks, the full test suite and a production build; changes go to staging before production, and classifier changes are scored against the real-mail test set before merge.",
+      results: [
+        "A production app with web, installable PWA and phone builds, shipped by one engineer",
+        "Classifier regressions are caught before release by fixtures taken from real recruiting email",
+      ],
+    },
+  },
+  {
+    slug: "inboxlink",
+    title: "InboxLink Gmail Connector",
+    classification: "deployed",
+    description:
+      "Every app that reads Gmail rebuilds the same OAuth, token refresh and message parsing. I built InboxLink, a standalone connector service with a typed SDK, so an app gets mail through one small API.",
+    highlights: [
+      "Open source, with @inboxlink/core and @inboxlink/sdk published on npm",
+      "Powers Askel's mail reading in production; 92 merged pull requests since Sep 2026",
+    ],
+    technologies: [
+      "TypeScript",
+      "Node.js",
+      "Next.js",
+      "Gmail API",
+      "OAuth 2.0",
+      "Neon Postgres",
+      "Vercel",
+      "npm",
+    ],
+    github: "https://github.com/EtienneFokou-E18560/inboxlink",
+    demo: "https://inboxlink.cieltd.org",
+    image: "/images/log-parser.svg",
+    featured: true,
+    caseStudy: {
+      problem:
+        "Gmail access means OAuth consent, encrypted token storage, refresh, rate limits and MIME parsing. Keeping that inside a product app mixes a security-sensitive service with product code.",
+      role: "Designed, built and operate the service, its SDK, docs site and npm releases.",
+      decisions: [
+        "A separate service with its own database and an encrypted token vault, so mail tokens never live in the product app",
+        "OAuth with PKCE, and server-to-server calls with a shared secret plus webhooks so the app hears about new mail",
+        "A typed SDK on npm, published from GitHub Actions with OIDC (id-token) and provenance instead of long-lived npm tokens",
+      ],
+      tradeoffs: [
+        "Another service to deploy and monitor, in exchange for a clear security boundary and reuse across apps",
+        "A small, stable API surface over full Gmail coverage; IMAP and Microsoft adapters are parked until there is demand",
+      ],
+      reliability:
+        "CI runs lint, type checks, tests and CodeQL; a scheduled smoke test checks production health; a docs check blocks any release whose changelog, README and website SDK page don't match the new version.",
+      results: [
+        "Askel's production mail reading runs through InboxLink",
+        "Any new app can add Gmail with the SDK instead of writing its own OAuth and parsing",
+      ],
+    },
+  },
+  {
     slug: "efokou-labs",
     title: "efokou-labs GitOps Platform",
     classification: "portfolio",
