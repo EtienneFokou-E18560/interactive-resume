@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -8,6 +7,7 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import { LanguageProvider } from "@/hooks/useLanguage";
 import JsonLd from "@/components/JsonLd";
 import LazyChatbot from "@/components/LazyChatbot";
+import SiteAnalytics from "@/components/SiteAnalytics";
 import TrackLinkClicks from "@/components/TrackLinkClicks";
 import { profile } from "@/data/profile";
 import { pageMetadata } from "@/lib/seo";
@@ -62,7 +62,7 @@ export default function RootLayout({
             <LazyChatbot />
           </LanguageProvider>
         </ThemeProvider>
-        <Analytics />
+        <SiteAnalytics />
         <TrackLinkClicks />
         <SpeedInsights />
       </body>
