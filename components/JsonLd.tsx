@@ -4,6 +4,7 @@ import { getSiteUrl } from "@/lib/site";
 export default function JsonLd() {
   const siteUrl = getSiteUrl();
   const personId = `${siteUrl}/#person`;
+  const companyId = "https://cieltd.org/#organization";
 
   const graph = {
     "@context": "https://schema.org",
@@ -26,6 +27,7 @@ export default function JsonLd() {
         sameAs: [profile.github, profile.linkedin, profile.portfolio].filter(
           Boolean
         ),
+        worksFor: { "@id": companyId },
         knowsAbout: [
           "Platform engineering",
           "Site reliability engineering",
@@ -34,6 +36,20 @@ export default function JsonLd() {
           "Azure",
           "GCP",
           "Agentic AI",
+          "Gmail API integration",
+          "Developer tooling",
+        ],
+      },
+      {
+        "@type": "Organization",
+        "@id": companyId,
+        name: "CIE LTD",
+        url: "https://cieltd.org",
+        foundingDate: "2021",
+        founder: { "@id": personId },
+        owns: [
+          { "@type": "SoftwareApplication", name: "Askel", url: "https://www.getaskel.com", applicationCategory: "BusinessApplication" },
+          { "@type": "SoftwareApplication", name: "InboxLink", url: "https://inboxlink.cieltd.org", applicationCategory: "DeveloperApplication" },
         ],
       },
       {

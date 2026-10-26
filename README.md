@@ -259,7 +259,7 @@ Supported variants: `senior-software-engineer`, `sre`, `devops-platform`, `cloud
 
 Update profile, experience, projects, or skills in `data/` - downloads stay in sync. Tailor emphasis per role in `data/resumeVariants.ts`.
 
-`public/resume.pdf` is kept as a legacy fallback only; hero and contact links point to the download builder.
+`/resume.pdf` redirects to the generated Senior Platform Engineer résumé (`/api/resume`), so old links get current data; hero and contact links point to the download builder.
 
 ### Add translations
 
