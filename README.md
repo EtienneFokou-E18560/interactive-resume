@@ -8,7 +8,7 @@ A modern, interactive resume and portfolio built with **Next.js**, **React**, **
 
 ## About This Project
 
-This is the personal portfolio site of **Etienne Fokou**, a Senior Platform Engineer specializing in cloud platforms, SRE, and production AI. Instead of a static PDF, the site presents career history, skills, and projects as an interactive web application with animations, dark mode, bilingual support, and optional assistant features.
+This is the personal portfolio site of **Etienne Fokou**, a Senior Software and Platform Engineer specializing in cloud platforms, SRE, and production AI. Instead of a static PDF, the site presents career history, skills, and projects as an interactive web application with animations, dark mode, bilingual support, and optional assistant features.
 
 The site is designed to be:
 
