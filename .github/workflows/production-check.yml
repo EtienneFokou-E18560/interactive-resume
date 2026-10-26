@@ -16,8 +16,8 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     env:
-      # Set the SITE_URL repository variable when the site moves to its own domain.
-      SITE_URL: ${{ vars.SITE_URL || 'https://etiennefokouresume.vercel.app' }}
+      # The SITE_URL repository variable overrides the address checked.
+      SITE_URL: ${{ vars.SITE_URL || 'https://etienne.cieltd.org' }}
     steps:
       - name: Pages in the sitemap load
         run: |

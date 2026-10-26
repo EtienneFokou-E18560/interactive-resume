@@ -288,7 +288,7 @@ This repo is configured for Vercel (`vercel.json`). Framework: Next.js. Install/
 
    | Name | Required | Notes |
    |------|----------|--------|
-   | `NEXT_PUBLIC_SITE_URL` | Recommended | Your live URL, e.g. `https://etiennefokouresume.vercel.app` or a custom domain |
+   | `NEXT_PUBLIC_SITE_URL` | Recommended | Your live URL, e.g. `https://etienne.cieltd.org` |
    | `RESEND_API_KEY` | Optional | Enables contact form email delivery |
    | `CONTACT_EMAIL` | Optional | Inbox for contact messages (defaults to profile email) |
 
@@ -332,7 +332,7 @@ docker run --rm -p 3000:3000 interactive-resume:local
 
 Set `NEXT_PUBLIC_SITE_URL` to your production domain in all environments.
 
-**Live (Vercel):** [etiennefokouresume.vercel.app](https://etiennefokouresume.vercel.app) · dashboard: [cieltd/etiennefokouresume](https://vercel.com/cieltd/etiennefokouresume)
+**Live:** [etienne.cieltd.org](https://etienne.cieltd.org) (the old `etiennefokouresume.vercel.app` redirects there) · dashboard: [cieltd/etiennefokouresume](https://vercel.com/cieltd/etiennefokouresume)
 
 To enable automatic deploys on git push, connect the GitHub repo in the Vercel dashboard (Git integration requires a [Login Connection](https://vercel.com/docs/accounts/create-an-account#login-methods-and-connections) to GitHub). Until then, deploy with `npm run deploy` or `npx vercel --prod`.
 
