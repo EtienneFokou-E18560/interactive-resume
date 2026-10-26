@@ -15,7 +15,7 @@ export const experience: Experience[] = [
   {
     company: "CIE LTD",
     role: "Founder and Owner",
-    start: "Aug 2026",
+    start: "2021",
     end: "Present",
     location: "Bellevue, WA",
     url: "https://cieltd.org",
