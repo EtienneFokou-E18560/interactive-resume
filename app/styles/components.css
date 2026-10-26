@@ -63,9 +63,13 @@
   color: var(--color-bg);
 }
 
-.button-primary:hover {
-  background: var(--color-text-secondary);
-  color: var(--color-bg);
+/* Hover only where a pointer can hover: on touch screens :hover sticks after a tap, and the
+   old grey hover made the primary button look disabled. A small mix keeps it clearly "on". */
+@media (hover: hover) {
+  .button-primary:hover {
+    background: color-mix(in srgb, var(--color-text) 86%, var(--color-bg));
+    color: var(--color-bg);
+  }
 }
 
 .button-secondary {
@@ -74,9 +78,11 @@
   color: var(--color-text);
 }
 
-.button-secondary:hover {
-  border-color: var(--color-accent);
-  background: var(--color-surface-hover);
+@media (hover: hover) {
+  .button-secondary:hover {
+    border-color: var(--color-accent);
+    background: var(--color-surface-hover);
+  }
 }
 
 .card {
