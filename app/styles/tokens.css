@@ -18,10 +18,10 @@
 
   --color-text: #18181b;
   --color-text-secondary: #52525b;
-  --color-text-muted: #71717a;
-  --color-accent: #4f6ee8;
-  --color-accent-hover: #3f5fd9;
-  --color-accent-soft: rgba(79, 110, 232, 0.1);
+  --color-text-muted: #66666f;
+  --color-accent: #425fd6;
+  --color-accent-hover: #3651c4;
+  --color-accent-soft: rgba(66, 95, 214, 0.1);
   --color-success: #16a34a;
   --color-danger: #dc2626;
 

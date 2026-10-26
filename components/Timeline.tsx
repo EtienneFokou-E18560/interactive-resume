@@ -54,7 +54,7 @@ export default function Timeline() {
                   </h3>
                   <p className="text-zinc-600 dark:text-zinc-400">{item.school}</p>
                   {item.location && (
-                    <p className="mt-1 flex items-center gap-1 text-sm text-zinc-500">
+                    <p className="mt-1 flex items-center gap-1 text-sm text-zinc-500 dark:text-zinc-400">
                       <MapPin className="h-3.5 w-3.5" />
                       {item.location}
                     </p>
@@ -109,7 +109,7 @@ export default function Timeline() {
                   )}
                 </p>
                 {item.location && (
-                  <p className="mt-1 flex items-center gap-1 text-sm text-zinc-500">
+                  <p className="mt-1 flex items-center gap-1 text-sm text-zinc-500 dark:text-zinc-400">
                     <MapPin className="h-3.5 w-3.5" />
                     {item.location}
                   </p>
