@@ -19,7 +19,7 @@ export const profile = {
   },
   /** What I'm doing now; update the date whenever the line changes. */
   now: {
-    text: "Building Askel at CIE LTD. Open to Senior Platform Engineer, SRE and production AI platform roles.",
+    text: "Building Askel at CIE LTD. Open to senior software, platform, SRE and production AI roles.",
     updated: "Oct 2026",
   },
   summary:
