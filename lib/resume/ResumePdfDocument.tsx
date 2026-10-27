@@ -151,6 +151,10 @@ export function ResumePdfDocument({ data }: { data: ResumeDocument }) {
           </Text>
           <Text style={styles.contactRow}>{contact.email}</Text>
           <Text style={styles.contactRow}>
+            <Link src={contact.website} style={styles.link}>
+              Website
+            </Link>
+            {", "}
             <Link src={contact.linkedin} style={styles.link}>
               LinkedIn
             </Link>
