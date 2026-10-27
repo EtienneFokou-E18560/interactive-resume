@@ -11,12 +11,27 @@ export const projectClassificationLabels: Record<ProjectClassification, string> 
   "reference-architecture": "Reference architecture",
 };
 
+/** One box in a case study's architecture flow, top to bottom. */
+export interface ArchitectureStep {
+  label: string;
+  detail: string;
+}
+
+/** A real failure and what changed because of it. */
+export interface Incident {
+  title: string;
+  what: string;
+  fix: string;
+}
+
 export interface ProjectCaseStudy {
   problem: string;
   role: string;
+  architecture?: ArchitectureStep[];
   decisions: string[];
   tradeoffs: string[];
   reliability: string;
+  incidents?: Incident[];
   results: string[];
 }
 
@@ -63,6 +78,13 @@ export const projects: Project[] = [
       problem:
         "A job search spreads across email threads, calendar invites and booking links. Updating a tracker by hand falls behind within a week, and a missed recruiter reply can cost an offer.",
       role: "Founder and sole engineer at CIE LTD: product, architecture, code, infrastructure, releases and support.",
+      architecture: [
+        { label: "Gmail and Google Calendar", detail: "Read-only scopes; mail arrives through InboxLink" },
+        { label: "Sync and classifier", detail: "Rule-based classifier sorts recruiting email and matches it to applications" },
+        { label: "Review Queue", detail: "Proposed changes wait for the user; opt-in auto-apply can be undone" },
+        { label: "Board", detail: "Browser working copy, saved to Neon Postgres with optimistic concurrency" },
+        { label: "Web, PWA and phone app", detail: "One API for the site, the installable app and the React Native build" },
+      ],
       decisions: [
         "Sync proposes, the user accepts: email and calendar changes land in a Review Queue, and opt-in auto-apply for clear cases can always be undone",
         "Rule-based email classifier first, with optional Claude passes for polish and questions, so the core works without a model call",
@@ -77,6 +99,18 @@ export const projects: Project[] = [
       ],
       reliability:
         "Every pull request runs lint, type checks, the full test suite and a production build; changes go to staging before production, and classifier changes are scored against the real-mail test set before merge.",
+      incidents: [
+        {
+          title: "A cancelled interview read as a rejection",
+          what: "An email saying \"unfortunately we need to cancel your interview\" matched the rejection rules, so a live application could have been closed.",
+          fix: "A cancellation or reschedule is now never a rejection, rejections need decisive wording, and the email became a regression fixture.",
+        },
+        {
+          title: "Gmail access lost after a connector outage",
+          what: "When InboxLink moved to a new database, every saved Gmail connection was gone and Askel's mail sync started failing.",
+          fix: "Askel now spots a missing connection, tells the user to reconnect in plain words, and falls back to reading Gmail directly from Google.",
+        },
+      ],
       results: [
         "A production app with web, installable PWA and phone builds, shipped by one engineer",
         "Classifier regressions are caught before release by fixtures taken from real recruiting email",
@@ -112,6 +146,12 @@ export const projects: Project[] = [
       problem:
         "Gmail access means OAuth consent, encrypted token storage, refresh, rate limits and MIME parsing. Keeping that inside a product app mixes a security-sensitive service with product code.",
       role: "Designed, built and operate the service, its SDK, docs site and npm releases.",
+      architecture: [
+        { label: "Product app (Askel)", detail: "Calls InboxLink through the typed @inboxlink/sdk" },
+        { label: "InboxLink API", detail: "OAuth with PKCE, tenant-scoped endpoints, signed webhooks back to the app" },
+        { label: "Token vault and sync jobs", detail: "Encrypted tokens and durable Gmail history jobs in Neon Postgres" },
+        { label: "Gmail API", detail: "Token refresh, rate limits and MIME parsing handled in one place" },
+      ],
       decisions: [
         "A separate service with its own database and an encrypted token vault, so mail tokens never live in the product app",
         "OAuth with PKCE, tenant-scoped APIs, and signed webhooks so the app hears about new mail",
@@ -124,6 +164,13 @@ export const projects: Project[] = [
       ],
       reliability:
         "Health checks, structured logs with secret redaction, and automated tests against a local Gmail stand-in; CI runs lint, type checks, tests and CodeQL, a scheduled smoke test checks production, and a docs check blocks any release whose changelog, README and website SDK page don't match the new version.",
+      incidents: [
+        {
+          title: "Production down after a database reconnect",
+          what: "In Oct 2026 a database integration reconnect left an invalid connection string in production, so every request failed. The old data could not be recovered, and users had to reconnect Gmail.",
+          fix: "Production moved to a fresh database the same day, the service now fails at startup with a readable error for a bad connection string, and Askel handles the lost connection gracefully.",
+        },
+      ],
       results: [
         "Askel's production mail reading runs through InboxLink",
         "Any new app can add Gmail with the SDK instead of writing its own OAuth and parsing",
