@@ -6,6 +6,8 @@ export interface ResumeContact {
   linkedin: string;
   github: string;
   portfolio: string;
+  /** This site, tagged so visits from the PDF show up as their own source. */
+  website: string;
 }
 
 export interface ResumeExperienceEntry {

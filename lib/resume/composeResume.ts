@@ -7,6 +7,7 @@ import {
   defaultResumeVariantId,
   getResumeVariant,
 } from "@/data/resumeVariants";
+import { getSiteUrl } from "@/lib/site";
 import type { ResumeDocument } from "@/lib/resume/types";
 
 const MAX_BULLETS_PER_JOB = 4;
@@ -71,6 +72,7 @@ export function composeResume(
       linkedin: profile.linkedin,
       github: profile.github,
       portfolio: profile.portfolio,
+      website: `${getSiteUrl()}/?utm_source=resume&utm_medium=pdf`,
     },
     summary: variant.summary,
     experience: experience.map((job) => ({

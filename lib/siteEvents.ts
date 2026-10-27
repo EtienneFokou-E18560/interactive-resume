@@ -1,4 +1,5 @@
 import { track } from "@vercel/analytics";
+import { visitSource } from "@/lib/visitSource";
 
 export type LinkEvent =
   | { name: "email_click" }
@@ -34,17 +35,26 @@ export function classifyLink(href: string, origin: string): LinkEvent | null {
   return null;
 }
 
-/** Anonymous site events - only the action and the page it happened on, never PII. */
+/**
+ * Anonymous site events - only the action, the page it happened on and where the visit
+ * came from (`source`, see visitSource), never PII.
+ */
 export function trackLinkEvent(event: LinkEvent, page: string) {
   const { name, ...props } = event;
-  track(name, { ...props, page });
+  track(name, { ...props, page, source: visitSource() });
 }
 
 export function trackResumeGenerated(role: string) {
-  track("resume_download", { format: "generated", role });
+  track("resume_download", { format: "generated", role, source: visitSource() });
+}
+
+/** Funnel step: the visit opened a second page instead of leaving from the first. */
+export function trackSecondPage(page: string) {
+  track("second_page", { page, source: visitSource() });
 }
 
 /** `status` is the HTTP status of a failed send, or "network" when the request never completed. */
 export function trackContactSubmit(result: "success" | "error", status?: number | "network") {
-  track("contact_submit", status === undefined ? { result } : { result, status });
+  const source = visitSource();
+  track("contact_submit", status === undefined ? { result, source } : { result, status, source });
 }
