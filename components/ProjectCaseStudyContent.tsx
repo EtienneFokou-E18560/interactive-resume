@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ExternalLink, ArrowLeft } from "lucide-react";
+import { ExternalLink, ArrowLeft, ArrowDown } from "lucide-react";
 import { FaGithub } from "react-icons/fa";
 import type { Project } from "@/data/projects";
 import { projectClassificationLabels } from "@/data/projects";
@@ -77,6 +77,30 @@ export default function ProjectCaseStudyContent({ project }: { project: Project 
           </p>
         </section>
 
+        {study.architecture && (
+          <section>
+            <h2 className="text-xl font-semibold text-foreground">How it fits together</h2>
+            <ol className="mt-4">
+              {study.architecture.map((step, index) => (
+                <li key={step.label}>
+                  <div className="rounded-lg border border-[var(--color-border)] px-4 py-3">
+                    <p className="font-medium text-foreground">{step.label}</p>
+                    <p className="mt-1 text-sm text-[var(--color-text-secondary)]">
+                      {step.detail}
+                    </p>
+                  </div>
+                  {index < study.architecture!.length - 1 && (
+                    <ArrowDown
+                      aria-hidden="true"
+                      className="mx-auto my-1 h-4 w-4 text-[var(--color-text-muted)]"
+                    />
+                  )}
+                </li>
+              ))}
+            </ol>
+          </section>
+        )}
+
         <section>
           <h2 className="text-xl font-semibold text-foreground">
             Key engineering decisions
@@ -119,6 +143,29 @@ export default function ProjectCaseStudyContent({ project }: { project: Project 
             {study.reliability}
           </p>
         </section>
+
+        {study.incidents && (
+          <section>
+            <h2 className="text-xl font-semibold text-foreground">
+              What broke and how I fixed it
+            </h2>
+            <div className="mt-4 space-y-4">
+              {study.incidents.map((incident) => (
+                <div
+                  key={incident.title}
+                  className="rounded-lg border border-[var(--color-border)] px-4 py-3"
+                >
+                  <h3 className="font-medium text-foreground">{incident.title}</h3>
+                  <p className="mt-2 text-[var(--color-text-secondary)]">{incident.what}</p>
+                  <p className="mt-2 text-[var(--color-text-secondary)]">
+                    <span className="font-medium text-foreground">Fix: </span>
+                    {incident.fix}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
 
         <section>
           <h2 className="text-xl font-semibold text-foreground">Results and lessons</h2>
