@@ -1,8 +1,11 @@
 "use client";
 
-import { FormEvent, useCallback, useState } from "react";
+import { FormEvent, useCallback, useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
-import { trackLabLaunchRequested } from "@/lib/terminalEvents";
+import {
+  trackLabLaunchRequested,
+  trackLabRolloutExposure,
+} from "@/lib/terminalEvents";
 
 const EngineeringLabClient = dynamic(
   () => import("@/components/EngineeringLabClient"),
@@ -17,11 +20,16 @@ const EngineeringLabClient = dynamic(
 );
 
 export type LabStatus = {
-  mode: "owner" | "invite" | "hidden";
+  mode: "owner" | "invite" | "rollout" | "hidden";
   unlocked: boolean;
   hostAvailable: boolean;
   inviteConfigured: boolean;
   wsUrl: string | null;
+  rollout: {
+    evaluated: boolean;
+    inRollout: boolean;
+    percent: number;
+  } | null;
 };
 
 type Props = {
@@ -34,6 +42,15 @@ export default function LaunchEngineeringLab({ initialStatus }: Props) {
   const [code, setCode] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
+  const exposureSent = useRef(false);
+
+  useEffect(() => {
+    if (exposureSent.current) return;
+    const rollout = initialStatus.rollout;
+    if (!rollout?.evaluated) return;
+    exposureSent.current = true;
+    trackLabRolloutExposure(rollout.inRollout, rollout.percent);
+  }, [initialStatus.rollout]);
 
   const endSession = useCallback(() => setActive(false), []);
 
@@ -53,13 +70,14 @@ export default function LaunchEngineeringLab({ initialStatus }: Props) {
         return;
       }
       trackLabLaunchRequested();
-      setStatus({
+      setStatus((prev) => ({
         mode: "invite",
         unlocked: true,
         hostAvailable: true,
         inviteConfigured: true,
         wsUrl: data.wsUrl || null,
-      });
+        rollout: prev.rollout,
+      }));
       setCode("");
     } catch {
       setError("Unable to unlock the lab.");
@@ -73,7 +91,11 @@ export default function LaunchEngineeringLab({ initialStatus }: Props) {
   }
 
   const wsUrl = status.wsUrl;
-  const canLaunch = Boolean(wsUrl) && (status.mode === "owner" || status.unlocked);
+  const canLaunch =
+    Boolean(wsUrl) &&
+    (status.mode === "owner" ||
+      status.mode === "rollout" ||
+      (status.mode === "invite" && status.unlocked));
 
   if (active && canLaunch && wsUrl) {
     return <EngineeringLabClient wsUrl={wsUrl} onEnded={endSession} />;
@@ -121,15 +143,24 @@ export default function LaunchEngineeringLab({ initialStatus }: Props) {
     return (
       <div className="lab-launch">
         <p>
-          <strong className="text-foreground">Engineering Lab</strong> invite
-          accepted, but the lab host is not available in this environment.
+          <strong className="text-foreground">Engineering Lab</strong> is
+          unlocked for this session, but the lab host is not available in this
+          environment.
         </p>
         <p className="lab-launch-note">
-          Ask the operator to start the local gateway, then try again.
+          The simulated portfolio CLI below remains available. Ask the operator
+          to start the gateway when a host is ready.
         </p>
       </div>
     );
   }
+
+  const note =
+    status.mode === "owner"
+      ? "Local lab gateway detected. Launching opens an xterm session against a disposable container."
+      : status.mode === "rollout"
+        ? "Limited public preview. Launching opens an xterm session against a disposable sandbox."
+        : "Invite unlocked. Launching opens an xterm session against the private-beta gateway.";
 
   return (
     <div className="lab-launch">
@@ -139,11 +170,7 @@ export default function LaunchEngineeringLab({ initialStatus }: Props) {
         demonstrations. Environments reset automatically and never attach to
         production clusters or cloud credentials.
       </p>
-      <p>
-        {status.mode === "owner"
-          ? "Local lab gateway detected. Launching opens an xterm session against a disposable container."
-          : "Invite unlocked. Launching opens an xterm session against the private-beta gateway."}
-      </p>
+      <p>{note}</p>
       <div className="lab-launch-actions">
         <button
           type="button"
@@ -153,7 +180,7 @@ export default function LaunchEngineeringLab({ initialStatus }: Props) {
           Launch Engineering Lab
         </button>
         <span className="lab-launch-note">
-          Private beta - sessions idle-out and expire automatically
+          Sessions idle-out and expire automatically
         </span>
       </div>
     </div>
